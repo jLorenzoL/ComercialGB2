@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Sistema Comercial GinoBigioni</string>
     <string name="app_menu_principal">Menu Principal</string>
+    <string name="app_menu_mantenimiento">Mantenimiento de Calzado</string>
+    <string name="app_agregar_calzado">Agregar Calzado</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

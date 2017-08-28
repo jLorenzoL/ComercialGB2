@@ -26,7 +26,10 @@
         <activity
             android:name=".MenuPrincipalActivity"
             android:label="@string/app_menu_principal" />
-        <activity android:name=".MantenimientoCalzadoActivity"></activity>
+        <activity android:name=".MantenimientoCalzadoActivity" />
+        <activity android:name=".AgregarCalzadoActivity" />
+        <activity android:name=".EliminarCalzadoActivity" />
+        <activity android:name=".ModificarCalzadoActivity"></activity>
     </application>
 
 </manifest>
