@@ -26,10 +26,19 @@
         <activity
             android:name=".MenuPrincipalActivity"
             android:label="@string/app_menu_principal" />
-        <activity android:name=".MantenimientoCalzadoActivity" />
-        <activity android:name=".AgregarCalzadoActivity" />
-        <activity android:name=".EliminarCalzadoActivity" />
-        <activity android:name=".ModificarCalzadoActivity"></activity>
+        <activity
+            android:name=".MantenimientoCalzadoActivity"
+            android:label="@string/app_menu_mantenimiento"/>
+        <activity
+            android:name=".AgregarCalzadoActivity"
+            android:label="@string/app_agregar_calzado"/>
+        <activity
+            android:name=".ModificarCalzadoActivity"
+            android:label="@string/app_modificar_calzado"/>
+        <activity
+            android:name=".EliminarCalzadoActivity"
+            android:label="@string/app_eliminar_calzado"/>
+
     </application>
 
 </manifest>

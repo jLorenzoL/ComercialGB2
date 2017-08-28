@@ -3,6 +3,8 @@
     <string name="app_menu_principal">Menu Principal</string>
     <string name="app_menu_mantenimiento">Mantenimiento de Calzado</string>
     <string name="app_agregar_calzado">Agregar Calzado</string>
+    <string name="app_modificar_calzado">Modificar Calzado</string>
+    <string name="app_eliminar_calzado">Eliminar Calzado</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
