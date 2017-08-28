@@ -26,7 +26,7 @@ public class MantenimientoCalzadoActivity extends AppCompatActivity {
     }
 
     public void onMantenimientoModificarCalzado(View v) {
-        Intent i = new Intent(getApplicationContext(), com.upc.gmt.comercialgb.EliminarCalzadoActivity.class);
+        Intent i = new Intent(getApplicationContext(), com.upc.gmt.comercialgb.ModificarCalzadoActivity.class);
 
         startActivity(i);
     }
