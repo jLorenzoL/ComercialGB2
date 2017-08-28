@@ -23,8 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MenuPrincipalActivity"
-                    android:label="@string/app_menu_principal"></activity>
+        <activity
+            android:name=".MenuPrincipalActivity"
+            android:label="@string/app_menu_principal" />
+        <activity android:name=".MantenimientoCalzadoActivity"></activity>
     </application>
 
 </manifest>

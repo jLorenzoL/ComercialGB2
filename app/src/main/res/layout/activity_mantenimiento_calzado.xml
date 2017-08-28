@@ -9,24 +9,23 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.upc.gmt.comercialgb.MenuPrincipalActivity">
+    tools:context="com.upc.gmt.comercialgb.MantenimientoCalzadoActivity">
 
     <Button
-        android:id="@+id/btnMantCalzado"
+        android:id="@+id/btnAgregar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onIngresarMantenimientoCalzado"
-        android:text="Mantenimiento de Calzado" />
+        android:text="Agregar Calzado" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnModificar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Boton B" />
+        android:text="Modificar Calzado" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnEliminar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="BOTON C" />
+        android:text="Eliminar Calzado" />
 </LinearLayout>
