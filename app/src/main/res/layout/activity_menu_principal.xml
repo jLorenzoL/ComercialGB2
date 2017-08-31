@@ -19,10 +19,11 @@
         android:text="Mantenimiento de Calzado" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnRegistroPedido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Boton B" />
+        android:onClick="onIngresarRegistroPedido"
+        android:text="Registro de Pedido" />
 
     <Button
         android:id="@+id/button3"

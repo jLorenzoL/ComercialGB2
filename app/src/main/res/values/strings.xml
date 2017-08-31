@@ -5,6 +5,7 @@
     <string name="app_agregar_calzado">Agregar Calzado</string>
     <string name="app_modificar_calzado">Modificar Calzado</string>
     <string name="app_eliminar_calzado">Eliminar Calzado</string>
+    <string name="app_registrar_pedido">Registrar Pedido</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
