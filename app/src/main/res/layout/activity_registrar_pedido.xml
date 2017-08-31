@@ -216,7 +216,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.30"
-                    android:text="Registrar" />
+                    android:text="REGISTRAR" />
 
                 <Button
                     android:id="@+id/btnCancelar"
