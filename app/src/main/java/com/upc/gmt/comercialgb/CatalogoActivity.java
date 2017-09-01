@@ -47,5 +47,39 @@ public class CatalogoActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }
         });
+
+        List<String> listaPrecioCalzado = new ArrayList<>();
+        listaPrecioCalzado.add("PRECIOS");
+        listaPrecioCalzado.add("80-99" + "S/.");
+        listaPrecioCalzado.add("100-199 S/.");
+        listaPrecioCalzado.add("200-250 S/.");
+        ArrayAdapter<String> arrayPrecioCalzado = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,listaPrecioCalzado);
+        Spinner spnPrecioCalzado = (Spinner) findViewById(R.id.spnCatalogoPC);
+        spnPrecioCalzado.setAdapter(arrayPrecioCalzado);
+
+        List<String> listaTallaCalzado = new ArrayList<>();
+        listaTallaCalzado.add("TALLA");
+        listaTallaCalzado.add("36");
+        listaTallaCalzado.add("37");
+        listaTallaCalzado.add("38");
+        listaTallaCalzado.add("39");
+        listaTallaCalzado.add("40");
+        listaTallaCalzado.add("41");
+        ArrayAdapter<String> arrayTallaCalzado = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,listaTallaCalzado);
+        Spinner spnTallaCalzado = (Spinner) findViewById(R.id.spnCatalogoTaC);
+        spnTallaCalzado.setAdapter(arrayTallaCalzado);
+
+        List<String> listaTacoCalzado = new ArrayList<>();
+        listaTacoCalzado.add("TACO");
+        listaTacoCalzado.add("CHINO");
+        listaTacoCalzado.add("PLATAFORMA");
+        listaTacoCalzado.add("CUADRADO");
+        listaTacoCalzado.add("FINO");
+        listaTacoCalzado.add("TAPITA");
+        ArrayAdapter<String> arrayTacoCalzado = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,listaTacoCalzado);
+        Spinner spnTacoCalzado = (Spinner) findViewById(R.id.spnCatalogoTacoC);
+        spnTacoCalzado.setAdapter(arrayTacoCalzado);
     }
+
+
 }

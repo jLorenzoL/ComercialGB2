@@ -25,22 +25,22 @@
         </activity>
         <activity
             android:name=".MenuPrincipalActivity"
-            android:label="@string/app_menu_principal" />
+            android:label="MENÚ PRINCIPAL" />
         <activity
             android:name=".MantenimientoCalzadoActivity"
-            android:label="@string/app_menu_mantenimiento" />
+            android:label="MANTENIMIENTO DE CALZADO" />
         <activity
             android:name=".AgregarCalzadoActivity"
-            android:label="@string/app_agregar_calzado" />
+            android:label="AGREGAR CALZADO" />
         <activity
             android:name=".ModificarCalzadoActivity"
-            android:label="Modificar Calzado" />
+            android:label="MODIFICAR CALZADO" />
         <activity
             android:name=".EliminarCalzadoActivity"
-            android:label="@string/app_eliminar_calzado" />
+            android:label="ELIMINAR CALZADO" />
         <activity
             android:name=".RegistrarPedidoActivity"
-            android:label="Registrar Pedido" />
+            android:label="REGISTRAR PEDIDO" />
         <activity
             android:name=".CatalogoActivity"
             android:label="@string/app_mostrar_catalogo"/>

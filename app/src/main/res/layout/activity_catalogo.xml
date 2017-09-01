@@ -23,19 +23,19 @@
             android:layout_weight="1" />
 
         <Spinner
-            android:id="@+id/spinner2"
+            android:id="@+id/spnCatalogoPC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <Spinner
-            android:id="@+id/spinner3"
+            android:id="@+id/spnCatalogoTaC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <Spinner
-            android:id="@+id/spinner4"
+            android:id="@+id/spnCatalogoTacoC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
