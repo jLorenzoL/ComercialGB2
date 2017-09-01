@@ -43,7 +43,13 @@
             android:label="REGISTRAR PEDIDO" />
         <activity
             android:name=".CatalogoActivity"
-            android:label="@string/app_mostrar_catalogo"/>
+            android:label="@string/app_mostrar_catalogo" />
+        <activity
+            android:name=".MantenimientoUsuarioActivity"
+            android:label="MANTEMIENTO DE USUARIO" />
+        <activity
+            android:name=".AgregarUsuarioActivity"
+            android:label="AGREGAR USUARIO"/>
     </application>
 
 </manifest>

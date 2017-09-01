@@ -29,4 +29,9 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(),com.upc.gmt.comercialgb.CatalogoActivity.class);
         startActivity(i);
     }
+
+    public void onMantenimientoUsuario(View v) {
+        Intent i = new Intent(getApplicationContext(),com.upc.gmt.comercialgb.MantenimientoUsuarioActivity.class);
+        startActivity(i);
+    }
 }

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,33 +8,26 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.upc.gmt.comercialgb.MenuPrincipalActivity">
+    tools:context="com.upc.gmt.comercialgb.MantenimientoUsuarioActivity">
 
     <Button
-        android:id="@+id/btnMantCalzado"
+        android:id="@+id/btnAgregarUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onIngresarMantenimientoCalzado"
-        android:text="Mantenimiento de Calzado" />
+        android:onClick="onMantenimientoAgregarUsuario"
+        android:text="AGREGAR USUARIO" />
 
     <Button
-        android:id="@+id/btnRegistroPedido"
+        android:id="@+id/btnModificarUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onIngresarRegistroPedido"
-        android:text="Registro de Pedido" />
+        android:onClick="onMantenimientoModificarUsuario"
+        android:text="ModificarUsuario" />
 
     <Button
-        android:id="@+id/btnAbrirCatalogo"
+        android:id="@+id/btnEliminarUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onAbrirCatalogo"
-        android:text="ABRIR CATALOGO" />
-
-    <Button
-        android:id="@+id/btnMantUsuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onMantenimientoUsuario"
-        android:text="MANTENIMIENTO USUARIO" />
+        android:onClick="onMantenimientoEliminarUsuario"
+        android:text="ELIMINAR USUARIO" />
 </LinearLayout>

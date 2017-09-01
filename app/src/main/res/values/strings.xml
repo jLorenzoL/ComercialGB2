@@ -7,6 +7,8 @@
     <string name="app_eliminar_calzado">Eliminar Calzado</string>
     <string name="app_registrar_pedido">Registrar Pedido</string>
     <string name="app_mostrar_catalogo">CATALOGO DE CALZADOS</string>
+    <string name="app_mantenimiento_cliente">Mantenimiento de Cliente</string>
+    <string name="app_agregar_cliente">Agregar Cliente</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
