@@ -26,8 +26,9 @@
         android:text="Registro de Pedido" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnAbrirCatalogo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="BOTON C" />
+        android:onClick="onAbrirCatalogo"
+        android:text="ABRIR CATALOGO" />
 </LinearLayout>
