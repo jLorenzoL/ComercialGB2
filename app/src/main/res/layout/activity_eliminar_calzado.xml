@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -27,6 +28,8 @@
         android:id="@+id/btnBuscar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Buscar Codigo" />
+        android:text="Buscar Codigo"
+        style="?android:textAppearanceSmall"
+        android:textStyle="bold"/>
 
 </LinearLayout>
