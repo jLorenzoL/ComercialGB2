@@ -49,7 +49,7 @@
             android:label="MANTEMIENTO DE USUARIO" />
         <activity
             android:name=".AgregarUsuarioActivity"
-            android:label="AGREGAR USUARIO"/>
+            android:label="AGREGAR USUARIO" />
     </application>
 
 </manifest>
