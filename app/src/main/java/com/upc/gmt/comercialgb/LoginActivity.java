@@ -23,12 +23,17 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +71,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         // Set up the login form.
         //mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         //populateAutoComplete();
@@ -100,11 +108,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 onValidarIngreso(v);
             }
         });
+
     }
 
     private void onValidarIngreso(View v){
         Intent i = new Intent(getApplicationContext(),com.upc.gmt.comercialgb.MenuPrincipalActivity.class);
-        startActivity(i);
+        //startActivity(i);
+
+        ImageView ivd = (ImageView) findViewById(R.id.imageViewDemo);
+
+        Picasso picasso = Picasso.with(getApplicationContext());
+        picasso.setIndicatorsEnabled(true);
+        picasso.setLoggingEnabled(true);
+        Picasso.with(getApplicationContext()).load("http://i.imgur.com/DvpvklR.png").into(ivd);
+        //Picasso.with(getApplicationContext()).load("http://10.0.2.2:8080/imagenes/calzado_amarillo.png").into(ivd);
+        //Picasso.with(getApplicationContext()).load(R.mipmap.calzado_rojo).into(ivd);
     }
 
     private void populateAutoComplete() {
