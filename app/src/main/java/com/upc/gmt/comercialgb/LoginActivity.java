@@ -3,34 +3,29 @@ package com.upc.gmt.comercialgb;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -120,9 +115,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         Picasso picasso = Picasso.with(getApplicationContext());
         picasso.setIndicatorsEnabled(true);
         picasso.setLoggingEnabled(true);
-        Picasso.with(getApplicationContext()).load("http://i.imgur.com/DvpvklR.png").into(ivd);
-        //Picasso.with(getApplicationContext()).load("http://10.0.2.2:8080/imagenes/calzado_amarillo.png").into(ivd);
+        //Picasso.with(getApplicationContext()).load("http://i.imgur.com/DvpvklR.png").into(ivd);
+        Picasso.with(getApplicationContext()).load("http://192.168.1.33:8080/ComercialWEB/imagen?nombre=amarillo").into(ivd);
         //Picasso.with(getApplicationContext()).load(R.mipmap.calzado_rojo).into(ivd);
+        startActivity(i);
     }
 
     private void populateAutoComplete() {

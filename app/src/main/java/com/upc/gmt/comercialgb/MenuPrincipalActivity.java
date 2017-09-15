@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import java.net.Inet4Address;
+import com.upc.gmt.catalogo.CatalogoActivity;
 
 public class MenuPrincipalActivity extends AppCompatActivity {
 
@@ -26,7 +26,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     }
 
     public void onAbrirCatalogo(View v) {
-        Intent i = new Intent(getApplicationContext(),com.upc.gmt.comercialgb.CatalogoActivity.class);
+        Intent i = new Intent(getApplicationContext(),CatalogoActivity.class);
         startActivity(i);
     }
 

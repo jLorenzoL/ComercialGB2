@@ -3,21 +3,45 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:background="@drawable/border"
+    android:padding="5dp"
+    >
 
     <ImageView
         android:id="@+id/grid_item_image"
-        android:layout_width="50px"
-        android:layout_height="50px"
-        android:layout_marginRight="10px"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_gravity="center"
         android:src="@android:drawable/ic_delete"></ImageView>
 
     <TextView
-        android:id="@+id/grid_item_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10px"
-        android:text="@+id/label"
-        android:textSize="15px"></TextView>
+        android:id="@+id/grid_item_label_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="25dp"></TextView>
 
+    <TextView
+        android:id="@+id/grid_item_label_codigo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="15dp"></TextView>
+
+    <TextView
+        android:id="@+id/grid_item_label_precio"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:layout_marginBottom="5dp"
+        ></TextView>
 </LinearLayout>

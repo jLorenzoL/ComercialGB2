@@ -43,7 +43,7 @@
             android:name=".RegistrarPedidoActivity"
             android:label="REGISTRAR PEDIDO" />
         <activity
-            android:name=".CatalogoActivity"
+            android:name="com.upc.gmt.catalogo.CatalogoActivity"
             android:label="@string/app_mostrar_catalogo" />
         <activity
             android:name=".MantenimientoUsuarioActivity"
@@ -51,6 +51,10 @@
         <activity
             android:name=".AgregarUsuarioActivity"
             android:label="AGREGAR USUARIO" />
+        <activity
+            android:name="com.upc.gmt.catalogo.DetalleCalzadoActivity"
+            android:label="Detalle Calzado" />
+
     </application>
 
 </manifest>

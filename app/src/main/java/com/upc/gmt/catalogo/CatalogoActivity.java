@@ -1,15 +1,31 @@
-package com.upc.gmt.comercialgb;
+package com.upc.gmt.catalogo;
 
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.upc.gmt.bean.ProductoBean;
+import com.upc.gmt.comercialgb.R;
+import com.upc.gmt.util.Util;
+
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,13 +53,13 @@ public class CatalogoActivity extends AppCompatActivity {
 
         //GRILLA DE CALZADOS
         GridView gvCalzados = (GridView) findViewById(R.id.gvCatalogo);
-        gvCalzados.setAdapter(new ImagenCalzadoAdapter(this, listaCalzados));
+        gvCalzados.setAdapter(new ImagenCalzadoAdapter(this, new ArrayList<ProductoBean>()));
         //EVENTO DE LA GRILLA
         gvCalzados.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getApplicationContext(),
-                        ((TextView)view.findViewById(R.id.grid_item_label)).getText(),
+                        ((TextView)view.findViewById(R.id.grid_item_label_nombre)).getText(),
                         Toast.LENGTH_LONG).show();
             }
         });
@@ -79,7 +95,47 @@ public class CatalogoActivity extends AppCompatActivity {
         ArrayAdapter<String> arrayTacoCalzado = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,listaTacoCalzado);
         Spinner spnTacoCalzado = (Spinner) findViewById(R.id.spnCatalogoTacoC);
         spnTacoCalzado.setAdapter(arrayTacoCalzado);
+
+        new HttpRequestTask().execute();
     }
 
+    private class HttpRequestTask extends AsyncTask<Void, Void, List<ProductoBean>> {
+        @Override
+        protected List<ProductoBean> doInBackground(Void... params) {
+            Log.i("doInBackground", "inicio");
+            try {
+                String URL = Util.URL_WEB_SERVICE +"/verCatalogo";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                //Object objetos = restTemplate.getForObject(url, Object.class);
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON); //copied this from somewhere else, not sure what its for
+
+                MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+//                body.add("field", "value");
+                HttpEntity<?> httpEntity = new HttpEntity<Object>(body, requestHeaders);
+
+                ParameterizedTypeReference<List<ProductoBean>> responseType = new ParameterizedTypeReference<List<ProductoBean>>() {};
+                ResponseEntity<List<ProductoBean>> respuesta = restTemplate.exchange(URL, HttpMethod.GET, null, responseType);
+                List<ProductoBean> lista = respuesta.getBody();
+                return lista;
+            } catch (Exception e) {
+                Log.i("Exception", "ERROR");
+                Log.e("HttpRequestTask", e.getMessage(), e);
+            }
+            Log.i("doInBackground", "fin");
+            return new ArrayList<>();
+        }
+
+        @Override
+        protected void onPostExecute(List<ProductoBean> lista) {
+            Log.i("onPostExecute", "inicio");
+            Log.i("LISTA", "Tamaño: "+lista.size());
+            GridView gvCalzados = (GridView) findViewById(R.id.gvCatalogo);
+            gvCalzados.setAdapter(new ImagenCalzadoArrayAdapter(getApplicationContext(), lista));
+            Log.i("onPostExecute", "fin");
+        }
+
+    }
 
 }
