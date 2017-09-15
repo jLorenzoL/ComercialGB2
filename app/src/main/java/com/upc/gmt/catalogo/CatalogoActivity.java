@@ -38,7 +38,7 @@ public class CatalogoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalogo);
-        //CREAMOS LA LISTA DE TIPOS DE CALZADO
+       /* //CREAMOS LA LISTA DE TIPOS DE CALZADO
         List<String> listaTipoCalzado = new ArrayList<>();
         listaTipoCalzado.add("TODOS LOS TIPOS");
         listaTipoCalzado.add("BOTAS");
@@ -64,16 +64,16 @@ public class CatalogoActivity extends AppCompatActivity {
             }
         });
 
-        List<String> listaPrecioCalzado = new ArrayList<>();
-        listaPrecioCalzado.add("PRECIOS");
-        listaPrecioCalzado.add("80-99" + "S/.");
-        listaPrecioCalzado.add("100-199 S/.");
-        listaPrecioCalzado.add("200-250 S/.");
-        ArrayAdapter<String> arrayPrecioCalzado = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,listaPrecioCalzado);
-        Spinner spnPrecioCalzado = (Spinner) findViewById(R.id.spnCatalogoPC);
-        spnPrecioCalzado.setAdapter(arrayPrecioCalzado);
+//        List<String> listaPrecioCalzado = new ArrayList<>();
+//        listaPrecioCalzado.add("PRECIOS");
+//        listaPrecioCalzado.add("80-99" + "S/.");
+//        listaPrecioCalzado.add("100-199 S/.");
+//        listaPrecioCalzado.add("200-250 S/.");
+//        ArrayAdapter<String> arrayPrecioCalzado = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,listaPrecioCalzado);
+//        Spinner spnPrecioCalzado = (Spinner) findViewById(R.id.spnCatalogoPC);
+//        spnPrecioCalzado.setAdapter(arrayPrecioCalzado);
 
-        List<String> listaTallaCalzado = new ArrayList<>();
+        /*List<String> listaTallaCalzado = new ArrayList<>();
         listaTallaCalzado.add("TALLA");
         listaTallaCalzado.add("36");
         listaTallaCalzado.add("37");
@@ -83,9 +83,9 @@ public class CatalogoActivity extends AppCompatActivity {
         listaTallaCalzado.add("41");
         ArrayAdapter<String> arrayTallaCalzado = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,listaTallaCalzado);
         Spinner spnTallaCalzado = (Spinner) findViewById(R.id.spnCatalogoTaC);
-        spnTallaCalzado.setAdapter(arrayTallaCalzado);
+        spnTallaCalzado.setAdapter(arrayTallaCalzado);*/
 
-        List<String> listaTacoCalzado = new ArrayList<>();
+        /*List<String> listaTacoCalzado = new ArrayList<>();
         listaTacoCalzado.add("TACO");
         listaTacoCalzado.add("CHINO");
         listaTacoCalzado.add("PLATAFORMA");
@@ -94,8 +94,12 @@ public class CatalogoActivity extends AppCompatActivity {
         listaTacoCalzado.add("TAPITA");
         ArrayAdapter<String> arrayTacoCalzado = new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,listaTacoCalzado);
         Spinner spnTacoCalzado = (Spinner) findViewById(R.id.spnCatalogoTacoC);
-        spnTacoCalzado.setAdapter(arrayTacoCalzado);
+        spnTacoCalzado.setAdapter(arrayTacoCalzado);*/
 
+        new HttpRequestTaskPrecios().execute();
+        new HttpRequestTaskTallas().execute();
+        new HttpRequestTaskTipos().execute();
+        new HttpRequestTaskTipoTaco().execute();
         new HttpRequestTask().execute();
     }
 
@@ -133,6 +137,170 @@ public class CatalogoActivity extends AppCompatActivity {
             Log.i("LISTA", "Tamaño: "+lista.size());
             GridView gvCalzados = (GridView) findViewById(R.id.gvCatalogo);
             gvCalzados.setAdapter(new ImagenCalzadoArrayAdapter(getApplicationContext(), lista));
+            Log.i("onPostExecute", "fin");
+        }
+
+    }
+
+    /*
+    LISTA DE PRECIOS
+     */
+    private class HttpRequestTaskPrecios extends AsyncTask<Void, Void, List<String>> {
+        @Override
+        protected List<String> doInBackground(Void... params) {
+            Log.i("doInBackground", "inicio");
+            try {
+                String URL = Util.URL_WEB_SERVICE +"/verPrecios";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON); //copied this from somewhere else, not sure what its for
+
+                MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+//                body.add("field", "value");
+                HttpEntity<?> httpEntity = new HttpEntity<Object>(body, requestHeaders);
+
+                ParameterizedTypeReference<List<String>> responseType = new ParameterizedTypeReference<List<String>>() {};
+                ResponseEntity<List<String>> respuesta = restTemplate.exchange(URL, HttpMethod.GET, null, responseType);
+                List<String> lista = respuesta.getBody();
+                return lista;
+            } catch (Exception e) {
+                Log.i("Exception", "ERROR");
+                Log.e("HttpRequestTask", e.getMessage(), e);
+            }
+            Log.i("doInBackground", "fin");
+            return new ArrayList<>();
+        }
+
+        @Override
+        protected void onPostExecute(List<String> lista) {
+            Log.i("onPostExecute", "inicio");
+            Log.i("LISTA", "Tamaño: "+lista.size());
+            ArrayAdapter<String> arrayPrecioCalzado = new ArrayAdapter<String>(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item,lista);
+            Spinner spnPrecioCalzado = (Spinner) findViewById(R.id.spnCatalogoPC);
+            spnPrecioCalzado.setAdapter(arrayPrecioCalzado);
+            Log.i("onPostExecute", "fin");
+        }
+
+    }
+
+    /*
+    Lista de Tallas
+     */
+    private class HttpRequestTaskTallas extends AsyncTask<Void, Void, List<String>> {
+        @Override
+        protected List<String> doInBackground(Void... params) {
+            Log.i("doInBackground", "inicio");
+            try {
+                String URL = Util.URL_WEB_SERVICE +"/verTallas";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON); //copied this from somewhere else, not sure what its for
+
+                MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+//                body.add("field", "value");
+                HttpEntity<?> httpEntity = new HttpEntity<Object>(body, requestHeaders);
+
+                ParameterizedTypeReference<List<String>> responseType = new ParameterizedTypeReference<List<String>>() {};
+                ResponseEntity<List<String>> respuesta = restTemplate.exchange(URL, HttpMethod.GET, null, responseType);
+                List<String> lista = respuesta.getBody();
+                return lista;
+            } catch (Exception e) {
+                Log.i("Exception", "ERROR");
+                Log.e("HttpRequestTask", e.getMessage(), e);
+            }
+            Log.i("doInBackground", "fin");
+            return new ArrayList<>();
+        }
+
+        @Override
+        protected void onPostExecute(List<String> lista) {
+            Log.i("onPostExecute", "inicio");
+            Log.i("LISTA", "Tamaño: "+lista.size());
+            ArrayAdapter<String> arrayTallaCalzado = new ArrayAdapter<String>(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item,lista);
+            Spinner spnTallaCalzado = (Spinner) findViewById(R.id.spnCatalogoTaC);
+            spnTallaCalzado.setAdapter(arrayTallaCalzado);
+            Log.i("onPostExecute", "fin");
+        }
+
+    }
+
+    //Lista de Tipos de Calzado
+    private class HttpRequestTaskTipos extends AsyncTask<Void, Void, List<String>> {
+        @Override
+        protected List<String> doInBackground(Void... params) {
+            Log.i("doInBackground", "inicio");
+            try {
+                String URL = Util.URL_WEB_SERVICE +"/verTipoCalzado";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON); //copied this from somewhere else, not sure what its for
+
+                MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+//                body.add("field", "value");
+                HttpEntity<?> httpEntity = new HttpEntity<Object>(body, requestHeaders);
+
+                ParameterizedTypeReference<List<String>> responseType = new ParameterizedTypeReference<List<String>>() {};
+                ResponseEntity<List<String>> respuesta = restTemplate.exchange(URL, HttpMethod.GET, null, responseType);
+                List<String> lista = respuesta.getBody();
+                return lista;
+            } catch (Exception e) {
+                Log.i("Exception", "ERROR");
+                Log.e("HttpRequestTask", e.getMessage(), e);
+            }
+            Log.i("doInBackground", "fin");
+            return new ArrayList<>();
+        }
+
+        @Override
+        protected void onPostExecute(List<String> lista) {
+            Log.i("onPostExecute", "inicio");
+            Log.i("LISTA", "Tipo de Calzado: "+lista.size());
+            ArrayAdapter<String> arrayTipoCalzado = new ArrayAdapter<String>(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item,lista);
+            Spinner spnTipoCalzado = (Spinner) findViewById(R.id.spnCatalogoTC);
+            spnTipoCalzado.setAdapter(arrayTipoCalzado);
+            Log.i("onPostExecute", "fin");
+        }
+
+    }
+
+    //Lista de Tipos de Taco
+    private class HttpRequestTaskTipoTaco extends AsyncTask<Void, Void, List<String>> {
+        @Override
+        protected List<String> doInBackground(Void... params) {
+            Log.i("doInBackground", "inicio");
+            try {
+                String URL = Util.URL_WEB_SERVICE +"/verTipoTacoCalzado";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                HttpHeaders requestHeaders = new HttpHeaders();
+                requestHeaders.setContentType(MediaType.APPLICATION_JSON); //copied this from somewhere else, not sure what its for
+
+                MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+//                body.add("field", "value");
+                HttpEntity<?> httpEntity = new HttpEntity<Object>(body, requestHeaders);
+
+                ParameterizedTypeReference<List<String>> responseType = new ParameterizedTypeReference<List<String>>() {};
+                ResponseEntity<List<String>> respuesta = restTemplate.exchange(URL, HttpMethod.GET, null, responseType);
+                List<String> lista = respuesta.getBody();
+                return lista;
+            } catch (Exception e) {
+                Log.i("Exception", "ERROR");
+                Log.e("HttpRequestTask", e.getMessage(), e);
+            }
+            Log.i("doInBackground", "fin");
+            return new ArrayList<>();
+        }
+
+        @Override
+        protected void onPostExecute(List<String> lista) {
+            Log.i("onPostExecute", "inicio");
+            Log.i("LISTA", "Tipo de Taco: "+lista.size());
+            ArrayAdapter<String> arrayTipoTacoCalzado = new ArrayAdapter<String>(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item,lista);
+            Spinner spnTipoTacoCalzado = (Spinner) findViewById(R.id.spnCatalogoTacoC);
+            spnTipoTacoCalzado.setAdapter(arrayTipoTacoCalzado);
             Log.i("onPostExecute", "fin");
         }
 
