@@ -44,7 +44,8 @@
             android:label="REGISTRAR PEDIDO" />
         <activity
             android:name="com.upc.gmt.catalogo.CatalogoActivity"
-            android:label="@string/app_mostrar_catalogo" />
+            android:label="@string/app_mostrar_catalogo"
+            android:parentActivityName=".MenuPrincipalActivity" />
         <activity
             android:name=".MantenimientoUsuarioActivity"
             android:label="MANTEMIENTO DE USUARIO" />
@@ -54,7 +55,14 @@
         <activity
             android:name="com.upc.gmt.catalogo.DetalleCalzadoActivity"
             android:label="Detalle Calzado" />
-
+        <activity
+            android:name="com.upc.gmt.catalogo.FullScreenImageActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_full_screen_image"
+            android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name="com.upc.gmt.pedido.PedidoActivity"
+            android:label="MIS CALZADOS" />
     </application>
 
 </manifest>
