@@ -69,7 +69,9 @@ public class CatalogoActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         ((TextView)view.findViewById(R.id.grid_item_label_nombre)).getText(),
                         Toast.LENGTH_LONG).show();
+                String codigo = ((TextView)view.findViewById(R.id.grid_item_label_codigo)).getText().toString();
                 Intent i = new Intent(getApplication(),DetalleCalzadoActivity.class);
+                i.putExtra("codigo", codigo);
                 startActivity(i);
             }
         });

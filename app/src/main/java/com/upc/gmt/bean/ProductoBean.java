@@ -10,6 +10,13 @@ public class ProductoBean{
     private String codigo;
     private String precio;
     private String nombreImagen;
+    private String listaImagenes;
+    private String listaTallas;
+    private String materialCalzado;
+    private String materialTaco;
+    private String materialForro;
+    private String materialPlanta;
+    private String materialPlantilla;
 
     public ProductoBean() {
     }
@@ -51,5 +58,61 @@ public class ProductoBean{
 
     public void setNombreImagen(String nombreImagen) {
         this.nombreImagen = nombreImagen;
+    }
+
+    public String getListaImagenes() {
+        return listaImagenes;
+    }
+
+    public void setListaImagenes(String listaImagenes) {
+        this.listaImagenes = listaImagenes;
+    }
+
+    public String getListaTallas() {
+        return listaTallas;
+    }
+
+    public void setListaTallas(String listaTallas) {
+        this.listaTallas = listaTallas;
+    }
+
+    public String getMaterialCalzado() {
+        return materialCalzado;
+    }
+
+    public void setMaterialCalzado(String materialCalzado) {
+        this.materialCalzado = materialCalzado;
+    }
+
+    public String getMaterialTaco() {
+        return materialTaco;
+    }
+
+    public void setMaterialTaco(String materialTaco) {
+        this.materialTaco = materialTaco;
+    }
+
+    public String getMaterialForro() {
+        return materialForro;
+    }
+
+    public void setMaterialForro(String materialForro) {
+        this.materialForro = materialForro;
+    }
+
+    public String getMaterialPlanta() {
+        return materialPlanta;
+    }
+
+    public void setMaterialPlanta(String materialPlanta) {
+        this.materialPlanta = materialPlanta;
+    }
+
+    public String getMaterialPlantilla() {
+        return materialPlantilla;
+    }
+
+    public void setMaterialPlantilla(String materialPlantilla) {
+        this.materialPlantilla = materialPlantilla;
     }
 }
