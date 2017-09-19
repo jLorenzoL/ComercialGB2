@@ -24,6 +24,11 @@ public class PedidoActivity extends AppCompatActivity {
         p.setCodigo("COD 1");
         p.setPrecio("129.99");
         lista.add(p);
+        ProductoBean p2 = new ProductoBean();
+        p2.setNombre("Calzado 2");
+        p2.setCodigo("COD 2");
+        p2.setPrecio("99.99");
+        lista.add(p2);
         lvPedidos.setAdapter(new PedidoArrayAdapter(this, lista));
 
     }
