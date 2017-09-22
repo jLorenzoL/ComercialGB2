@@ -44,7 +44,7 @@ public class CatalogoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalogo);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
        /* //CREAMOS LA LISTA DE TIPOS DE CALZADO
         List<String> listaTipoCalzado = new ArrayList<>();

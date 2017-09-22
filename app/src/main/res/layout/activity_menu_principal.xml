@@ -9,41 +9,30 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorPrimaryDark"
     tools:context="com.upc.gmt.comercialgb.MenuPrincipalActivity">
 
     <Button
         android:id="@+id/btnMantCalzado"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/button_style"
         android:onClick="onIngresarMantenimientoCalzado"
-        android:text="Mantenimiento de Calzado"
-        style="?android:textAppearanceSmall"
-        android:textStyle="bold"/>
+        android:text="Mantenimiento de Calzado" />
 
     <Button
         android:id="@+id/btnRegistroPedido"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/button_style"
         android:onClick="onIngresarRegistroPedido"
-        android:text="Registro de Pedido"
-        style="?android:textAppearanceSmall"
-        android:textStyle="bold"/>
+        android:text="Registro de Pedido" />
 
     <Button
         android:id="@+id/btnAbrirCatalogo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/button_style"
         android:onClick="onAbrirCatalogo"
-        android:text="ABRIR CATALOGO"
-        style="?android:textAppearanceSmall"
-        android:textStyle="bold"/>
+        android:text="ABRIR CATALOGO"/>
 
     <Button
         android:id="@+id/btnMantUsuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/button_style"
         android:onClick="onMantenimientoUsuario"
-        android:text="MANTENIMIENTO USUARIO"
-        style="?android:textAppearanceSmall"
-        android:textStyle="bold"/>
+        android:text="MANTENIMIENTO USUARIO"/>
 </LinearLayout>
