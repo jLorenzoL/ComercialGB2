@@ -25,9 +25,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,13 +108,13 @@ import static android.Manifest.permission.READ_CONTACTS;
         Intent i = new Intent(getApplicationContext(),com.upc.gmt.comercialgb.MenuPrincipalActivity.class);
         //startActivity(i);
 
-        ImageView ivd = (ImageView) findViewById(R.id.imageViewDemo);
+//        ImageView ivd = (ImageView) findViewById(R.id.imageViewDemo);
 
-        Picasso picasso = Picasso.with(getApplicationContext());
-        picasso.setIndicatorsEnabled(true);
-        picasso.setLoggingEnabled(true);
+//        Picasso picasso = Picasso.with(getApplicationContext());
+//        picasso.setIndicatorsEnabled(true);
+//        picasso.setLoggingEnabled(true);
         //Picasso.with(getApplicationContext()).load("http://i.imgur.com/DvpvklR.png").into(ivd);
-        Picasso.with(getApplicationContext()).load("http://192.168.1.33:8080/ComercialWEB/imagen?nombre=amarillo").into(ivd);
+//        Picasso.with(getApplicationContext()).load("http://192.168.1.33:8080/ComercialWEB/imagen?nombre=amarillo").into(ivd);
         //Picasso.with(getApplicationContext()).load(R.mipmap.calzado_rojo).into(ivd);
         startActivity(i);
     }
@@ -374,22 +371,82 @@ import static android.Manifest.permission.READ_CONTACTS;
         }
     }
 }*/
+
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.upc.gmt.model.Usuario;
+import com.upc.gmt.util.Util;
+
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 public class LoginActivity extends AppCompatActivity {
+
+    EditText txtUsuario;
+    EditText txtPassword;
+
+    String usuario;
+    String password;
+
+    public static Usuario USUARIO_SESSION;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        txtUsuario = (EditText) findViewById(R.id.txtUsuario);
+        txtPassword = (EditText) findViewById(R.id.txtPassword);
+
     }
     public void onValidarIngreso(View v){
+        usuario = txtUsuario.getText().toString();
+        password = txtPassword.getText().toString();
+        new HttpRequestTaskLogin().execute();
         Intent i = new Intent(getApplicationContext(),com.upc.gmt.comercialgb.MenuPrincipalActivity.class);
         startActivity(i);
 
+    }
+
+    private class HttpRequestTaskLogin extends AsyncTask<Void, Void, Usuario> {
+        @Override
+        protected Usuario doInBackground(Void... params) {
+            try {
+                String URL = Util.URL_WEB_SERVICE + "/login";
+                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(URL)
+                        .queryParam("codUsuario", usuario)
+                        .queryParam("password", password);
+
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+                Usuario Usuario = restTemplate.getForObject(builder.build().encode().toUri(), Usuario.class);
+                Log.i("Usuario", usuario);
+
+                return Usuario;
+            } catch (Exception e) {
+                Log.e(this.getClass().getName(), e.getMessage(), e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Usuario usuario) {
+            if(null != usuario) {
+                USUARIO_SESSION = usuario;
+                Toast.makeText(LoginActivity.this,
+                        "Bienvenido " + usuario.getCodUsuario()
+                        , Toast.LENGTH_SHORT).show();
+            }
+        }
 
     }
 }

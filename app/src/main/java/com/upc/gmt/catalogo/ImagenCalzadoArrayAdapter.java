@@ -9,10 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-import com.upc.gmt.bean.ProductoBean;
+import com.upc.gmt.comercialgb.LoginActivity;
 import com.upc.gmt.comercialgb.R;
-import com.upc.gmt.util.Util;
+import com.upc.gmt.model.Producto;
 
 import java.util.List;
 
@@ -23,10 +22,10 @@ import java.util.List;
 public class ImagenCalzadoArrayAdapter extends ArrayAdapter {
 
     private Context context;
-    private List<ProductoBean> lista;
+    private List<Producto> lista;
     private LayoutInflater inflater;
 
-    public ImagenCalzadoArrayAdapter(Context context, List<ProductoBean> lista){
+    public ImagenCalzadoArrayAdapter(Context context, List<Producto> lista){
         super(context, R.layout.calzado, lista);
         this.context = context;
         this.lista = lista;
@@ -47,24 +46,29 @@ public class ImagenCalzadoArrayAdapter extends ArrayAdapter {
             // get layout from mobile.xml
 //            gridView = inflater.inflate(R.layout.calzado, null);
 
-            ProductoBean p = lista.get(position);
+            Producto p = lista.get(position);
 
             // set value into textview
             TextView tvNombre = (TextView) convertView.findViewById(R.id.grid_item_label_nombre);
-            tvNombre.setText(p.getNombre());
+            tvNombre.setText(p.getDescripcion());
 
             TextView tvCodigo = (TextView) convertView.findViewById(R.id.grid_item_label_codigo);
-            tvCodigo.setText(p.getCodigo());
+            tvCodigo.setText(p.getSKU());
 
             TextView tvPrecio = (TextView) convertView.findViewById(R.id.grid_item_label_precio);
-            tvPrecio.setText(p.getPrecio());
+            int tipoUsuario = LoginActivity.USUARIO_SESSION.getIdTipoUsuario();
+            if(tipoUsuario == 2){//Revendedor
+                tvPrecio.setText("S/. " + p.getPrecioVendedor().doubleValue() + "(RV)");
+            }else{
+                tvPrecio.setText("S/. " + p.getPrecioUnitario().doubleValue());
+            }
 
             // set image based on selected text
             ImageView imageView = (ImageView) convertView.findViewById(R.id.grid_item_image);
 
 //            String calzado = "rojo";
 //            if (calzado.equals("rojo")) {
-//                imageView.setImageResource(R.mipmap.calzado_rojo);
+                imageView.setImageResource(R.mipmap.calzado_rojo);
 //            } else if (calzado.equals("amarillo")) {
 //                imageView.setImageResource(R.mipmap.calzado_amarillo);
 //            } else if (calzado.equals("verde")) {
@@ -72,11 +76,11 @@ public class ImagenCalzadoArrayAdapter extends ArrayAdapter {
 //            } else {
 //                imageView.setImageResource(R.mipmap.calzado_rojo);
 //            }
-            Picasso picasso = Picasso.with(context);
-            picasso.setIndicatorsEnabled(true);
-            picasso.setLoggingEnabled(true);
+//            Picasso picasso = Picasso.with(context);
+//            picasso.setIndicatorsEnabled(true);
+//            picasso.setLoggingEnabled(true);
             try {
-                Picasso.with(context).load(Util.URL_WEB_SERVICE+"/verImagen?nombre="+p.getNombreImagen()).into(imageView);
+//                Picasso.with(context).load(Util.URL_WEB_SERVICE+"/verImagen?nombre="+p.getNombreImagen()).into(imageView);
             }catch (Exception e){
                 e.printStackTrace();
                 Log.e("ERROR", e.getMessage());

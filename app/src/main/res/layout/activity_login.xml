@@ -36,16 +36,18 @@
             android:text="SISTEMA COMERCIAL GINO BIGIONI" />
 
         <EditText
+            android:id="@+id/txtUsuario"
             style="@style/editText_style"
-            android:id="@+id/editText"
             android:hint="Usuario"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:text="Usuario6" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/txtPassword"
             style="@style/editText_style"
             android:hint="Contraseña"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="123456789" />
 
         <Button
             style="@style/button_style"

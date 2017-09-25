@@ -54,7 +54,12 @@
                 android:text="Precio" />
 
             <Spinner
-                android:id="@+id/spnDetalleTalla"
+                android:id="@+id/spnDetalleColores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/spnDetalleTallas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -64,34 +69,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Material" />
-
-            <TextView
-                android:id="@+id/tvDetalleTaco"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Taco" />
-
-            <TextView
-                android:id="@+id/tvDetalleForro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Forro" />
-
-            <TextView
-                android:id="@+id/tvDetallePlanta"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Planta" />
-
-            <TextView
-                android:id="@+id/tvDetallePlantilla"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Plantilla" />
 
             <Button
                 android:id="@+id/btnAgregarPedido"

@@ -1,7 +1,9 @@
 package com.upc.gmt.pedido;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ListView;
 
 import com.upc.gmt.bean.ProductoBean;
@@ -31,5 +33,10 @@ public class PedidoActivity extends AppCompatActivity {
         lista.add(p2);
         lvPedidos.setAdapter(new PedidoArrayAdapter(this, lista));
 
+    }
+
+    public void onClickComprar(View v){
+        Intent i = new Intent(this,DatosPedidoActivity.class);
+        startActivity(i);
     }
 }

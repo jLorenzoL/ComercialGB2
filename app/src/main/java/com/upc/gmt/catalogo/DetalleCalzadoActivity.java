@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,33 +15,42 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.upc.gmt.bean.ProductoBean;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.upc.gmt.comercialgb.R;
+import com.upc.gmt.model.Producto;
 import com.upc.gmt.util.Util;
 
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
+import java.util.Map;
 
 public class DetalleCalzadoActivity extends AppCompatActivity {
 
+    LinearLayout lyDetalleCalzado;
+
+    TextView tvDetalleNombre;
+    TextView tvDetalleCodigo;
+    TextView tvDetallePrecio;
+    Spinner spnColores;
+    Spinner spnTallas;
+    TextView tvDetalleMaterial;
+
     ImageView imageView;
     String codigo;
+
+    List<String> listaMateriales;
+    Map<String, String> mapaColores;
+    List<String> listaTallas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +61,14 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
 
         codigo = extras.getString("codigo");
 
+        tvDetalleNombre = (TextView) findViewById(R.id.tvDetalleNombre);
+        tvDetalleCodigo = (TextView) findViewById(R.id.tvDetalleCodigo);
+        tvDetallePrecio = (TextView) findViewById(R.id.tvDetallePrecio);
+        spnColores = (Spinner)findViewById(R.id.spnDetalleColores);
+        spnTallas = (Spinner)findViewById(R.id.spnDetalleTallas);
+        tvDetalleMaterial = (TextView) findViewById(R.id.tvDetalleMaterial);
 
-        LinearLayout lyDetalleCalzado = (LinearLayout) findViewById(R.id.lyDetalleCalzado);
+        lyDetalleCalzado = (LinearLayout) findViewById(R.id.lyDetalleCalzado);
         for (int i = 0; i <= 4; i++) {
             imageView = new ImageView(this);
             imageView.setId(i);
@@ -105,53 +119,73 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
 
         new HttpRequestTaskDetalleCalzado().execute();
     }
-    private class HttpRequestTaskDetalleCalzado extends AsyncTask<Void, Void, ProductoBean> {
+    private class HttpRequestTaskDetalleCalzado extends AsyncTask<Void, Void, Producto> {
         @Override
-        protected ProductoBean doInBackground(Void... params) {
-            Log.i("doInBackground", "inicio");
+        protected Producto doInBackground(Void... params) {
+            Log.i("doInBackground", "HttpRequestTaskDetalleCalzado");
             try {
                 String URL = Util.URL_WEB_SERVICE +"/verDetalleCalzado";
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-//                HttpHeaders requestHeaders = new HttpHeaders();
-//                requestHeaders.setContentType(MediaType.APPLICATION_JSON);
-
-//                MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
-//                HttpEntity<?> httpEntity = new HttpEntity<Object>(body, requestHeaders);
 
                 UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(URL)
-                        .queryParam("codigo", codigo);
+                        .queryParam("idProducto", codigo);
+                Log.i("URL", builder.toUriString());
+//                ParameterizedTypeReference<Producto> responseType = new ParameterizedTypeReference<Producto>() {};
+//                ResponseEntity<Producto> respuesta = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, null, responseType);
+//                Producto p = respuesta.getBody();
 
-                ParameterizedTypeReference<ProductoBean> responseType = new ParameterizedTypeReference<ProductoBean>() {};
-                ResponseEntity<ProductoBean> respuesta = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, null, responseType);
-                ProductoBean p = respuesta.getBody();
-                return p;
+                ParameterizedTypeReference<Map<String, Object>> responseType = new ParameterizedTypeReference<Map<String, Object>>() {};
+                ResponseEntity<Map<String, Object>> respuesta = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, null, responseType);
+                Map<String, Object> mapa = respuesta.getBody();
+                Log.i("respuesta", mapa.toString());
+                ObjectMapper mapper = new ObjectMapper(); // jackson's objectmapper
+                List<Producto> lista = mapper.convertValue(mapa.get("detalle"), new TypeReference<List<Producto>>(){});
+                listaMateriales = new ArrayList<>();
+                for (Producto p:lista) {
+                    listaMateriales.add(p.getComponente()+": "+p.getMaterial());
+                }
+                List<Producto> colores = mapper.convertValue(mapa.get("colores"), new TypeReference<List<Producto>>(){});
+                mapaColores = new HashMap<>();
+                for (Producto p:colores) {
+                    mapaColores.put(p.getIdColor(),p.getColor());
+                }
+                List<Producto> tallas = mapper.convertValue(mapa.get("tallas"), new TypeReference<List<Producto>>(){});
+                listaTallas = new ArrayList<>();
+                for (Producto p:tallas) {
+                    listaTallas.add(p.getNroTalla() + " (Stock: "+ p.getStockVenta() + ")");
+                }
+                return lista.get(0);
             } catch (Exception e) {
                 Log.i("Exception", "ERROR");
                 Log.e("HttpRequestTask", e.getMessage(), e);
             }
             Log.i("doInBackground", "fin");
-            return new ProductoBean();
+            return new Producto();
         }
 
         @Override
-        protected void onPostExecute(ProductoBean p) {
-            Log.i("onPostExecute", "inicio");
-            Log.i("ProductoBean", p.toString());
-            TextView tvDetalleNombre = (TextView) findViewById(R.id.tvDetalleNombre); tvDetalleNombre.setText("Nombre  :" + p.getNombre());
-            TextView tvDetalleCodigo = (TextView) findViewById(R.id.tvDetalleCodigo); tvDetalleCodigo.setText("Codigo  :" + p.getCodigo());
-            TextView tvDetallePrecio = (TextView) findViewById(R.id.tvDetallePrecio); tvDetallePrecio.setText("Precio  :" + p.getPrecio());
-            Spinner spn = (Spinner)findViewById(R.id.spnDetalleTalla);
-  //          spn.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, p.getListaTallas().t oString());
-            TextView tvDetalleMaterial = (TextView) findViewById(R.id.tvDetalleMaterial); tvDetalleMaterial.setText("Material Calzado  :" + p.getMaterialCalzado());
-            TextView tvDetalleTaco = (TextView) findViewById(R.id.tvDetalleTaco); tvDetalleTaco.setText("Material Taco  :" + p.getMaterialTaco());
-            TextView tvDetalleForro = (TextView) findViewById(R.id.tvDetalleForro); tvDetalleForro.setText("Material de Forro  :" + p.getMaterialForro());
-            TextView tvDetallePlanta = (TextView) findViewById(R.id.tvDetallePlanta); tvDetallePlanta.setText("Material de Planta  :" + p.getMaterialPlanta());
-            TextView tvDetallePlantilla = (TextView) findViewById(R.id.tvDetallePlantilla); tvDetallePlantilla.setText("Material de Plantilla  :" + p.getMaterialPlantilla());
- //           Spinner spnDetalleTalla = (Spinner) findViewById(R.id.spnDetalleTalla); spnDetalleTalla(p.getListaTallas().toString()):
-
-
-
+        protected void onPostExecute(Producto p) {
+            Log.i("onPostExecute", "HttpRequestTaskDetalleCalzado");
+            Log.i("Producto", p.toString());
+            tvDetalleNombre.setText("Nombre  :" + p.getDescripcion());
+            tvDetalleCodigo.setText("Codigo  :" + p.getSKU());
+            tvDetallePrecio.setText("Precio  :" + p.getPrecioUnitario());
+            List<String> colores = new ArrayList<>();
+            for(Map.Entry<String, String> entry : mapaColores.entrySet()) {
+                colores.add(entry.getValue());
+            }
+            spnColores.setAdapter(
+                    new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, colores)
+            );
+            spnTallas.setAdapter(
+                    new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listaTallas)
+            );
+            String material = "";
+            for(String m:listaMateriales){
+                material += m + System.getProperty("line.separator");
+            }
+            tvDetalleMaterial.setText(material);
             Log.i("onPostExecute", "fin");
         }
 
