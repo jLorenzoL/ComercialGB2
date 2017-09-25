@@ -19,31 +19,64 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_weight="2">
 
             <Spinner
                 android:id="@+id/spnCatalogoTC"
+                style="@android:style/Widget.Holo.Light.Spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
 
             <Spinner
                 android:id="@+id/spnCatalogoTaC"
+                style="@android:style/Widget.Holo.Light.Spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_weight="2"
             android:orientation="vertical">
 
             <Spinner
                 android:id="@+id/spnCatalogoColor"
+                style="@android:style/Widget.Holo.Light.Spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
 
             <Spinner
                 android:id="@+id/spnCatalogoTemporada"
+                style="@android:style/Widget.Holo.Light.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="2">
+
+            <Spinner
+                android:id="@+id/spnCatalogoPC"
+                style="@android:style/Widget.Holo.Light.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/button3"
+                style="@style/button_styleCatalogo"
+                android:onClick="onClickReiniciar"
+                android:text="REINICIAR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -52,36 +85,19 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <Spinner
-                android:id="@+id/spnCatalogoPC"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="onClickReiniciar"
-                android:text="REINICIAR" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_weight="2">
 
             <Button
                 android:id="@+id/btnBuscarCalzado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/button_styleCatalogo"
                 android:onClick="onClickBuscar"
-                android:text="BUSCAR" />
+                android:text="BUSCAR"
+                />
 
             <TextView
                 android:id="@+id/tvTotalCatalogo"
+                style="@style/textView_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -100,15 +116,25 @@
 
         <GridView
             android:id="@+id/gvCatalogo"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:columnWidth="150dp"
             android:gravity="center"
             android:horizontalSpacing="10dp"
             android:numColumns="auto_fit"
             android:scrollbars="vertical"
             android:stretchMode="columnWidth"
-            android:verticalSpacing="10dp" />
+            android:verticalSpacing="10dp"
+            android:padding="@dimen/espacio_grilla"/>
+
+        <!--android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnWidth="120dp"
+        android:horizontalSpacing="@dimen/espacio_grilla"
+        android:numColumns="auto_fit"
+        android:padding="@dimen/espacio_grilla"
+        android:verticalSpacing="@dimen/espacio_grilla"-->
     </RelativeLayout>
     <!--</ScrollView>-->
 </LinearLayout>
