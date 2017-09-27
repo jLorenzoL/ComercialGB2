@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context="com.upc.gmt.pedido.PedidoActivity"
     >
@@ -20,7 +20,8 @@
             <ListView
                 android:id="@+id/lvPedidos"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/borde"/>
 
         </LinearLayout>
 
@@ -29,12 +30,16 @@
     <Spinner
         android:id="@+id/spnTipoPago"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        style="@android:style/Widget.Holo.Light.Spinner"
+        />
 
     <Spinner
         android:id="@+id/spnTipoEntrega"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        style="@android:style/Widget.Holo.Light.Spinner"
+        />
 
     <TextView
         android:id="@+id/tvTotalPedido"
@@ -49,6 +54,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:onClick="onClickComprar"
-        android:text="COMPRAR" />
+        android:text="COMPRAR"
+        style="@style/button_style"
+        />
 
 </LinearLayout>

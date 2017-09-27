@@ -47,7 +47,8 @@
             android:layout_alignBottom="@+id/radioGroup"
             android:layout_toRightOf="@+id/radioGroup"
             android:layout_weight="1"
-            android:text="MAPA" />
+            android:text="MAPA"
+            style="@style/button_styleDatosPedido"/>
     </RadioGroup>
 
     <TextView
@@ -244,12 +245,13 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_toEndOf="@+id/editText4"
+        android:layout_weight="1"
         android:text="Pagar"
-        android:layout_below="@+id/editText4" />
+        style="@style/button_styleDatosPedido"
+        android:layout_alignBaseline="@+id/textView18"
+        android:layout_alignBottom="@+id/textView18"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/textView18"
@@ -258,8 +260,8 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/editText6"
         android:layout_toRightOf="@+id/radioGroup2"
-        android:text="123456789"
-        android:layout_toLeftOf="@+id/button2"
-        android:layout_toStartOf="@+id/button2" />
+        android:text="123456789"/>
+       <!-- android:layout_toLeftOf="@+id/button2"
+        android:layout_toStartOf="@+id/button2" />-->
 
 </RelativeLayout>

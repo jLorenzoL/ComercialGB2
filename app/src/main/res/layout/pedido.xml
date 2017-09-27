@@ -2,11 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="5dp"
-    android:weightSum="1">
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/grid_pedido_image"
@@ -14,7 +13,10 @@
         android:layout_height="200dp"
         android:layout_gravity="center"
         android:layout_marginRight="1dp"
-        android:src="@android:drawable/ic_delete"></ImageView>
+        android:src="@android:drawable/ic_delete"
+        android:background="@drawable/borde"
+        >
+    </ImageView>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -26,11 +28,11 @@
             android:id="@+id/grid_pedido_label_nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="NOMBRE"
-            android:textColor="@android:color/black"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:gravity="left"
+            android:text="Nombre"
+            android:fontFamily="cursive"
+            style="@style/textView_stylePedido"
+             />
 
         <TextView
             android:id="@+id/grid_pedido_label_codigo"
@@ -38,8 +40,7 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="Codigo:"
-            android:textColor="@android:color/black"
-            android:textSize="15dp" />
+            style="@style/textView_stylePedido" />
 
         <TextView
             android:id="@+id/grid_pedido_label_color"
@@ -47,8 +48,7 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="Color:"
-            android:textColor="@android:color/black"
-            android:textSize="15dp" />
+            style="@style/textView_stylePedido"/>
 
         <TextView
             android:id="@+id/grid_pedido_label_talla"
@@ -56,8 +56,7 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="Talla:"
-            android:textColor="@android:color/black"
-            android:textSize="15dp"  />
+            style="@style/textView_stylePedido"/>
 
         <TextView
             android:id="@+id/grid_pedido_label_precio"
@@ -65,8 +64,7 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="Precio:"
-            android:textColor="@android:color/black"
-            android:textSize="20dp" />
+            style="@style/textView_stylePedido" />
     </LinearLayout>
 
     <LinearLayout
@@ -76,7 +74,7 @@
         >
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_gravity="right"
@@ -96,32 +94,29 @@
 
         <TextView
             android:id="@+id/tvTotalArticulo"
+            style="@style/textView_style"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="51dp"
             android:gravity="center"
             android:text="TextView"
             android:textStyle="bold"
             tools:text="S/ " />
 
+        <CheckBox
+            android:id="@+id/chbArticulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OK" />
+
     </LinearLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@android:drawable/ic_delete" />
 
-        <CheckBox
-            android:id="@+id/chbArticulo"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:text="OK" />
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 </LinearLayout>
