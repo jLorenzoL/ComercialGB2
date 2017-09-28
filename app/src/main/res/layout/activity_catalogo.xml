@@ -78,7 +78,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onClickReiniciar"
-                android:text="REINICIAR" />
+                android:text="REINICIAR"
+                android:fontFamily="cursive"/>
 
         </LinearLayout>
 
@@ -93,6 +94,7 @@
                 style="@style/button_styleCatalogo"
                 android:onClick="onClickBuscar"
                 android:text="BUSCAR"
+                android:fontFamily="cursive"
                 />
 
             <TextView
@@ -101,7 +103,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="ENCONTRADOS: 0" />
+                android:text="ENCONTRADOS: 0"
+                android:fontFamily="cursive"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -126,7 +129,8 @@
             android:stretchMode="columnWidth"
             android:verticalSpacing="10dp"
             android:padding="@dimen/espacio_grilla"
-            android:layout_margin="9dp"/>
+            android:layout_margin="9dp"
+            android:fontFamily="cursive"/>
 
         <!--android:id="@+id/grid"
         android:layout_width="match_parent"

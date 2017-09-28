@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="Codigo:"
+            android:fontFamily="cursive"
             style="@style/textView_stylePedido" />
 
         <TextView
@@ -48,6 +49,7 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="Color:"
+            android:fontFamily="cursive"
             style="@style/textView_stylePedido"/>
 
         <TextView
@@ -56,6 +58,7 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="Talla:"
+            android:fontFamily="cursive"
             style="@style/textView_stylePedido"/>
 
         <TextView
@@ -64,6 +67,7 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="Precio:"
+            android:fontFamily="cursive"
             style="@style/textView_stylePedido" />
     </LinearLayout>
 
@@ -90,6 +94,7 @@
             android:hint="CANTIDAD"
             android:inputType="number"
             android:text="1"
+            android:fontFamily="cursive"
             android:textAlignment="gravity" />
 
         <TextView
@@ -106,7 +111,8 @@
             android:id="@+id/chbArticulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="OK" />
+            android:text="OK"
+            android:fontFamily="cursive"/>
 
     </LinearLayout>
 

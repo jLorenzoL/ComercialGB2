@@ -14,7 +14,8 @@
         android:text="Tipo de Entrega:"
         android:layout_toLeftOf="@+id/textView13"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:fontFamily="cursive"/>
 
     <RadioGroup
         android:layout_width="wrap_content"
@@ -24,14 +25,16 @@
         android:layout_alignParentStart="true"
         android:id="@+id/radioGroup"
         android:layout_toLeftOf="@+id/textView13"
-        android:layout_toStartOf="@+id/textView13">
+        android:layout_toStartOf="@+id/textView13"
+        android:fontFamily="cursive">
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Recojo en Almacén" />
+            android:text="Recojo en Almacén"
+            android:fontFamily="cursive"/>
 
         <RadioButton
             android:id="@+id/radioButton"

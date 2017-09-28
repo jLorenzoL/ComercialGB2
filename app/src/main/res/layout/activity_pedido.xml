@@ -46,7 +46,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="TOTAL:" />
+        android:text="TOTAL:"
+        android:fontFamily="cursive"/>
 
     <Button
         android:id="@+id/btnComprar"
@@ -56,6 +57,7 @@
         android:onClick="onClickComprar"
         android:text="COMPRAR"
         style="@style/button_style"
+        android:fontFamily="cursive"
         />
 
 </LinearLayout>
