@@ -24,17 +24,19 @@
 
             <Spinner
                 android:id="@+id/spnCatalogoTC"
-                style="@android:style/Widget.Holo.Light.Spinner"
+                android:background="@drawable/spinner_bg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:spinnerMode="dropdown"/>
 
             <Spinner
                 android:id="@+id/spnCatalogoTaC"
-                style="@android:style/Widget.Holo.Light.Spinner"
+                android:background="@drawable/spinner_bg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:spinnerMode="dropdown"/>
         </LinearLayout>
 
         <LinearLayout
@@ -45,17 +47,19 @@
 
             <Spinner
                 android:id="@+id/spnCatalogoColor"
-                style="@android:style/Widget.Holo.Light.Spinner"
+                android:background="@drawable/spinner_bg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:spinnerMode="dropdown"/>
 
             <Spinner
                 android:id="@+id/spnCatalogoTemporada"
-                style="@android:style/Widget.Holo.Light.Spinner"
+                android:background="@drawable/spinner_bg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:spinnerMode="dropdown"/>
 
         </LinearLayout>
 
@@ -67,10 +71,10 @@
 
             <Spinner
                 android:id="@+id/spnCatalogoPC"
-                style="@android:style/Widget.Holo.Light.Spinner"
+                android:background="@drawable/spinner_bg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_height="50dp"
+                android:spinnerMode="dropdown"/>
 
             <Button
                 android:id="@+id/button3"
@@ -78,8 +82,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onClickReiniciar"
-                android:text="REINICIAR"
-                android:fontFamily="cursive"/>
+                android:text="Reiniciar"
+                android:fontFamily="cursive"
+                android:textColor="#000000"/>
 
         </LinearLayout>
 
@@ -93,8 +98,9 @@
                 android:id="@+id/btnBuscarCalzado"
                 style="@style/button_styleCatalogo"
                 android:onClick="onClickBuscar"
-                android:text="BUSCAR"
+                android:text="Buscar"
                 android:fontFamily="cursive"
+                android:textColor="#000000"
                 />
 
             <TextView
@@ -104,7 +110,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="ENCONTRADOS: 0"
-                android:fontFamily="cursive"/>
+                android:fontFamily="cursive"
+                android:textColor="#000000"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -130,7 +137,8 @@
             android:verticalSpacing="10dp"
             android:padding="@dimen/espacio_grilla"
             android:layout_margin="9dp"
-            android:fontFamily="cursive"/>
+            android:fontFamily="cursive"
+            android:textColor="#000000"/>
 
         <!--android:id="@+id/grid"
         android:layout_width="match_parent"
