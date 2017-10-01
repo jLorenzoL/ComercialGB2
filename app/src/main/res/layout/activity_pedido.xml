@@ -20,8 +20,7 @@
             <ListView
                 android:id="@+id/lvPedidos"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/borde"/>
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

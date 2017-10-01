@@ -68,10 +68,12 @@
             android:label="Detalle Calzado" />
 
         <activity
+            android:screenOrientation="landscape"
             android:name="com.upc.gmt.pedido.PedidoActivity"
             android:label="MIS CALZADOS" />
 
         <activity
+            android:screenOrientation="landscape"
             android:name="com.upc.gmt.catalogo.FullScreenImageActivity"
             android:label="IMAGEN CALZADO" />
 

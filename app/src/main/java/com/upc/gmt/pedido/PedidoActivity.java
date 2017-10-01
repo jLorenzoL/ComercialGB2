@@ -1,13 +1,18 @@
 package com.upc.gmt.pedido;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.upc.gmt.bean.ProductoBean;
+import com.upc.gmt.comercialgb.LoginActivity;
 import com.upc.gmt.comercialgb.R;
+import com.upc.gmt.comercialgb.RegistrarPedidoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,4 +44,27 @@ public class PedidoActivity extends AppCompatActivity {
         Intent i = new Intent(this,DatosPedidoActivity.class);
         startActivity(i);
     }
-}
+
+    public void onQuitarPedido(View v){
+
+        AlertDialog.Builder ad= new AlertDialog.Builder(this);
+        ad.setMessage("Desea Quitar pedido de la lista?");
+        ad.setTitle("Confirmacion");
+        ad.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(PedidoActivity.this, "Pedido Eliminado", Toast.LENGTH_LONG).show();
+            }
+        });
+        ad.setNegativeButton("Cancelar", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                cancelar();
+            }
+        });
+        ad.show();
+    }
+    public void cancelar() {
+        finish();
+    }
+    }
