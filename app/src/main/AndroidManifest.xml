@@ -49,14 +49,14 @@
             android:name="com.upc.gmt.catalogo.CatalogoActivity"
             android:label="@string/app_mostrar_catalogo"
             android:parentActivityName=".MenuPrincipalActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".MantenimientoUsuarioActivity"
             android:label="MANTEMIENTO DE USUARIO"
             android:screenOrientation="landscape" />
         <activity
             android:name=".AgregarUsuarioActivity"
-            android:label="AGREGAR USUARIO"
+            android:label="Registrar USUARIO"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

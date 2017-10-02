@@ -1,17 +1,30 @@
 package com.upc.gmt.comercialgb;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-public class AgregarUsuarioActivity extends AppCompatActivity {
+public class AgregarUsuarioActivity extends AppCompatActivity{
+
+    private int año;
+    private int mes;
+    private int dia;
+
+    private EditText txtFechaNacimiento;
+    private static final int TIPO_DIALOGO = 0;
+    private static DatePickerDialog.OnDateSetListener onSelectorFecha;
 
     Spinner spnTipoDoc;
     LinearLayout lyDNI;
@@ -22,6 +35,25 @@ public class AgregarUsuarioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_usuario);
+
+        txtFechaNacimiento = (EditText) findViewById(R.id.txtFechaNacimiento);
+        Calendar calendario = Calendar.getInstance();
+        año = calendario.get(Calendar.YEAR);
+        mes = calendario.get(Calendar.MONTH);
+        dia = calendario.get(Calendar.DAY_OF_MONTH);
+        mostrarFecha();
+
+        onSelectorFecha = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                año = year;
+                mes = month;
+                dia = dayOfMonth;
+                mostrarFecha();
+            }
+        };
+
+
 
         lyDNI = (LinearLayout) findViewById(R.id.lyDNI);
         lyRS = (LinearLayout) findViewById(R.id.lyRS);
@@ -53,4 +85,23 @@ public class AgregarUsuarioActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case 0:
+                return new DatePickerDialog(this,onSelectorFecha,año,mes,dia);
+        }
+        return null;
+    }
+
+    public void onMostrarCalendario(View control){
+            showDialog(TIPO_DIALOGO);
+    }
+
+    public void mostrarFecha(){
+        txtFechaNacimiento.setText(año+"-"+mes+"-"+dia);
+    }
+
+
 }
