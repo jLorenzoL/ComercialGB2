@@ -141,6 +141,7 @@
                 android:paddingRight="50dp">
 
                 <TextView
+                    android:id="@+id/textView15"
                     android:layout_width="199dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -216,15 +217,87 @@
                     android:textColor="#ffff" />
 
                 <Spinner
+                    android:id="@+id/spnTipoDoc"
+                    style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@android:style/Widget.Holo.Light.Spinner"
                     android:layout_gravity="center">
 
                 </Spinner>
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/lyDNI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="199dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Número de DNI"
+                    android:textColor="#ffff" />
+
+                <EditText
+                    style="@style/editText_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyRS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="199dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Razón Social"
+                    android:textColor="#ffff" />
+
+                <EditText
+                    style="@style/editText_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyRUC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="199dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Número RUC"
+                    android:textColor="#ffff" />
+
+                <EditText
+                    style="@style/editText_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
