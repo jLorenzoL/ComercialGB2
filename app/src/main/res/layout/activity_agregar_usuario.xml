@@ -9,7 +9,16 @@
     android:orientation="vertical">
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+    <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -93,13 +102,14 @@
                     android:text="DNI"
                     android:textColor="#ffff" />
 
-                <EditText
-                    android:id="@+id/editText2"
-                    style="@style/editText_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="2" />
+            <EditText
+                android:id="@+id/editText2"
+                style="@style/editText_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -163,5 +173,9 @@
                     android:layout_height="wrap_content"
                     android:text="Cancelar"/>
         </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
