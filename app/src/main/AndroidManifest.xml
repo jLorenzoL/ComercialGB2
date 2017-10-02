@@ -16,68 +16,71 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:screenOrientation="landscape"
             android:name=".LoginActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
+
+        </activity>
+        <activity
+            android:name=".MenuPrincipalActivity"
+            android:label="MENÚ PRINCIPAL"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".MantenimientoCalzadoActivity"
+            android:label="MANTENIMIENTO DE CALZADO"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".AgregarCalzadoActivity"
+            android:label="AGREGAR CALZADO"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ModificarCalzadoActivity"
+            android:label="MODIFICAR CALZADO"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".EliminarCalzadoActivity"
+            android:label="ELIMINAR CALZADO"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".RegistrarPedidoActivity"
+            android:label="REGISTRAR PEDIDO"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.upc.gmt.catalogo.CatalogoActivity"
+            android:label="@string/app_mostrar_catalogo"
+            android:parentActivityName=".MenuPrincipalActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".MantenimientoUsuarioActivity"
+            android:label="MANTEMIENTO DE USUARIO"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".AgregarUsuarioActivity"
+            android:label="AGREGAR USUARIO"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:screenOrientation="landscape"
-            android:name=".MenuPrincipalActivity"
-            android:label="MENÚ PRINCIPAL" />
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".MantenimientoCalzadoActivity"
-            android:label="MANTENIMIENTO DE CALZADO" />
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".AgregarCalzadoActivity"
-            android:label="AGREGAR CALZADO" />
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".ModificarCalzadoActivity"
-            android:label="MODIFICAR CALZADO" />
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".EliminarCalzadoActivity"
-            android:label="ELIMINAR CALZADO" />
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".RegistrarPedidoActivity"
-            android:label="REGISTRAR PEDIDO" />
-        <activity
-            android:screenOrientation="landscape"
-            android:name="com.upc.gmt.catalogo.CatalogoActivity"
-            android:label="@string/app_mostrar_catalogo"
-            android:parentActivityName=".MenuPrincipalActivity">
-            </activity>
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".MantenimientoUsuarioActivity"
-            android:label="MANTEMIENTO DE USUARIO" />
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".AgregarUsuarioActivity"
-            android:label="AGREGAR USUARIO" />
-        <activity
-            android:screenOrientation="landscape"
             android:name="com.upc.gmt.catalogo.DetalleCalzadoActivity"
-            android:label="Detalle Calzado" />
-
+            android:label="Detalle Calzado"
+            android:screenOrientation="landscape" />
         <activity
-            android:screenOrientation="landscape"
             android:name="com.upc.gmt.pedido.PedidoActivity"
-            android:label="MIS CALZADOS" />
-
+            android:label="MIS CALZADOS"
+            android:screenOrientation="landscape" />
         <activity
-            android:screenOrientation="landscape"
             android:name="com.upc.gmt.catalogo.FullScreenImageActivity"
-            android:label="IMAGEN CALZADO" />
-
-        <activity android:name="com.upc.gmt.pedido.DatosPedidoActivity"></activity>
+            android:label="IMAGEN CALZADO"
+            android:screenOrientation="landscape" />
+        <activity android:name="com.upc.gmt.pedido.DatosPedidoActivity" />
+        <activity
+            android:name=".RecuperarClaveActivity"
+            android:label="Recuperar Contraseña"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

@@ -58,7 +58,8 @@
         <TextView
             android:id="@+id/textView"
             style="@style/textView_style"
-            android:text="¿Olvidó su contraseña?" />
+            android:text="¿Olvidó su contraseña?"
+            android:onClick="onRecuperClave"/>
 
     </LinearLayout>
 </RelativeLayout>

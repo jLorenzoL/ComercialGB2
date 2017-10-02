@@ -416,6 +416,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    public void onRecuperClave(View v) {
+        Intent i = new Intent(getApplicationContext(),com.upc.gmt.comercialgb.RecuperarClaveActivity.class);
+        startActivity(i);
+    }
+
+
     private class HttpRequestTaskLogin extends AsyncTask<Void, Void, Usuario> {
         @Override
         protected Usuario doInBackground(Void... params) {

@@ -9,6 +9,7 @@
     <string name="app_mostrar_catalogo">CATALOGO DE CALZADOS</string>
     <string name="app_mantenimiento_cliente">Mantenimiento de Cliente</string>
     <string name="app_agregar_cliente">Agregar Cliente</string>
+    <string name="app_recupera_contraseña">Recuperar Contraseña</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
