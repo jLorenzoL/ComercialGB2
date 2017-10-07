@@ -94,7 +94,7 @@ public class CatalogoActivity extends AppCompatActivity {
         listaPrecios.add("De S/. 50 a 99 Soles");
         listaPrecios.add("De S/. 100 a 149 Soles");
         listaPrecios.add("De S/. 150 a más");
-        ArrayAdapter<String> arrayPrecioCalzado = new ArrayAdapter<>(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item,listaPrecios);
+        ArrayAdapter<String> arrayPrecioCalzado = new ArrayAdapter<>(getApplicationContext(),R.layout.simple_spinner_dropdown_item,listaPrecios);
         spnPrecioCalzado.setAdapter(arrayPrecioCalzado);
 
         //GRILLA DE CALZADOS
@@ -360,7 +360,7 @@ public class CatalogoActivity extends AppCompatActivity {
             for (Talla t:lista) {
                 items.add(t.getNroTalla().toString());
             }
-            ArrayAdapter<String> arrayTallaCalzado = new ArrayAdapter<String>(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item,items);
+            ArrayAdapter<String> arrayTallaCalzado = new ArrayAdapter<String>(getApplicationContext(),R.layout.simple_spinner_item,items);
             spnTallaCalzado.setAdapter(arrayTallaCalzado);
             Log.i("onPostExecute", "fin");
             progresoCarga+=25;
@@ -400,7 +400,7 @@ public class CatalogoActivity extends AppCompatActivity {
             for (Colorproducto cp:lista) {
                 items.add(cp.getColor());
             }
-            ArrayAdapter<String> array = new ArrayAdapter<>(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item,items);
+            ArrayAdapter<String> array = new ArrayAdapter<>(getApplicationContext(),R.layout.simple_spinner_item,items);
             spnColor.setAdapter(array);
             Log.i("onPostExecute", "fin");
             progresoCarga+=25;
@@ -480,7 +480,8 @@ public class CatalogoActivity extends AppCompatActivity {
             for (Tipoproducto tp: lista) {
                 items.add(tp.getDescripcion());
             }
-            ArrayAdapter<String> array = new ArrayAdapter<>(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item,items);
+            ArrayAdapter<String> array = new ArrayAdapter<>(getApplicationContext(),R.layout.simple_spinner_item,items);
+            array.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
             spnTipoCalzado.setAdapter(array);
             Log.i("onPostExecute", "fin");
             progresoCarga+=25;
@@ -520,7 +521,7 @@ public class CatalogoActivity extends AppCompatActivity {
             for (Temporada t:lista) {
                 items.add(t.getDescripcion());
             }
-            ArrayAdapter<String> array = new ArrayAdapter<>(getApplicationContext(),R.layout.support_simple_spinner_dropdown_item,items);
+            ArrayAdapter<String> array = new ArrayAdapter<>(getApplicationContext(),R.layout.simple_spinner_item,items);
             spnTemporada.setAdapter(array);
             Log.i("onPostExecute", "fin");
             progresoCarga+=25;

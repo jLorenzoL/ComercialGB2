@@ -62,6 +62,7 @@
             android:name=".AgregarUsuarioActivity"
             android:label="Registrar USUARIO"
             android:screenOrientation="landscape">
+
         </activity>
         <activity
             android:name="com.upc.gmt.catalogo.DetalleCalzadoActivity"
