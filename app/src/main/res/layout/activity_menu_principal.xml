@@ -18,6 +18,12 @@
         android:onClick="onIngresarMantenimientoCalzado"
         android:text="Mantenimiento de Calzado" />
 
+    <Spinner
+        android:id="@+id/spnPrueba2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
     <Button
         android:id="@+id/btnRegistroPedido"
         style="@style/button_style"
