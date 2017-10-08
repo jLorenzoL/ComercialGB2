@@ -175,12 +175,16 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
             for(Map.Entry<String, String> entry : mapaColores.entrySet()) {
                 colores.add(entry.getValue());
             }
-            spnColores.setAdapter(
-                    new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, colores)
-            );
-            spnTallas.setAdapter(
-                    new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, listaTallas)
-            );
+            ArrayAdapter spnColores = new ArrayAdapter(getApplicationContext(),R.layout.simple_spinner_item,colores);
+            spnColores.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+            Spinner spn = (Spinner) findViewById(R.id.spnDetalleColores);
+            spn.setAdapter(spnColores);
+            /*spnColores.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, colores));*/
+            /*spnTallas.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, listaTallas));*/
+            ArrayAdapter spnTallas = new ArrayAdapter(getApplicationContext(),R.layout.simple_spinner_item,listaTallas);
+            spnTallas.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+            Spinner spn1 = (Spinner) findViewById(R.id.spnDetalleTallas);
+            spn1.setAdapter(spnTallas);
             String material = "";
             for(String m:listaMateriales){
                 material += m + System.getProperty("line.separator");

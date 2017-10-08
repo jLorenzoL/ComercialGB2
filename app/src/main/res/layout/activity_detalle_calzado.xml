@@ -66,22 +66,28 @@
                 android:layout_weight="1"
                 android:padding="5dp"/>
 
+                <LinearLayout
+                    android:layout_width="274dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
             <Spinner
+                style="@style/spinner_style"
                 android:id="@+id/spnDetalleColores"
-                style="@style/spinner_style"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:padding="3dp"/>
+                android:padding="3dp" />
 
             <Spinner
-                android:id="@+id/spnDetalleTallas"
                 style="@style/spinner_style"
+                android:id="@+id/spnDetalleTallas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="3dp"/>
+                </LinearLayout>
 
             <TextView
                 android:id="@+id/tvDetalleMaterial"

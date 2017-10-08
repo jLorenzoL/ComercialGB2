@@ -94,8 +94,15 @@ public class CatalogoActivity extends AppCompatActivity {
         listaPrecios.add("De S/. 50 a 99 Soles");
         listaPrecios.add("De S/. 100 a 149 Soles");
         listaPrecios.add("De S/. 150 a más");
-        ArrayAdapter<String> arrayPrecioCalzado = new ArrayAdapter<>(getApplicationContext(),R.layout.simple_spinner_dropdown_item,listaPrecios);
+
+        ArrayAdapter<String> arrayPrecioCalzado = new ArrayAdapter<String>(getApplicationContext(),R.layout.simple_spinner_item,listaPrecios);
+        arrayPrecioCalzado.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         spnPrecioCalzado.setAdapter(arrayPrecioCalzado);
+
+        /*ArrayAdapter<String> arrayPrecioCalzado = new ArrayAdapter<>(getApplicationContext(),R.layout.simple_spinner_dropdown_item,listaPrecios);
+        spnPrecioCalzado.setAdapter(arrayPrecioCalzado);*/
+
+
 
         //GRILLA DE CALZADOS
         gvCalzados = (GridView) findViewById(R.id.gvCatalogo);
@@ -361,6 +368,7 @@ public class CatalogoActivity extends AppCompatActivity {
                 items.add(t.getNroTalla().toString());
             }
             ArrayAdapter<String> arrayTallaCalzado = new ArrayAdapter<String>(getApplicationContext(),R.layout.simple_spinner_item,items);
+            arrayTallaCalzado.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
             spnTallaCalzado.setAdapter(arrayTallaCalzado);
             Log.i("onPostExecute", "fin");
             progresoCarga+=25;
@@ -401,6 +409,7 @@ public class CatalogoActivity extends AppCompatActivity {
                 items.add(cp.getColor());
             }
             ArrayAdapter<String> array = new ArrayAdapter<>(getApplicationContext(),R.layout.simple_spinner_item,items);
+            array.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
             spnColor.setAdapter(array);
             Log.i("onPostExecute", "fin");
             progresoCarga+=25;
@@ -522,6 +531,7 @@ public class CatalogoActivity extends AppCompatActivity {
                 items.add(t.getDescripcion());
             }
             ArrayAdapter<String> array = new ArrayAdapter<>(getApplicationContext(),R.layout.simple_spinner_item,items);
+            array.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
             spnTemporada.setAdapter(array);
             Log.i("onPostExecute", "fin");
             progresoCarga+=25;

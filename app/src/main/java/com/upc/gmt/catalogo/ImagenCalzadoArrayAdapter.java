@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.upc.gmt.comercialgb.LoginActivity;
 import com.upc.gmt.comercialgb.R;
 import com.upc.gmt.model.Producto;
+import com.upc.gmt.util.Util;
 
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class ImagenCalzadoArrayAdapter extends ArrayAdapter {
             tvCodigo.setText(p.getSKU());
 
             TextView tvPrecio = (TextView) convertView.findViewById(R.id.grid_item_label_precio);
-            int tipoUsuario = LoginActivity.USUARIO_SESSION.getIdTipoUsuario();
+            int tipoUsuario = Util.USUARIO_SESSION.getIdTipoUsuario();
             if(tipoUsuario == 2){//Revendedor
                 tvPrecio.setText("S/. " + p.getPrecioVendedor().doubleValue() + "(RV)");
             }else{
