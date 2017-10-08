@@ -43,15 +43,6 @@
             android:layout_weight="1"
             android:text="Envio a Domicilio" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/radioGroup"
-            android:layout_toRightOf="@+id/radioGroup"
-            android:layout_weight="1"
-            android:text="MAPA"
-            style="@style/button_styleDatosPedido"/>
     </RadioGroup>
 
     <TextView

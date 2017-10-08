@@ -18,13 +18,7 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".MenuPrincipalActivity"
             android:label="MENÚ PRINCIPAL"
@@ -47,13 +41,18 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".RegistrarPedidoActivity"
-            android:label="REGISTRAR PEDIDO"
-            android:screenOrientation="landscape" />
+            android:label="REGISTRAR PEDIDO">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.upc.gmt.catalogo.CatalogoActivity"
             android:label="@string/app_mostrar_catalogo"
             android:parentActivityName=".MenuPrincipalActivity"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".MantenimientoUsuarioActivity"
             android:label="MANTEMIENTO DE USUARIO"
@@ -61,8 +60,7 @@
         <activity
             android:name=".AgregarUsuarioActivity"
             android:label="Registrar USUARIO"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name="com.upc.gmt.catalogo.DetalleCalzadoActivity"
             android:label="Detalle Calzado"
@@ -79,7 +77,8 @@
         <activity
             android:name=".RecuperarClaveActivity"
             android:label="Recuperar Contraseña"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
+        <activity android:name="com.upc.gmt.pedido.PedidoConsignacionActivity"></activity>
     </application>
 
 </manifest>
