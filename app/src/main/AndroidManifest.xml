@@ -40,7 +40,7 @@
             android:label="ELIMINAR CALZADO"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".RegistrarPedidoActivity"
+            android:name="com.upc.gmt.pedido.RegistrarPedidoActivity"
             android:label="REGISTRAR PEDIDO">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

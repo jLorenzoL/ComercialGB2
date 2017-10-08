@@ -10,9 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.upc.gmt.bean.ProductoBean;
-import com.upc.gmt.comercialgb.LoginActivity;
 import com.upc.gmt.comercialgb.R;
-import com.upc.gmt.comercialgb.RegistrarPedidoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +39,7 @@ public class PedidoActivity extends AppCompatActivity {
     }
 
     public void onClickComprar(View v){
-        Intent i = new Intent(this,DatosPedidoActivity.class);
+        Intent i = new Intent(this,RegistrarPedidoActivity.class);
         startActivity(i);
     }
 

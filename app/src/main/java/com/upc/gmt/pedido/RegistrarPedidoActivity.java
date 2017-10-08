@@ -1,4 +1,4 @@
-package com.upc.gmt.comercialgb;
+package com.upc.gmt.pedido;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,14 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
-import com.upc.gmt.pedido.ComprobantePagoFragment;
-import com.upc.gmt.pedido.TipoEntregaFragment;
-import com.upc.gmt.pedido.TipoPagoFragment;
+import com.upc.gmt.comercialgb.R;
 
 public class RegistrarPedidoActivity extends AppCompatActivity
         implements TipoEntregaFragment.OnFragmentInteractionListener,
         TipoPagoFragment.OnFragmentInteractionListener,
-        ComprobantePagoFragment.OnFragmentInteractionListener{
+        ComprobantePagoFragment.OnFragmentInteractionListener {
 
     static int tipoEntrega = 0;
     static int tipoPago = 0;
