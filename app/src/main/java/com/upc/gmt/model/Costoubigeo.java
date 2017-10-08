@@ -5,15 +5,21 @@ import java.math.BigDecimal;
 public class Costoubigeo {
     private String codUbigeoCosto;
 
-    private String descripion;
+    private String distrito;
+
+    private String provincia;
+
+    private String departamento;
 
     private BigDecimal costoEnvio;
 
     private String estado;
 
-    public Costoubigeo(String codUbigeoCosto, String descripion, BigDecimal costoEnvio, String estado) {
+    public Costoubigeo(String codUbigeoCosto, String distrito, String provincia, String departamento, BigDecimal costoEnvio, String estado) {
         this.codUbigeoCosto = codUbigeoCosto;
-        this.descripion = descripion;
+        this.distrito = distrito;
+        this.provincia = provincia;
+        this.departamento = departamento;
         this.costoEnvio = costoEnvio;
         this.estado = estado;
     }
@@ -30,12 +36,28 @@ public class Costoubigeo {
         this.codUbigeoCosto = codUbigeoCosto == null ? null : codUbigeoCosto.trim();
     }
 
-    public String getDescripion() {
-        return descripion;
+    public String getDistrito() {
+        return distrito;
     }
 
-    public void setDescripion(String descripion) {
-        this.descripion = descripion == null ? null : descripion.trim();
+    public void setDistrito(String distrito) {
+        this.distrito = distrito == null ? null : distrito.trim();
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia == null ? null : provincia.trim();
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento == null ? null : departamento.trim();
     }
 
     public BigDecimal getCostoEnvio() {
@@ -61,7 +83,9 @@ public class Costoubigeo {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", codUbigeoCosto=").append(codUbigeoCosto);
-        sb.append(", descripion=").append(descripion);
+        sb.append(", distrito=").append(distrito);
+        sb.append(", provincia=").append(provincia);
+        sb.append(", departamento=").append(departamento);
         sb.append(", costoEnvio=").append(costoEnvio);
         sb.append(", estado=").append(estado);
         sb.append("]");

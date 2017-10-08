@@ -114,11 +114,11 @@ public class CatalogoActivity extends AppCompatActivity {
 //                toast.maketext(getapplicationcontext(),
 //                        ((textview)view.findviewbyid(r.id.grid_item_label_nombre)).gettext().tostring(),
 //                        toast.length_long).show();
-//                String codigo = ((TextView)view.findViewById(R.id.grid_item_label_codigo)).getText().toString();
+//                String idProducto = ((TextView)view.findViewById(R.id.grid_item_label_codigo)).getText().toString();
                 Producto p = listaProducto.get(position);
                 Toast.makeText(view.getContext().getApplicationContext(),p.getDescripcion(),Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(),DetalleCalzadoActivity.class);
-                i.putExtra("codigo", p.getIdProducto().toString());
+                i.putExtra("idProducto", p.getIdProducto().toString());
                 startActivity(i);
             }
         });

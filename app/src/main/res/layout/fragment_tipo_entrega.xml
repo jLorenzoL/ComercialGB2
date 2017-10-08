@@ -37,43 +37,52 @@
                 android:text="Envío a Domicilio" />
         </RadioGroup>
 
-        <Spinner
-            android:id="@+id/spnDepartamento"
+        <LinearLayout
+            android:id="@+id/layoutDomicilio"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="invisible">
 
-        <Spinner
-            android:id="@+id/spnProvincia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <Spinner
+                android:id="@+id/spnDepartamento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <Spinner
-            android:id="@+id/spnDistrito"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <Spinner
+                android:id="@+id/spnProvincia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/editText7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="DIRECCIÓN"
-            android:inputType="textPersonName" />
+            <Spinner
+                android:id="@+id/spnDistrito"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/textView28"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Costo de Envío: 50.00" />
+            <EditText
+                android:id="@+id/editText7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="DIRECCIÓN"
+                android:inputType="textPersonName" />
 
-        <ToggleButton
-            android:id="@+id/toggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:textOff="ACEPTAR"
-            android:textOn="ACEPTADO" />
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Costo de Envío: 50.00" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textOff="ACEPTAR"
+                android:textOn="ACEPTADO" />
+
+        </LinearLayout>
 
     </LinearLayout>
 </FrameLayout>

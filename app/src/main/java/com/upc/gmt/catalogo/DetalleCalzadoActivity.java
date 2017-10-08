@@ -1,5 +1,6 @@
 package com.upc.gmt.catalogo;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,6 +38,8 @@ import java.util.Map;
 
 public class DetalleCalzadoActivity extends AppCompatActivity {
 
+    ProgressDialog progressDialog;
+
     LinearLayout lyDetalleCalzado;
 
     TextView tvDetalleNombre;
@@ -46,11 +50,15 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
     TextView tvDetalleMaterial;
 
     ImageView imageView;
-    String codigo;
+    String idProducto;
+    String idColor;
+    String nroTalla;
 
     List<String> listaMateriales;
     Map<String, String> mapaColores;
     List<String> listaTallas;
+
+    List<Producto> listaColorTalla;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +67,10 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-        codigo = extras.getString("codigo");
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Cargando Tallas...");
+
+        idProducto = extras.getString("idProducto");
 
         tvDetalleNombre = (TextView) findViewById(R.id.tvDetalleNombre);
         tvDetalleCodigo = (TextView) findViewById(R.id.tvDetalleCodigo);
@@ -68,6 +79,41 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
         spnTallas = (Spinner)findViewById(R.id.spnDetalleTallas);
         tvDetalleMaterial = (TextView) findViewById(R.id.tvDetalleMaterial);
 
+        spnColores.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String desColor = (String) parent.getItemAtPosition(position);
+                String idColorNuevo = "";
+                for(Map.Entry<String, String> entry : mapaColores.entrySet()) {
+                    if(desColor.equals(entry.getValue())){
+                        idColorNuevo = entry.getKey();
+                        break;
+                    }
+                }
+                Log.i("idColor", idColorNuevo);
+                if(!idColorNuevo.equals("") && !idColor.equals(idColorNuevo)){
+                    idColor = idColorNuevo;
+                    progressDialog.show();
+                    new HttpRequestTaskTallas().execute();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        spnTallas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                nroTalla = (String) parent.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
         lyDetalleCalzado = (LinearLayout) findViewById(R.id.lyDetalleCalzado);
         for (int i = 0; i <= 4; i++) {
             imageView = new ImageView(this);
@@ -75,9 +121,10 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
             imageView.setClickable(true);
             imageView.setAdjustViewBounds(true);
             imageView.setPadding(2, 2, 2, 2);
-            if(i>3){
+            Double random = Math.random()*10;
+            if(random.intValue() > 6){
                 imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.calzado_verde));
-            }else if(i>1){
+            }else if(random.intValue() > 3){
                 imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.calzado_amarillo));
             }else{
                 imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.calzado_rojo));
@@ -129,12 +176,8 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
                 UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(URL)
-                        .queryParam("idProducto", codigo);
+                        .queryParam("idProducto", idProducto);
                 Log.i("URL", builder.toUriString());
-//                ParameterizedTypeReference<Producto> responseType = new ParameterizedTypeReference<Producto>() {};
-//                ResponseEntity<Producto> respuesta = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, null, responseType);
-//                Producto p = respuesta.getBody();
-
                 ParameterizedTypeReference<Map<String, Object>> responseType = new ParameterizedTypeReference<Map<String, Object>>() {};
                 ResponseEntity<Map<String, Object>> respuesta = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, null, responseType);
                 Map<String, Object> mapa = respuesta.getBody();
@@ -151,6 +194,9 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                     mapaColores.put(p.getIdColor(),p.getColor());
                 }
                 List<Producto> tallas = mapper.convertValue(mapa.get("tallas"), new TypeReference<List<Producto>>(){});
+                if(tallas.size() > 0){
+                    nroTalla = String.valueOf(tallas.get(0).getNroTalla());
+                }
                 listaTallas = new ArrayList<>();
                 for (Producto p:tallas) {
                     listaTallas.add(p.getNroTalla() + " (Stock: "+ p.getStockVenta() + ")");
@@ -172,8 +218,13 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
             tvDetalleCodigo.setText("Codigo  :" + p.getSKU());
             tvDetallePrecio.setText("Precio  :" + p.getPrecioUnitario());
             List<String> colores = new ArrayList<>();
+            int contador = 1;
             for(Map.Entry<String, String> entry : mapaColores.entrySet()) {
+                if(contador == 1){
+                    idColor = entry.getKey();
+                }
                 colores.add(entry.getValue());
+                contador++;
             }
             ArrayAdapter spnColores = new ArrayAdapter(getApplicationContext(),R.layout.simple_spinner_item,colores);
             spnColores.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
@@ -190,6 +241,50 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                 material += m + System.getProperty("line.separator");
             }
             tvDetalleMaterial.setText(material);
+            Log.i("onPostExecute", "fin");
+        }
+
+    }
+
+    private class HttpRequestTaskTallas extends AsyncTask<Void, Void, List<Producto>> {
+        @Override
+        protected List<Producto> doInBackground(Void... params) {
+            Log.i("doInBackground", "HttpRequestTaskTallas");
+            try {
+                String URL = Util.URL_WEB_SERVICE +"/verDetalleCalzadoTallas";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(URL)
+                        .queryParam("idProducto", idProducto)
+                        .queryParam("idColor", idColor);
+                Log.i("URL", builder.toUriString());
+                ParameterizedTypeReference<List<Producto>> responseType = new ParameterizedTypeReference<List<Producto>>() {};
+                ResponseEntity<List<Producto>> respuesta = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, null, responseType);
+                List<Producto> lista = respuesta.getBody();
+                Log.i("respuesta", lista.toString());
+                return lista;
+            } catch (Exception e) {
+                Log.i("Exception", "ERROR");
+                Log.e("HttpRequestTask", e.getMessage(), e);
+            }
+            Log.i("doInBackground", "fin");
+            return new ArrayList<>();
+        }
+
+        @Override
+        protected void onPostExecute(List<Producto> lista) {
+            Log.i("onPostExecute", "HttpRequestTaskTallas");
+            Log.i("LISTA", "Tamaño: "+lista.size());
+            listaColorTalla = lista;
+            List<String> items = new ArrayList<>();
+            for (Producto p:lista) {
+                items.add(p.getNroTalla().toString());
+            }
+            ArrayAdapter<String> arrayTallaCalzado = new ArrayAdapter<String>(getApplicationContext(),R.layout.simple_spinner_item,items);
+            arrayTallaCalzado.setDropDownViewResource(R.layout.simple_spinner_item);
+            spnTallas.setAdapter(arrayTallaCalzado);
+            progressDialog.dismiss();
             Log.i("onPostExecute", "fin");
         }
 

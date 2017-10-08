@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import com.upc.gmt.comercialgb.R;
@@ -25,6 +26,8 @@ public class TipoEntregaFragment extends Fragment {
 
     RadioButton rdRecojoAlmacen;
     RadioButton rdEnvioDomicilio;
+
+    LinearLayout layoutDomicilio;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -122,9 +125,9 @@ public class TipoEntregaFragment extends Fragment {
                 int id = v.getId();
                 Log.i("ID",""+id);
                 if(id == R.id.rdRecojoAlmacen){
-
+                    layoutDomicilio.setVisibility(View.INVISIBLE);
                 }else if(id == R.id.rdEnvioDomicilio){
-
+                    layoutDomicilio.setVisibility(View.VISIBLE);
                 }
             }
         };
@@ -136,6 +139,9 @@ public class TipoEntregaFragment extends Fragment {
         rdEnvioDomicilio.setOnClickListener(ocl);
 
         rdRecojoAlmacen.setChecked(true);
+
+        layoutDomicilio = (LinearLayout) getView().findViewById(R.id.layoutDomicilio);;
+
         super.onViewCreated(view, savedInstanceState);
     }
 }
