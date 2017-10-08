@@ -44,7 +44,7 @@
                 android:text="Nombre"
                 style="@style/textView_stylePedido"
                 android:layout_weight="1"
-                android:fontFamily="cursive"/>
+                android:padding="5dp"/>
 
             <TextView
                 android:id="@+id/tvDetalleCodigo"
@@ -54,7 +54,7 @@
                 android:text="Codigo"
                 style="@style/textView_stylePedido"
                 android:layout_weight="1"
-                android:fontFamily="cursive"/>
+                android:padding="5dp"/>
 
             <TextView
                 android:id="@+id/tvDetallePrecio"
@@ -64,21 +64,24 @@
                 android:text="Precio"
                 style="@style/textView_stylePedido"
                 android:layout_weight="1"
-                android:fontFamily="cursive"/>
+                android:padding="5dp"/>
 
             <Spinner
                 android:id="@+id/spnDetalleColores"
+                style="@style/spinner_style"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"/>
+                android:padding="3dp"/>
 
             <Spinner
                 android:id="@+id/spnDetalleTallas"
+                style="@style/spinner_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="cursive"/>
+                android:padding="3dp"/>
 
             <TextView
                 android:id="@+id/tvDetalleMaterial"
@@ -88,15 +91,14 @@
                 android:text="Material"
                 style="@style/textView_stylePedido"
                 android:layout_weight="1"
-                android:fontFamily="cursive"/>
+                android:padding="5dp"/>
             </LinearLayout>
             <Button
                 android:id="@+id/btnAgregarPedido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Agregar al Pedido"
-                style="@style/button_styleCatalogo"
-                android:fontFamily="cursive"/>
+                style="@style/button_styleCatalogo"/>
 
         </LinearLayout>
     </ScrollView>

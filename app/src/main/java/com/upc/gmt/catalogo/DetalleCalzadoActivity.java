@@ -176,10 +176,10 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                 colores.add(entry.getValue());
             }
             spnColores.setAdapter(
-                    new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, colores)
+                    new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, colores)
             );
             spnTallas.setAdapter(
-                    new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listaTallas)
+                    new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, listaTallas)
             );
             String material = "";
             for(String m:listaMateriales){

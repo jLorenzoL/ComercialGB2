@@ -16,8 +16,8 @@ import com.upc.gmt.pedido.TipoPagoFragment;
 
 public class RegistrarPedidoActivity extends AppCompatActivity
         implements TipoEntregaFragment.OnFragmentInteractionListener,
-                    TipoPagoFragment.OnFragmentInteractionListener,
-                    ComprobantePagoFragment.OnFragmentInteractionListener{
+        TipoPagoFragment.OnFragmentInteractionListener,
+        ComprobantePagoFragment.OnFragmentInteractionListener{
 
     static int tipoEntrega = 0;
     static int tipoPago = 0;
