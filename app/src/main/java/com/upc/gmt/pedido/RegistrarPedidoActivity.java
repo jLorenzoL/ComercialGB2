@@ -33,6 +33,7 @@ public class RegistrarPedidoActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_pedido);
 
+        tvTotalPagar = (TextView) findViewById(R.id.tvTotalPagar);
         tvTotalPagar.setText("TOTAL A PAGAR: S/ "+ Util.PRECIO_TOTAL_CALZADOS);
 
         String[] items = {"TIPO DE ENTREGA","TIPO DE PAGO","COMPROBANTE DE PAGO"};

@@ -42,7 +42,6 @@
         <Button
             android:id="@+id/btnPedidosPorPagar"
             style="@style/button_style"
-            android:onClick="onPedidosPorPagar"
             android:text="Ver Pedidos por pagar" />
 
     </LinearLayout>
