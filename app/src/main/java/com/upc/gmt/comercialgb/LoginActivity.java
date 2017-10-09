@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
             if(null != usuario) {
                 Util.USUARIO_SESSION = usuario;
                 Toast.makeText(LoginActivity.this,
-                        "Bienvenido " + usuario.getCodUsuario()
+                        "BIENVENIDO " + usuario.getCodUsuario()
                         , Toast.LENGTH_SHORT).show();
             }else {
                 Util.USUARIO_SESSION = new Usuario();

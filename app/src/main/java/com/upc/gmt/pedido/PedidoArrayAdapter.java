@@ -45,6 +45,9 @@ public class PedidoArrayAdapter extends ArrayAdapter {
             convertView = inflater.inflate(R.layout.pedido, parent, false);
         }
 
+            ImageView btnQuitar = (ImageView) convertView.findViewById(R.id.btnQuitar);
+            btnQuitar.setTag(position);
+
             CheckBox chbArticulo = (CheckBox) convertView.findViewById(R.id.chbArticulo);
             chbArticulo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -93,8 +96,8 @@ public class PedidoArrayAdapter extends ArrayAdapter {
             TextView tvTotalArticulo = (TextView) convertView.findViewById(R.id.tvTotalArticulo);
 
             if(Util.USUARIO_SESSION.getIdTipoUsuario() == 2){
-                tvPrecio.setText("Precio: " + p.getPrecioVendedor() +"(RV)");
-                tvTotalArticulo.setText("SubTotal de Calzado: S/ " + p.getPrecioVendedor() +"(RV)");
+                tvPrecio.setText("Precio: " + p.getPrecioVendedor() +" (RV)");
+                tvTotalArticulo.setText("SubTotal de Calzado: S/ " + p.getPrecioVendedor() +" (RV)");
             }else {
                 tvPrecio.setText("Precio: " + p.getPrecioUnitario());
                 tvTotalArticulo.setText("SubTotal de Calzado: S/ " + p.getPrecioUnitario());

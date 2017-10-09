@@ -9,8 +9,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.upc.gmt.comercialgb.R;
+import com.upc.gmt.util.Util;
 
 public class RegistrarPedidoActivity extends AppCompatActivity
         implements TipoEntregaFragment.OnFragmentInteractionListener,
@@ -24,10 +26,14 @@ public class RegistrarPedidoActivity extends AppCompatActivity
     ListView lvRegistrarPedido;
     FrameLayout fragPedido;
 
+    TextView tvTotalPagar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_pedido);
+
+        tvTotalPagar.setText("TOTAL A PAGAR: S/ "+ Util.PRECIO_TOTAL_CALZADOS);
 
         String[] items = {"TIPO DE ENTREGA","TIPO DE PAGO","COMPROBANTE DE PAGO"};
         lvRegistrarPedido = (ListView) findViewById(R.id.lvRegistrarPedido);
@@ -88,4 +94,7 @@ public class RegistrarPedidoActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
         Log.i("Uri",""+uri);
     }
+
+
+
 }

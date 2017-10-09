@@ -109,10 +109,6 @@ public class CatalogoActivity extends AppCompatActivity {
         gvCalzados.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                toast.maketext(getapplicationcontext(),
-//                        ((textview)view.findviewbyid(r.id.grid_item_label_nombre)).gettext().tostring(),
-//                        toast.length_long).show();
-//                String idProducto = ((TextView)view.findViewById(R.id.grid_item_label_codigo)).getText().toString();
                 productoSeleccionado = listaProducto.get(position);
                 Toast.makeText(view.getContext().getApplicationContext(),productoSeleccionado.getDescripcion(),Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(),DetalleCalzadoActivity.class);

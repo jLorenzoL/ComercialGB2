@@ -204,7 +204,7 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
         p.setNroTalla(Integer.parseInt(nroTalla.substring(0,2)));
         p.setColor(spnColores.getSelectedItem().toString());
         Util.LISTA_PRODUCTOS_PEDIDO.add(p);
-        Toast.makeText(DetalleCalzadoActivity.this, "El Calzado "+p.getDescripcion()+" fue agregado al Pedido.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(DetalleCalzadoActivity.this, "EL CALZADO "+p.getDescripcion()+" FUE AGREGADO AL PEDIDO", Toast.LENGTH_SHORT).show();
         finish();
     }
 
