@@ -215,7 +215,7 @@ public class CatalogoActivity extends AppCompatActivity {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setProgress(progresoCarga);
         progressDialog.setMax(100);
-        progressDialog.show();
+        /*progressDialog.show();
 
         new Thread(new Runnable() {
             @Override
@@ -226,7 +226,7 @@ public class CatalogoActivity extends AppCompatActivity {
                     }
                 }
             }
-        }).start();
+        }).start();*/
 
         new HttpRequestTaskTiposCalzado().execute();
         new HttpRequestTaskTallas().execute();
