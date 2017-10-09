@@ -24,14 +24,14 @@ public class Util {
 
         public static double PRECIO_TOTAL_CALZADOS = 0.00;
 
-        public static View getViewByPosition(int position, ListView listView) {
+        public static View getViewByPosition(int pos, ListView listView) {
             final int firstListItemPosition = listView.getFirstVisiblePosition();
             final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
 
-            if (position < firstListItemPosition || position > lastListItemPosition) {
-                return listView.getAdapter().getView(position, listView.getChildAt(position), listView);
+            if (pos < firstListItemPosition || pos > lastListItemPosition ) {
+                return listView.getAdapter().getView(pos, null, listView);
             } else {
-                final int childIndex = position - firstListItemPosition;
+                final int childIndex = pos - firstListItemPosition;
                 return listView.getChildAt(childIndex);
             }
         }

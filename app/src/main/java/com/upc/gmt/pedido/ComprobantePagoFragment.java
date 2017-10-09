@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import com.upc.gmt.comercialgb.R;
@@ -21,6 +22,9 @@ import com.upc.gmt.comercialgb.R;
  * create an instance of this fragment.
  */
 public class ComprobantePagoFragment extends Fragment {
+
+    LinearLayout lyRUC;
+    LinearLayout lyRS;
 
     RadioButton rdBoleta;
     RadioButton rdFactura;
@@ -115,10 +119,41 @@ public class ComprobantePagoFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        lyRUC = (LinearLayout) getView().findViewById(R.id.lyRUC);
+        lyRS = (LinearLayout) getView().findViewById(R.id.lyRS);
+
+        View.OnClickListener ocl = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                int id = v.getId();
+                if(id == R.id.rdBoleta){
+                    lyRUC.setVisibility(View.INVISIBLE);
+                    lyRS.setVisibility(View.INVISIBLE);
+                    RegistrarPedidoActivity.tipoComprobante = 0;
+                }else if(id == R.id.rdFactura){
+                    lyRUC.setVisibility(View.VISIBLE);
+                    lyRS.setVisibility(View.VISIBLE);
+                    RegistrarPedidoActivity.tipoComprobante = 1;
+                }
+            }
+        };
+
         rdBoleta = (RadioButton) getView().findViewById(R.id.rdBoleta);
         rdFactura = (RadioButton) getView().findViewById(R.id.rdFactura);
 
-        rdBoleta.setChecked(true);
+        rdBoleta.setOnClickListener(ocl);
+        rdFactura.setOnClickListener(ocl);
+
+        if(RegistrarPedidoActivity.tipoComprobante == 1){
+            rdFactura.setChecked(true);
+            lyRUC.setVisibility(View.VISIBLE);
+            lyRS.setVisibility(View.VISIBLE);
+        }else{
+            rdBoleta.setChecked(true);
+            lyRUC.setVisibility(View.INVISIBLE);
+            lyRS.setVisibility(View.INVISIBLE);
+        }
 
         super.onViewCreated(view, savedInstanceState);
     }

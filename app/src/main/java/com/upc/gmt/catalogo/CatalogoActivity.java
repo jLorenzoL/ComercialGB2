@@ -223,6 +223,7 @@ public class CatalogoActivity extends AppCompatActivity {
                 while(true){
                     if(progressDialog != null && progressDialog.getProgress()==100){
                         progressDialog.dismiss();
+                        break;
                     }
                 }
             }

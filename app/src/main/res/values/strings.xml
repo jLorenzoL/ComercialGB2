@@ -1,15 +1,15 @@
 <resources>
-    <string name="app_name">GinoBigioni</string>
-    <string name="app_menu_principal">Menu Principal</string>
-    <string name="app_menu_mantenimiento">Mantenimiento de Calzado</string>
-    <string name="app_agregar_calzado">Agregar Calzado</string>
-    <string name="app_modificar_calzado">Modificar Calzado</string>
-    <string name="app_eliminar_calzado">Eliminar Calzado</string>
-    <string name="app_registrar_pedido">Registrar Pedido</string>
+    <string name="app_name">AppGinoBigioni</string>
+    <string name="app_menu_principal">MENU PRINCIPAL</string>
+    <string name="app_menu_mantenimiento">MANTENIMIENTO DE CALZADO</string>
+    <string name="app_agregar_calzado">AGREGAR CALZADO</string>
+    <string name="app_modificar_calzado">MODIFICAR CALZADO</string>
+    <string name="app_eliminar_calzado">ELIMINAR CALZADO</string>
+    <string name="app_registrar_pedido">REGISTRAR PEDIDO</string>
     <string name="app_mostrar_catalogo">CATALOGO DE CALZADOS</string>
-    <string name="app_mantenimiento_cliente">Mantenimiento de Cliente</string>
-    <string name="app_agregar_cliente">Agregar Cliente</string>
-    <string name="app_recupera_contraseña">Recuperar Contraseña</string>
+    <string name="app_mantenimiento_cliente">MANTENIMIENTO DE CLIENTE</string>
+    <string name="app_agregar_cliente">AGREGAR CLIENTe</string>
+    <string name="app_recupera_contraseña">RECUPERAR CONTRASEÑa</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

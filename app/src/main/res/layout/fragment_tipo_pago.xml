@@ -68,9 +68,11 @@
         </RadioGroup>
 
         <LinearLayout
+            android:id="@+id/lyBanco"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <TextView
                 android:id="@+id/textView17"
@@ -87,9 +89,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lyCuentaBancaria"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <TextView
                 android:id="@+id/textView29"
@@ -129,9 +133,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lyNumeroTarjeta"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <TextView
                 android:id="@+id/textView21"
@@ -153,9 +159,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lyNombre"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <TextView
                 android:id="@+id/textView22"
@@ -174,9 +182,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lyApellido"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <TextView
                 android:id="@+id/textView23"
@@ -195,9 +205,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lyFechaCaducidad"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <TextView
                 android:id="@+id/textView24"
@@ -216,9 +228,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lyCSV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <TextView
                 android:id="@+id/textView25"

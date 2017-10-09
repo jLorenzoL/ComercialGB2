@@ -45,6 +45,8 @@ public class PedidoArrayAdapter extends ArrayAdapter {
             convertView = inflater.inflate(R.layout.pedido, parent, false);
         }
 
+            convertView.setTag(position);
+
             ImageView btnQuitar = (ImageView) convertView.findViewById(R.id.btnQuitar);
             btnQuitar.setTag(position);
 
@@ -54,16 +56,24 @@ public class PedidoArrayAdapter extends ArrayAdapter {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     double totalPrecio = 0.00;
                     ListView lvPedidos = (ListView) buttonView.getRootView().findViewById(R.id.lvPedidos);
+//                    ListView lvPedidos = PedidoActivity.lvPedidos;
                     for (int i = 0; i < lvPedidos.getCount(); i++){
+                        Log.i("OnCheckedChangeListener", "i: "+i);
                         View viewPedido = Util.getViewByPosition(i, lvPedidos);
+//                        View viewPedido = lvPedidos.getChildAt(i); // USAR SELECTITEM
+                        Log.i("viewPedido", "position: "+viewPedido.getTag());
                         CheckBox chbArticulo = (CheckBox) viewPedido.findViewById(R.id.chbArticulo);
                         if(chbArticulo.isChecked()){
                             EditText txtCantidadPedido = (EditText) viewPedido.findViewById(R.id.txtCantidadPedido);
                             Producto p = Util.LISTA_PRODUCTOS_PEDIDO.get(i);
                             p.setCantidad(Integer.parseInt(txtCantidadPedido.getText().toString()));
+                            Util.LISTA_PRODUCTOS_PEDIDO.set(i, p);
+                            TextView tvTotalArticulo = (TextView) viewPedido.findViewById(R.id.tvTotalArticulo);
                             if(Util.USUARIO_SESSION.getIdTipoUsuario() == 2){
+                                tvTotalArticulo.setText("SubTotal del Calzado: S/ " + (p.getCantidad()*p.getPrecioVendedor().doubleValue()));
                                 totalPrecio += (p.getCantidad()*p.getPrecioVendedor().doubleValue());
                             }else{
+                                tvTotalArticulo.setText("SubTotal del Calzado: S/ " + (p.getCantidad()*p.getPrecioUnitario().doubleValue()));
                                 totalPrecio += (p.getCantidad()*p.getPrecioUnitario().doubleValue());
                             }
                         }
@@ -74,11 +84,12 @@ public class PedidoArrayAdapter extends ArrayAdapter {
                 }
             });
 
-            EditText txtCantidadPedido = (EditText) convertView.findViewById(R.id.txtCantidadPedido);
-
             Producto p = lista.get(position);
 
-            Log.i("Producto "+position, p.toString());
+//            Log.i("Producto "+position, p.toString());
+
+            EditText txtCantidadPedido = (EditText) convertView.findViewById(R.id.txtCantidadPedido);
+            txtCantidadPedido.setText(""+p.getCantidad());
 
             TextView tvNombre = (TextView) convertView.findViewById(R.id.grid_pedido_label_nombre);
             tvNombre.setText("Nombre: "+p.getDescripcion());
@@ -97,19 +108,19 @@ public class PedidoArrayAdapter extends ArrayAdapter {
 
             if(Util.USUARIO_SESSION.getIdTipoUsuario() == 2){
                 tvPrecio.setText("Precio: " + p.getPrecioVendedor() +" (RV)");
-                tvTotalArticulo.setText("SubTotal de Calzado: S/ " + p.getPrecioVendedor() +" (RV)");
+                tvTotalArticulo.setText("SubTotal del Calzado: S/ " + p.getCantidad()*p.getPrecioVendedor().doubleValue());
             }else {
                 tvPrecio.setText("Precio: " + p.getPrecioUnitario());
-                tvTotalArticulo.setText("SubTotal de Calzado: S/ " + p.getPrecioUnitario());
+                tvTotalArticulo.setText("SubTotal del Calzado: S/ " + p.getCantidad()*p.getPrecioUnitario().doubleValue());
             }
 
             ImageView imageView = (ImageView) convertView.findViewById(R.id.grid_pedido_image);
 
-            Double random = Math.random();
+            Double random = Math.random()*15;
             if (random.intValue() > 9) {
                 imageView.setImageResource(R.mipmap.calzado_rojo);
             } else if (random.intValue() > 5) {
-                imageView.setImageResource(R.mipmap.calzado_amarillo);
+                imageView.setImageResource(R.mipmap.calzado_rojo);
             } else {
                 imageView.setImageResource(R.mipmap.calzado_rojo);
             }

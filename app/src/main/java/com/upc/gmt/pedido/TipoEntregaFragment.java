@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -123,11 +122,12 @@ public class TipoEntregaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int id = v.getId();
-                Log.i("ID",""+id);
                 if(id == R.id.rdRecojoAlmacen){
                     layoutDomicilio.setVisibility(View.INVISIBLE);
+                    RegistrarPedidoActivity.tipoEntrega = 0;
                 }else if(id == R.id.rdEnvioDomicilio){
                     layoutDomicilio.setVisibility(View.VISIBLE);
+                    RegistrarPedidoActivity.tipoEntrega = 1;
                 }
             }
         };
@@ -138,9 +138,14 @@ public class TipoEntregaFragment extends Fragment {
         rdRecojoAlmacen.setOnClickListener(ocl);
         rdEnvioDomicilio.setOnClickListener(ocl);
 
-        rdRecojoAlmacen.setChecked(true);
-
         layoutDomicilio = (LinearLayout) getView().findViewById(R.id.layoutDomicilio);;
+        if(RegistrarPedidoActivity.tipoEntrega == 1){
+            layoutDomicilio.setVisibility(View.VISIBLE);
+            rdEnvioDomicilio.setChecked(true);
+        }else{
+            layoutDomicilio.setVisibility(View.INVISIBLE);
+            rdRecojoAlmacen.setChecked(true);
+        }
 
         super.onViewCreated(view, savedInstanceState);
     }

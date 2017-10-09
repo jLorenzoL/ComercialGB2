@@ -74,7 +74,7 @@ public class ImagenCalzadoArrayAdapter extends ArrayAdapter {
             } else if (random.intValue() > 4) {
                 imageView.setImageResource(R.mipmap.calzado_amarillo);
             } else {
-                imageView.setImageResource(R.mipmap.calzado_rojo);
+                imageView.setImageResource(R.mipmap.calzado_verde);
             }
 
 //            Picasso picasso = Picasso.with(context);

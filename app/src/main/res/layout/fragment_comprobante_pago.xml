@@ -31,9 +31,11 @@
         </RadioGroup>
 
         <LinearLayout
+            android:id="@+id/lyRUC"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <TextView
                 android:id="@+id/textView19"
@@ -53,9 +55,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lyRS"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <TextView
                 android:id="@+id/textView20"

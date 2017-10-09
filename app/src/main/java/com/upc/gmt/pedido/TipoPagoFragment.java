@@ -5,10 +5,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import com.upc.gmt.comercialgb.R;
@@ -22,6 +22,14 @@ import com.upc.gmt.comercialgb.R;
  * create an instance of this fragment.
  */
 public class TipoPagoFragment extends Fragment {
+
+    LinearLayout lyBanco;
+    LinearLayout lyCuentaBancaria;
+    LinearLayout lyNumeroTarjeta;
+    LinearLayout lyNombre;
+    LinearLayout lyApellido;
+    LinearLayout lyFechaCaducidad;
+    LinearLayout lyCSV;
 
     RadioButton rdConsignacion;
     RadioButton rdEfectivo;
@@ -80,6 +88,15 @@ public class TipoPagoFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        lyBanco = (LinearLayout) getView().findViewById(R.id.lyBanco);
+        lyCuentaBancaria = (LinearLayout) getView().findViewById(R.id.lyCuentaBancaria);
+        lyNumeroTarjeta = (LinearLayout) getView().findViewById(R.id.lyNumeroTarjeta);
+        lyNombre = (LinearLayout) getView().findViewById(R.id.lyNombre);
+        lyApellido = (LinearLayout) getView().findViewById(R.id.lyApellido);
+        lyFechaCaducidad = (LinearLayout) getView().findViewById(R.id.lyFechaCaducidad);
+        lyCSV = (LinearLayout) getView().findViewById(R.id.lyCSV);
+
         View.OnClickListener ocl = new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -88,15 +105,47 @@ public class TipoPagoFragment extends Fragment {
                 rdTarjeta.setChecked(false);
                 rdTransferencia.setChecked(false);
                 int id = v.getId();
-                Log.i("ID",""+id);
+//                Log.i("ID",""+id);
                 if(id == R.id.rdConsignacion){
                     rdConsignacion.setChecked(true);
+                    RegistrarPedidoActivity.tipoPago = 2;
+                    lyBanco.setVisibility(View.INVISIBLE);
+                    lyCuentaBancaria.setVisibility(View.INVISIBLE);
+                    lyNumeroTarjeta.setVisibility(View.INVISIBLE);
+                    lyNombre.setVisibility(View.INVISIBLE);
+                    lyApellido.setVisibility(View.INVISIBLE);
+                    lyFechaCaducidad.setVisibility(View.INVISIBLE);
+                    lyCSV.setVisibility(View.INVISIBLE);
                 }else if(id == R.id.rdEfectivo){
                     rdEfectivo.setChecked(true);
+                    RegistrarPedidoActivity.tipoPago = 1;
+                    lyBanco.setVisibility(View.INVISIBLE);
+                    lyCuentaBancaria.setVisibility(View.INVISIBLE);
+                    lyNumeroTarjeta.setVisibility(View.INVISIBLE);
+                    lyNombre.setVisibility(View.INVISIBLE);
+                    lyApellido.setVisibility(View.INVISIBLE);
+                    lyFechaCaducidad.setVisibility(View.INVISIBLE);
+                    lyCSV.setVisibility(View.INVISIBLE);
                 }else if(id == R.id.rdTarjeta){
                     rdTarjeta.setChecked(true);
+                    RegistrarPedidoActivity.tipoPago = 3;
+                    lyBanco.setVisibility(View.INVISIBLE);
+                    lyCuentaBancaria.setVisibility(View.INVISIBLE);
+                    lyNumeroTarjeta.setVisibility(View.VISIBLE);
+                    lyNombre.setVisibility(View.VISIBLE);
+                    lyApellido.setVisibility(View.VISIBLE);
+                    lyFechaCaducidad.setVisibility(View.VISIBLE);
+                    lyCSV.setVisibility(View.VISIBLE);
                 }else if(id == R.id.rdTransferencia){
                     rdTransferencia.setChecked(true);
+                    RegistrarPedidoActivity.tipoPago = 4;
+                    lyBanco.setVisibility(View.VISIBLE);
+                    lyCuentaBancaria.setVisibility(View.VISIBLE);
+                    lyNumeroTarjeta.setVisibility(View.INVISIBLE);
+                    lyNombre.setVisibility(View.INVISIBLE);
+                    lyApellido.setVisibility(View.INVISIBLE);
+                    lyFechaCaducidad.setVisibility(View.INVISIBLE);
+                    lyCSV.setVisibility(View.INVISIBLE);
                 }
             }
         };
@@ -110,9 +159,50 @@ public class TipoPagoFragment extends Fragment {
         rdTarjeta.setOnClickListener(ocl);
         rdTransferencia.setOnClickListener(ocl);
 
-        rdEfectivo.setChecked(true);
+        cargarPantalla();
 
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    private void cargarPantalla() {
+        int id = RegistrarPedidoActivity.tipoPago;
+        if(id == 2){
+            rdConsignacion.setChecked(true);
+            lyBanco.setVisibility(View.INVISIBLE);
+            lyCuentaBancaria.setVisibility(View.INVISIBLE);
+            lyNumeroTarjeta.setVisibility(View.INVISIBLE);
+            lyNombre.setVisibility(View.INVISIBLE);
+            lyApellido.setVisibility(View.INVISIBLE);
+            lyFechaCaducidad.setVisibility(View.INVISIBLE);
+            lyCSV.setVisibility(View.INVISIBLE);
+        }else if(id == 1){
+            rdEfectivo.setChecked(true);
+            lyBanco.setVisibility(View.INVISIBLE);
+            lyCuentaBancaria.setVisibility(View.INVISIBLE);
+            lyNumeroTarjeta.setVisibility(View.INVISIBLE);
+            lyNombre.setVisibility(View.INVISIBLE);
+            lyApellido.setVisibility(View.INVISIBLE);
+            lyFechaCaducidad.setVisibility(View.INVISIBLE);
+            lyCSV.setVisibility(View.INVISIBLE);
+        }else if(id == 3){
+            rdTarjeta.setChecked(true);
+            lyBanco.setVisibility(View.INVISIBLE);
+            lyCuentaBancaria.setVisibility(View.INVISIBLE);
+            lyNumeroTarjeta.setVisibility(View.VISIBLE);
+            lyNombre.setVisibility(View.VISIBLE);
+            lyApellido.setVisibility(View.VISIBLE);
+            lyFechaCaducidad.setVisibility(View.VISIBLE);
+            lyCSV.setVisibility(View.VISIBLE);
+        }else if(id == 4){
+            rdTransferencia.setChecked(true);
+            lyBanco.setVisibility(View.VISIBLE);
+            lyCuentaBancaria.setVisibility(View.VISIBLE);
+            lyNumeroTarjeta.setVisibility(View.INVISIBLE);
+            lyNombre.setVisibility(View.INVISIBLE);
+            lyApellido.setVisibility(View.INVISIBLE);
+            lyFechaCaducidad.setVisibility(View.INVISIBLE);
+            lyCSV.setVisibility(View.INVISIBLE);
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

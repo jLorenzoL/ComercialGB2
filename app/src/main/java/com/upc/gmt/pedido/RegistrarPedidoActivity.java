@@ -20,7 +20,7 @@ public class RegistrarPedidoActivity extends AppCompatActivity
         ComprobantePagoFragment.OnFragmentInteractionListener {
 
     static int tipoEntrega = 0;
-    static int tipoPago = 0;
+    static int tipoPago = 1;
     static int tipoComprobante = 0;
 
     ListView lvRegistrarPedido;
