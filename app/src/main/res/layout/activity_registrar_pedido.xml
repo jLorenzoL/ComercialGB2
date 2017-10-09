@@ -2,36 +2,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.upc.gmt.comercialgb.com.upc.gmt.pedido.RegistrarPedidoActivity"
-    >
+    tools:context="com.upc.gmt.pedido.RegistrarPedidoActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_weight="4"
         android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
         <ListView
             android:id="@+id/lvRegistrarPedido"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2" />
+            android:divider="@android:color/transparent"
+            android:dividerHeight="5dp"
+            android:keepScreenOn="false" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/textView27"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:text="TOTAL A PAGAR: 1000.00" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
         <Button
             android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="PAGAR" />
-
+            android:text="Pagar"
+            style="@style/button_style_pedido"/>
+        </LinearLayout>
     </LinearLayout>
 
     <FrameLayout

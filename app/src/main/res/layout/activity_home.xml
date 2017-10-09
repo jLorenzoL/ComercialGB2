@@ -51,7 +51,7 @@
         <Button
             style="@style/button_style"
             android:id="@+id/btnAbrirCatalogo"
-            android:text="Catalago de Productos"
+            android:text="Ver Catálago"
             android:onClick="onAbrirCatalogo"/>
 
         </LinearLayout>

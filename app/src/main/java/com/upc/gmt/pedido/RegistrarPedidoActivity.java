@@ -32,6 +32,7 @@ public class RegistrarPedidoActivity extends AppCompatActivity
         String[] items = {"TIPO DE ENTREGA","TIPO DE PAGO","COMPROBANTE DE PAGO"};
         lvRegistrarPedido = (ListView) findViewById(R.id.lvRegistrarPedido);
         lvRegistrarPedido.setAdapter(new ArrayAdapter<String>(this, R.layout.simple_listview_item,items));
+
         lvRegistrarPedido.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

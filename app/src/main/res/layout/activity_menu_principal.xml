@@ -12,7 +12,7 @@
     android:background="@color/colorPrimaryDark"
     tools:context="com.upc.gmt.comercialgb.MenuPrincipalActivity">
 
-    <Button
+    <!--<Button
         android:id="@+id/btnMantCalzado"
         style="@style/button_style"
         android:onClick="onIngresarMantenimientoCalzado"
@@ -22,17 +22,33 @@
         android:id="@+id/btnRegistroPedido"
         style="@style/button_style"
         android:onClick="onIngresarRegistroPedido"
-        android:text="Registro de Pedido" />
+        android:text="Registro de Pedido" />-->
 
-    <Button
-        android:id="@+id/btnAbrirCatalogo"
-        style="@style/button_style"
-        android:onClick="onAbrirCatalogo"
-        android:text="ABRIR CATALOGO"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:padding="100dp">
 
-    <Button
+        <Button
+            android:id="@+id/btnAbrirCatalogo"
+            style="@style/button_style"
+            android:onClick="onAbrirCatalogo"
+            android:text="Ver Catálogo"
+            android:layout_width="233dp" />
+
+
+        <Button
+            android:id="@+id/btnPedidosPorPagar"
+            style="@style/button_style"
+            android:onClick="onPedidosPorPagar"
+            android:text="Ver Pedidos por pagar" />
+
+    </LinearLayout>
+</LinearLayout>
+    <!--<Button
         android:id="@+id/btnMantUsuario"
         style="@style/button_style"
         android:onClick="onMantenimientoUsuario"
-        android:text="MANTENIMIENTO USUARIO"/>
-</LinearLayout>
+        android:text="Mantenimiento Usuario"/>-->

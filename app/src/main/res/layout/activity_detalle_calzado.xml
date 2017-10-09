@@ -67,10 +67,37 @@
                 android:padding="5dp"/>
 
                 <LinearLayout
-                    android:layout_width="274dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Color"
+                            style="@style/textView_stylePedido"
+                            android:layout_weight="1"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Talla"
+                            style="@style/textView_stylePedido"
+                            android:layout_weight="1"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="2"
+                        android:layout_gravity="center">
 
             <Spinner
                 style="@style/spinner_style"
@@ -87,6 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="3dp"/>
+                </LinearLayout>
                 </LinearLayout>
 
             <TextView

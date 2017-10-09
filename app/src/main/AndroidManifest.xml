@@ -43,7 +43,14 @@
             android:screenOrientation="landscape" />
         <activity
             android:name="com.upc.gmt.pedido.RegistrarPedidoActivity"
-            android:label="REGISTRAR PEDIDO"></activity>
+            android:label="REGISTRAR PEDIDO">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.upc.gmt.catalogo.CatalogoActivity"
             android:label="@string/app_mostrar_catalogo"
@@ -79,11 +86,7 @@
             android:name=".HomeActivity"
             android:screenOrientation="landscape">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

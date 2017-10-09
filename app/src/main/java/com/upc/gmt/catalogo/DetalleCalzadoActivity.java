@@ -282,7 +282,7 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                 items.add(p.getNroTalla().toString());
             }
             ArrayAdapter<String> arrayTallaCalzado = new ArrayAdapter<String>(getApplicationContext(),R.layout.simple_spinner_item,items);
-            arrayTallaCalzado.setDropDownViewResource(R.layout.simple_spinner_item);
+            arrayTallaCalzado.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
             spnTallas.setAdapter(arrayTallaCalzado);
             progressDialog.dismiss();
             Log.i("onPostExecute", "fin");
