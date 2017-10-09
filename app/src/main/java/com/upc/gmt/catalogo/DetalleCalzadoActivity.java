@@ -9,6 +9,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,11 +18,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.upc.gmt.comercialgb.R;
 import com.upc.gmt.model.Producto;
+import com.upc.gmt.pedido.PedidoActivity;
 import com.upc.gmt.util.Util;
 
 import org.springframework.core.ParameterizedTypeReference;
@@ -67,11 +71,8 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Cargando Tallas...");
-
         idProducto = extras.getString("idProducto");
-
+        Log.i("onCreate-idProducto", idProducto);
         tvDetalleNombre = (TextView) findViewById(R.id.tvDetalleNombre);
         tvDetalleCodigo = (TextView) findViewById(R.id.tvDetalleCodigo);
         tvDetallePrecio = (TextView) findViewById(R.id.tvDetallePrecio);
@@ -164,8 +165,49 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
 //            }
 //        });
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Cargando Calzado...");
+        progressDialog.show();
         new HttpRequestTaskDetalleCalzado().execute();
     }
+
+    @Override
+    protected void onStart() {
+//        progressDialog.show();
+        super.onStart();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.carrito, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_carrito:
+                Intent i = new Intent(this, PedidoActivity.class);
+                startActivity(i);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void onClickAgregarPedido(View v){
+        Log.i("DATOS PEDIDO", idProducto+"-"+idColor+"-"+nroTalla.substring(0,2));
+        Producto p = CatalogoActivity.productoSeleccionado;
+        p.setIdProducto(Integer.parseInt(idProducto));
+        p.setIdColor(idColor);
+        p.setNroTalla(Integer.parseInt(nroTalla.substring(0,2)));
+        p.setColor(spnColores.getSelectedItem().toString());
+        Util.LISTA_PRODUCTOS_PEDIDO.add(p);
+        Toast.makeText(DetalleCalzadoActivity.this, "El Calzado "+p.getDescripcion()+" fue agregado al Pedido.", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
     private class HttpRequestTaskDetalleCalzado extends AsyncTask<Void, Void, Producto> {
         @Override
         protected Producto doInBackground(Void... params) {
@@ -214,33 +256,34 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
         protected void onPostExecute(Producto p) {
             Log.i("onPostExecute", "HttpRequestTaskDetalleCalzado");
             Log.i("Producto", p.toString());
-            tvDetalleNombre.setText("Nombre  :" + p.getDescripcion());
-            tvDetalleCodigo.setText("Codigo  :" + p.getSKU());
-            tvDetallePrecio.setText("Precio  :" + p.getPrecioUnitario());
-            List<String> colores = new ArrayList<>();
-            int contador = 1;
-            for(Map.Entry<String, String> entry : mapaColores.entrySet()) {
-                if(contador == 1){
-                    idColor = entry.getKey();
+            if(p.getIdProducto() != null) {
+                tvDetalleNombre.setText("Nombre  :" + p.getDescripcion());
+                tvDetalleCodigo.setText("Codigo  :" + p.getSKU());
+                tvDetallePrecio.setText("Precio  :" + p.getPrecioUnitario());
+                List<String> colores = new ArrayList<>();
+                int contador = 1;
+                for (Map.Entry<String, String> entry : mapaColores.entrySet()) {
+                    if (contador == 1) {
+                        idColor = entry.getKey();
+                    }
+                    colores.add(entry.getValue());
+                    contador++;
                 }
-                colores.add(entry.getValue());
-                contador++;
+                ArrayAdapter spnColores = new ArrayAdapter(getApplicationContext(), R.layout.simple_spinner_item, colores);
+                spnColores.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+                Spinner spn = (Spinner) findViewById(R.id.spnDetalleColores);
+                spn.setAdapter(spnColores);
+                ArrayAdapter spnTallas = new ArrayAdapter(getApplicationContext(), R.layout.simple_spinner_item, listaTallas);
+                spnTallas.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+                Spinner spn1 = (Spinner) findViewById(R.id.spnDetalleTallas);
+                spn1.setAdapter(spnTallas);
+                String material = "";
+                for (String m : listaMateriales) {
+                    material += m + System.getProperty("line.separator");
+                }
+                tvDetalleMaterial.setText(material);
+                progressDialog.dismiss();
             }
-            ArrayAdapter spnColores = new ArrayAdapter(getApplicationContext(),R.layout.simple_spinner_item,colores);
-            spnColores.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-            Spinner spn = (Spinner) findViewById(R.id.spnDetalleColores);
-            spn.setAdapter(spnColores);
-            /*spnColores.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, colores));*/
-            /*spnTallas.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, listaTallas));*/
-            ArrayAdapter spnTallas = new ArrayAdapter(getApplicationContext(),R.layout.simple_spinner_item,listaTallas);
-            spnTallas.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-            Spinner spn1 = (Spinner) findViewById(R.id.spnDetalleTallas);
-            spn1.setAdapter(spnTallas);
-            String material = "";
-            for(String m:listaMateriales){
-                material += m + System.getProperty("line.separator");
-            }
-            tvDetalleMaterial.setText(material);
             Log.i("onPostExecute", "fin");
         }
 
@@ -279,7 +322,7 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
             listaColorTalla = lista;
             List<String> items = new ArrayList<>();
             for (Producto p:lista) {
-                items.add(p.getNroTalla().toString());
+                items.add(p.getNroTalla().toString() + " (Stock: "+ p.getStockVenta() + ")");
             }
             ArrayAdapter<String> arrayTallaCalzado = new ArrayAdapter<String>(getApplicationContext(),R.layout.simple_spinner_item,items);
             arrayTallaCalzado.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);

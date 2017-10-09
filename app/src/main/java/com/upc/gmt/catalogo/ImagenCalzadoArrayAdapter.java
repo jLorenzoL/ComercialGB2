@@ -9,12 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.upc.gmt.comercialgb.LoginActivity;
 import com.upc.gmt.comercialgb.R;
 import com.upc.gmt.model.Producto;
 import com.upc.gmt.util.Util;
 
 import java.util.List;
+
+import static com.upc.gmt.comercialgb.R.layout.calzado;
 
 /**
  * Created by MALEX on 31/08/2017.
@@ -27,7 +28,7 @@ public class ImagenCalzadoArrayAdapter extends ArrayAdapter {
     private LayoutInflater inflater;
 
     public ImagenCalzadoArrayAdapter(Context context, List<Producto> lista){
-        super(context, R.layout.calzado, lista);
+        super(context, calzado, lista);
         this.context = context;
         this.lista = lista;
         inflater = LayoutInflater.from(context);
@@ -40,7 +41,7 @@ public class ImagenCalzadoArrayAdapter extends ArrayAdapter {
 //        View gridView;
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.calzado, parent, false);
+            convertView = inflater.inflate(calzado, parent, false);
         }
 //            gridView = new View(context);
 
@@ -67,16 +68,15 @@ public class ImagenCalzadoArrayAdapter extends ArrayAdapter {
             // set image based on selected text
             ImageView imageView = (ImageView) convertView.findViewById(R.id.grid_item_image);
 
-//            String calzado = "rojo";
-//            if (calzado.equals("rojo")) {
+            Double random = Math.random()*15;
+            if (random.intValue() > 9) {
                 imageView.setImageResource(R.mipmap.calzado_rojo);
-//            } else if (calzado.equals("amarillo")) {
-//                imageView.setImageResource(R.mipmap.calzado_amarillo);
-//            } else if (calzado.equals("verde")) {
-//                imageView.setImageResource(R.mipmap.calzado_verde);
-//            } else {
-//                imageView.setImageResource(R.mipmap.calzado_rojo);
-//            }
+            } else if (random.intValue() > 4) {
+                imageView.setImageResource(R.mipmap.calzado_amarillo);
+            } else {
+                imageView.setImageResource(R.mipmap.calzado_rojo);
+            }
+
 //            Picasso picasso = Picasso.with(context);
 //            picasso.setIndicatorsEnabled(true);
 //            picasso.setLoggingEnabled(true);

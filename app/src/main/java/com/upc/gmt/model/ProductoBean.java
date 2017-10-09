@@ -1,4 +1,4 @@
-package com.upc.gmt.bean;
+package com.upc.gmt.model;
 
 /**
  * Created by MALEX on 14/09/2017.

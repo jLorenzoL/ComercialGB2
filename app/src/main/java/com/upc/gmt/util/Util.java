@@ -1,6 +1,13 @@
 package com.upc.gmt.util;
 
+import android.view.View;
+import android.widget.ListView;
+
+import com.upc.gmt.model.Producto;
 import com.upc.gmt.model.Usuario;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by MALEX on 14/09/2017.
@@ -13,5 +20,20 @@ public class Util {
 
         public static Usuario USUARIO_SESSION;
 
+        public static List<Producto> LISTA_PRODUCTOS_PEDIDO = new ArrayList<>();
 
+        public static double PRECIO_TOTAL_CALZADOS = 0.00;
+
+
+        public static View getViewByPosition(int position, ListView listView) {
+            final int firstListItemPosition = listView.getFirstVisiblePosition();
+            final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
+
+            if (position < firstListItemPosition || position > lastListItemPosition) {
+                return listView.getAdapter().getView(position, listView.getChildAt(position), listView);
+            } else {
+                final int childIndex = position - firstListItemPosition;
+                return listView.getChildAt(childIndex);
+            }
+        }
 }

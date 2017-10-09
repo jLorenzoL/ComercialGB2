@@ -13,8 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -127,12 +125,14 @@
                 android:layout_weight="1"
                 android:padding="5dp"/>
             </LinearLayout>
+
             <Button
                 android:id="@+id/btnAgregarPedido"
+                style="@style/button_styleCatalogo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Agregar al Pedido"
-                style="@style/button_styleCatalogo"/>
+                android:onClick="onClickAgregarPedido"
+                android:text="Agregar al Pedido" />
 
         </LinearLayout>
     </ScrollView>

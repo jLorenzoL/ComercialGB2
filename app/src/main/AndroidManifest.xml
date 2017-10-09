@@ -67,10 +67,12 @@
         <activity
             android:name="com.upc.gmt.catalogo.DetalleCalzadoActivity"
             android:label="Detalle Calzado"
+            android:parentActivityName="com.upc.gmt.catalogo.CatalogoActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name="com.upc.gmt.pedido.PedidoActivity"
-            android:label="MIS CALZADOS"
+            android:label="MI PEDIDO"
+            android:parentActivityName="com.upc.gmt.catalogo.CatalogoActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name="com.upc.gmt.catalogo.FullScreenImageActivity"

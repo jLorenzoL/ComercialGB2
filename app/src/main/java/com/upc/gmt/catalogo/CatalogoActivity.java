@@ -2,7 +2,6 @@ package com.upc.gmt.catalogo;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -70,13 +69,12 @@ public class CatalogoActivity extends AppCompatActivity {
     List<Temporada> listaTemporada;
     List<String> listaPrecios;
 
+    static Producto productoSeleccionado;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalogo);
-
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         spnTallaCalzado = (Spinner) findViewById(R.id.spnCatalogoTaC);
         spnColor = (Spinner) findViewById(R.id.spnCatalogoColor);
@@ -115,10 +113,10 @@ public class CatalogoActivity extends AppCompatActivity {
 //                        ((textview)view.findviewbyid(r.id.grid_item_label_nombre)).gettext().tostring(),
 //                        toast.length_long).show();
 //                String idProducto = ((TextView)view.findViewById(R.id.grid_item_label_codigo)).getText().toString();
-                Producto p = listaProducto.get(position);
-                Toast.makeText(view.getContext().getApplicationContext(),p.getDescripcion(),Toast.LENGTH_SHORT).show();
+                productoSeleccionado = listaProducto.get(position);
+                Toast.makeText(view.getContext().getApplicationContext(),productoSeleccionado.getDescripcion(),Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(),DetalleCalzadoActivity.class);
-                i.putExtra("idProducto", p.getIdProducto().toString());
+                i.putExtra("idProducto", productoSeleccionado.getIdProducto().toString());
                 startActivity(i);
             }
         });
@@ -223,12 +221,6 @@ public class CatalogoActivity extends AppCompatActivity {
         progressDialog.setMax(100);
         progressDialog.show();
 
-        new HttpRequestTaskTiposCalzado().execute();
-        new HttpRequestTaskTallas().execute();
-        new HttpRequestTaskColor().execute();
-//        new HttpRequestTaskMaterial().execute();
-        new HttpRequestTaskTemporada().execute();
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -239,6 +231,13 @@ public class CatalogoActivity extends AppCompatActivity {
                 }
             }
         }).start();
+
+        new HttpRequestTaskTiposCalzado().execute();
+        new HttpRequestTaskTallas().execute();
+        new HttpRequestTaskColor().execute();
+//        new HttpRequestTaskMaterial().execute();
+        new HttpRequestTaskTemporada().execute();
+
     }
 
     @Override
@@ -275,20 +274,13 @@ public class CatalogoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-//            case R.id.action_settings:
-                // User chose the "Settings" item, show the app settings UI...
-//                return true;
-
             case R.id.action_carrito:
                 Intent i = new Intent(this, PedidoActivity.class);
                 startActivity(i);
                 return true;
 
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
-
         }
     }
 

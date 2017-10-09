@@ -62,7 +62,8 @@ public class Producto {
     private Integer nroTalla; 
     private String componente;
     private String material;
-    
+    private int cantidad;
+
     public Producto(Integer idProducto, String SKU, String descripcion, Integer idTipoProducto, String genero, BigDecimal precioUnitario, BigDecimal precioVendedor, String estilo, String estado, Integer stockVenta, Integer stockObservado, Integer stockCritico, Date fechaUltimaCarga, Date fechaProximaCarga, String usuarioGenero, Date fechaGeneracion, String usuarioModifico, Date fechaModificacion, BigDecimal altoPaquete, BigDecimal anchoPaquete, BigDecimal largoPaquete, String observacion, Integer idTemporada, Integer idUMD, BigDecimal peso) {
         this.idProducto = idProducto;
         this.SKU = SKU;
@@ -351,74 +352,50 @@ public class Producto {
 		this.material = material;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Producto [idProducto=");
-		builder.append(idProducto);
-		builder.append(", SKU=");
-		builder.append(SKU);
-		builder.append(", descripcion=");
-		builder.append(descripcion);
-		builder.append(", idTipoProducto=");
-		builder.append(idTipoProducto);
-		builder.append(", genero=");
-		builder.append(genero);
-		builder.append(", precioUnitario=");
-		builder.append(precioUnitario);
-		builder.append(", precioVendedor=");
-		builder.append(precioVendedor);
-		builder.append(", estilo=");
-		builder.append(estilo);
-		builder.append(", estado=");
-		builder.append(estado);
-		builder.append(", stockVenta=");
-		builder.append(stockVenta);
-		builder.append(", stockObservado=");
-		builder.append(stockObservado);
-		builder.append(", stockCritico=");
-		builder.append(stockCritico);
-		builder.append(", fechaUltimaCarga=");
-		builder.append(fechaUltimaCarga);
-		builder.append(", fechaProximaCarga=");
-		builder.append(fechaProximaCarga);
-		builder.append(", usuarioGenero=");
-		builder.append(usuarioGenero);
-		builder.append(", fechaGeneracion=");
-		builder.append(fechaGeneracion);
-		builder.append(", usuarioModifico=");
-		builder.append(usuarioModifico);
-		builder.append(", fechaModificacion=");
-		builder.append(fechaModificacion);
-		builder.append(", altoPaquete=");
-		builder.append(altoPaquete);
-		builder.append(", anchoPaquete=");
-		builder.append(anchoPaquete);
-		builder.append(", largoPaquete=");
-		builder.append(largoPaquete);
-		builder.append(", observacion=");
-		builder.append(observacion);
-		builder.append(", idTemporada=");
-		builder.append(idTemporada);
-		builder.append(", idUMD=");
-		builder.append(idUMD);
-		builder.append(", peso=");
-		builder.append(peso);
-		builder.append(", tipoProducto=");
-		builder.append(tipoProducto);
-		builder.append(", temporada=");
-		builder.append(temporada);
-		builder.append(", idColor=");
-		builder.append(idColor);
-		builder.append(", color=");
-		builder.append(color);
-		builder.append(", nroTalla=");
-		builder.append(nroTalla);
-		builder.append(", componente=");
-		builder.append(componente);
-		builder.append(", material=");
-		builder.append(material);
-		builder.append("]");
-		return builder.toString();
-	}
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "idProducto=" + idProducto +
+                ", SKU='" + SKU + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", idTipoProducto=" + idTipoProducto +
+                ", genero='" + genero + '\'' +
+                ", precioUnitario=" + precioUnitario +
+                ", precioVendedor=" + precioVendedor +
+                ", estilo='" + estilo + '\'' +
+                ", estado='" + estado + '\'' +
+                ", stockVenta=" + stockVenta +
+                ", stockObservado=" + stockObservado +
+                ", stockCritico=" + stockCritico +
+                ", fechaUltimaCarga=" + fechaUltimaCarga +
+                ", fechaProximaCarga=" + fechaProximaCarga +
+                ", usuarioGenero='" + usuarioGenero + '\'' +
+                ", fechaGeneracion=" + fechaGeneracion +
+                ", usuarioModifico='" + usuarioModifico + '\'' +
+                ", fechaModificacion=" + fechaModificacion +
+                ", altoPaquete=" + altoPaquete +
+                ", anchoPaquete=" + anchoPaquete +
+                ", largoPaquete=" + largoPaquete +
+                ", observacion='" + observacion + '\'' +
+                ", idTemporada=" + idTemporada +
+                ", idUMD=" + idUMD +
+                ", peso=" + peso +
+                ", tipoProducto='" + tipoProducto + '\'' +
+                ", temporada='" + temporada + '\'' +
+                ", idColor='" + idColor + '\'' +
+                ", color='" + color + '\'' +
+                ", nroTalla=" + nroTalla +
+                ", componente='" + componente + '\'' +
+                ", material='" + material + '\'' +
+                ", cantidad='" + cantidad + '\'' +
+                '}';
+    }
 }

@@ -10,6 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.upc.gmt.catalogo.CatalogoActivity">
+
    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -118,10 +119,6 @@
 
     </LinearLayout>
 
-    <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -140,14 +137,6 @@
             android:padding="@dimen/espacio_grilla"
             android:layout_margin="9dp"/>
 
-        <!--android:id="@+id/grid"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnWidth="120dp"
-        android:horizontalSpacing="@dimen/espacio_grilla"
-        android:numColumns="auto_fit"
-        android:padding="@dimen/espacio_grilla"
-        android:verticalSpacing="@dimen/espacio_grilla"-->
     </RelativeLayout>
-    <!--</ScrollView>-->
+
 </LinearLayout>

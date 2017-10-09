@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.upc.gmt.bean.ProductoBean;
+import com.upc.gmt.model.ProductoBean;
 import com.upc.gmt.comercialgb.R;
 import com.upc.gmt.util.Util;
 

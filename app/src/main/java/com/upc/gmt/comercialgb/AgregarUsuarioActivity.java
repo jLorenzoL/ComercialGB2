@@ -23,8 +23,8 @@ public class AgregarUsuarioActivity extends AppCompatActivity{
     private int dia;
 
     private EditText txtFechaNacimiento;
-    private static final int TIPO_DIALOGO = 0;
-    private static DatePickerDialog.OnDateSetListener onSelectorFecha;
+    private int TIPO_DIALOGO = 0;
+    private DatePickerDialog.OnDateSetListener onSelectorFecha;
 
     Spinner spnTipoDoc;
     LinearLayout lyDNI;
