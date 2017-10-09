@@ -2,16 +2,33 @@ package com.upc.gmt.pedido;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 
 import com.upc.gmt.comercialgb.R;
+import com.upc.gmt.model.Costoubigeo;
+import com.upc.gmt.util.Util;
+
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,10 +40,25 @@ import com.upc.gmt.comercialgb.R;
  */
 public class TipoEntregaFragment extends Fragment {
 
+    Spinner spnDepartamento;
+    Spinner spnProvincia;
+    Spinner spnDistrito;
+
     RadioButton rdRecojoAlmacen;
     RadioButton rdEnvioDomicilio;
 
+
+    List<Costoubigeo> listaDepartamento;
+    List<Costoubigeo> listaProvincia;
+    List<Costoubigeo> listaDistrito;
+
+
     LinearLayout layoutDomicilio;
+
+    String idUbigeoDepartamento;
+    String idUbigeoProvincia;
+    String idUbigeoDistrito;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,6 +100,8 @@ public class TipoEntregaFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
@@ -134,6 +168,58 @@ public class TipoEntregaFragment extends Fragment {
 
         rdRecojoAlmacen = (RadioButton) getView().findViewById(R.id.rdRecojoAlmacen);
         rdEnvioDomicilio = (RadioButton) getView().findViewById(R.id.rdEnvioDomicilio);
+        spnDepartamento = (Spinner) getView().findViewById(R.id.spnDepartamento);
+        spnProvincia= (Spinner) getView().findViewById(R.id.spnProvincia);
+        spnDistrito = (Spinner) getView().findViewById(R.id.spnDistrito);
+
+        spnProvincia.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,new String[]{"PROVINCIA"}));
+        spnDistrito.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,new String[]{"DISTRITO"}));
+
+
+        spnDepartamento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String desDepartamento = (String) parent.getItemAtPosition(position);
+                idUbigeoDepartamento = "";
+                for(Costoubigeo cu : listaDepartamento) {
+                    if(desDepartamento.equals(cu.getDepartamento())){
+                        idUbigeoDepartamento = cu.getCodUbigeoCosto().substring(0,2);
+                        break;
+                    }
+                }
+                Log.i("idUbigeoDepartamento", idUbigeoDepartamento);
+                if(!idUbigeoDepartamento.equals("") ){
+                    new HttpRequestTaskProvincias().execute();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        spnProvincia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(listaProvincia == null || listaProvincia.size()==0){
+                    return;
+                }
+                String desProvincia = (String) parent.getItemAtPosition(position);
+                idUbigeoProvincia= "";
+                for(Costoubigeo cu : listaProvincia) {
+                    if(desProvincia.equals(cu.getProvincia())){
+                        idUbigeoProvincia = cu.getCodUbigeoCosto().substring(0,4);
+                        break;
+                    }
+                }
+                Log.i("idUbigeoProvincia", idUbigeoProvincia);
+                if(!idUbigeoProvincia.equals("") ){
+                    new HttpRequestTaskDistrito().execute();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         rdRecojoAlmacen.setOnClickListener(ocl);
         rdEnvioDomicilio.setOnClickListener(ocl);
@@ -146,7 +232,133 @@ public class TipoEntregaFragment extends Fragment {
             layoutDomicilio.setVisibility(View.INVISIBLE);
             rdRecojoAlmacen.setChecked(true);
         }
+        new HttpRequestTaskDepartamentos().execute();
 
-        super.onViewCreated(view, savedInstanceState);
+        super.onViewCreated(view, savedInstanceState);//siempre final
+
     }
+
+
+
+    private class HttpRequestTaskDepartamentos extends AsyncTask<Void, Void, List<Costoubigeo>> {
+        @Override
+        protected List<Costoubigeo> doInBackground(Void... params) {
+            Log.i("doInBackground", "HttpRequestTaskCostoUbigeo");
+            try {
+                String URL = Util.URL_WEB_SERVICE +"/departamentos";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                ParameterizedTypeReference<List<Costoubigeo>> responseType = new ParameterizedTypeReference<List<Costoubigeo>>() {};
+                ResponseEntity<List<Costoubigeo>> respuesta = restTemplate.exchange(URL, HttpMethod.GET, null, responseType);
+                List<Costoubigeo> lista = respuesta.getBody();
+                return lista;
+            } catch (Exception e) {
+                Log.i("Exception", "ERROR");
+                Log.e("doInBackground", e.getMessage(), e);
+            }
+            Log.i("doInBackground", "fin");
+            return new ArrayList<>();
+        }
+
+        @Override
+        protected void onPostExecute(List<Costoubigeo> lista) {
+            Log.i("onPostExecute", "HttpRequestTaskCostoUbigeo");
+            Log.i("LISTA", "Departamentos: "+lista.size());
+            listaDepartamento = lista;
+            List<String> items = new ArrayList<>();
+            items.add("DEPARTAMENTO");
+            for (Costoubigeo tp: lista) {
+                items.add(tp.getDepartamento());
+            }
+            ArrayAdapter<String> array = new ArrayAdapter<>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,items);
+            array.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+            spnDepartamento.setAdapter(array);
+            Log.i("onPostExecute", "fin");
+        }
+    }
+
+    private class HttpRequestTaskProvincias extends AsyncTask<Void, Void, List<Costoubigeo>> {
+        @Override
+        protected List<Costoubigeo> doInBackground(Void... params) {
+            Log.i("doInBackground", "HttpRequestTaskProvincias");
+            try {
+                String URL = Util.URL_WEB_SERVICE +"/provincias";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(URL)
+                        .queryParam("codUbigeoCosto", idUbigeoDepartamento);
+                Log.i("URL", builder.toUriString());
+                ParameterizedTypeReference<List<Costoubigeo>> responseType = new ParameterizedTypeReference<List<Costoubigeo>>() {};
+                ResponseEntity<List<Costoubigeo>> respuesta = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, null, responseType);
+                List<Costoubigeo> lista = respuesta.getBody();
+                Log.i("respuesta", lista.toString());
+                return lista;
+            } catch (Exception e) {
+                Log.i("Exception", "ERROR");
+                Log.e("HttpRequestTask", e.getMessage(), e);
+            }
+            Log.i("doInBackground", "fin");
+            return new ArrayList<>();
+        }
+
+        @Override
+        protected void onPostExecute(List<Costoubigeo> lista) {
+            Log.i("onPostExecute", "HttpRequestTaskProvincias");
+            Log.i("LISTA", "PROVINCIA: "+lista.size());
+            listaProvincia = lista;
+            List<String> items = new ArrayList<>();
+            for (Costoubigeo p:lista) {
+                items.add(p.getProvincia());
+            }
+            ArrayAdapter<String> arrayProvincia = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,items);
+            arrayProvincia.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+            spnProvincia.setAdapter(arrayProvincia);
+        }
+
+    }
+
+    /*DISTRITO*/
+    private class HttpRequestTaskDistrito extends AsyncTask<Void, Void, List<Costoubigeo>> {
+        @Override
+        protected List<Costoubigeo> doInBackground(Void... params) {
+            Log.i("doInBackground", "HttpRequestTaskDistrito");
+            try {
+                String URL = Util.URL_WEB_SERVICE +"/distritos";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(URL)
+                        .queryParam("codUbigeoCosto", idUbigeoProvincia);
+                Log.i("URL", builder.toUriString());
+                ParameterizedTypeReference<List<Costoubigeo>> responseType = new ParameterizedTypeReference<List<Costoubigeo>>() {};
+                ResponseEntity<List<Costoubigeo>> respuesta = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, null, responseType);
+                List<Costoubigeo> lista = respuesta.getBody();
+                Log.i("respuesta", lista.toString());
+                return lista;
+            } catch (Exception e) {
+                Log.i("Exception", "ERROR");
+                Log.e("HttpRequestTask", e.getMessage(), e);
+            }
+            Log.i("doInBackground", "fin");
+            return new ArrayList<>();
+        }
+
+        @Override
+        protected void onPostExecute(List<Costoubigeo> lista) {
+            Log.i("onPostExecute", "HttpRequestTaskDistrito");
+            Log.i("LISTA", "DISTRITO: "+lista.size());
+            listaDistrito = lista;
+            List<String> items = new ArrayList<>();
+            for (Costoubigeo p:lista) {
+                items.add(p.getDistrito());
+            }
+            ArrayAdapter<String> arrayDistrito = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,items);
+            arrayDistrito.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+            spnDistrito.setAdapter(arrayDistrito);
+        }
+
+    }
+
+
 }

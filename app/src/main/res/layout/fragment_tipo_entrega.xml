@@ -45,16 +45,19 @@
             android:visibility="invisible">
 
             <Spinner
+                style="@style/spinner_style"
                 android:id="@+id/spnDepartamento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <Spinner
+                style="@style/spinner_style"
                 android:id="@+id/spnProvincia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <Spinner
+                style="@style/spinner_style"
                 android:id="@+id/spnDistrito"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
