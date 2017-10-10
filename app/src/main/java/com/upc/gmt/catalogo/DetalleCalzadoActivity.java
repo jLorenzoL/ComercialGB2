@@ -260,7 +260,11 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
             if(p.getIdProducto() != null) {
                 tvDetalleNombre.setText("Nombre  :" + p.getDescripcion());
                 tvDetalleCodigo.setText("Codigo  :" + p.getSKU());
-                tvDetallePrecio.setText("Precio  :" + p.getPrecioUnitario());
+                if(Util.USUARIO_SESSION.getIdTipoUsuario() == 2){
+                    tvDetallePrecio.setText("Precio  :" + p.getPrecioVendedor() + " (RV)");
+                }else{
+                    tvDetallePrecio.setText("Precio  :" + p.getPrecioUnitario());
+                }
                 List<String> colores = new ArrayList<>();
                 int contador = 1;
                 for (Map.Entry<String, String> entry : mapaColores.entrySet()) {

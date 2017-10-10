@@ -24,6 +24,10 @@ public class Util {
 
         public static double PRECIO_TOTAL_CALZADOS = 0.00;
 
+        public static double PRECIO_COSTO_ENVIO = 0.00;
+
+        public static double PRECIO_TOTAL_PAGAR = 0.00;
+
         public static View getViewByPosition(int pos, ListView listView) {
             final int firstListItemPosition = listView.getFirstVisiblePosition();
             final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;

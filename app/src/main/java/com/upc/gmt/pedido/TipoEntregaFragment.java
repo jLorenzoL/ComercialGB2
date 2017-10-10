@@ -2,7 +2,6 @@ package com.upc.gmt.pedido;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -159,6 +158,7 @@ public class TipoEntregaFragment extends Fragment {
                 if(id == R.id.rdRecojoAlmacen){
                     layoutDomicilio.setVisibility(View.INVISIBLE);
                     RegistrarPedidoActivity.tipoEntrega = 0;
+                    Util.PRECIO_COSTO_ENVIO = 0.00;
                 }else if(id == R.id.rdEnvioDomicilio){
                     layoutDomicilio.setVisibility(View.VISIBLE);
                     RegistrarPedidoActivity.tipoEntrega = 1;

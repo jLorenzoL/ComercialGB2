@@ -1,9 +1,11 @@
 package com.upc.gmt.pedido;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.upc.gmt.comercialgb.R;
 
@@ -32,5 +34,9 @@ public class PedidoPorConsignacionActivity extends AppCompatActivity {
         arrayCuota.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         spnCuota = (Spinner) findViewById(R.id.spnCuota);
         spnCuota.setAdapter(arrayCuota);
+    }
+
+    public void onClickPedidoConsignacion(View v){
+        Toast.makeText(getApplicationContext(),"SE HA REGISTRADO SU PEDIDO", Toast.LENGTH_LONG).show();
     }
 }

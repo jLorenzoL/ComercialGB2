@@ -35,14 +35,14 @@
             android:id="@+id/btnAbrirCatalogo"
             style="@style/button_style"
             android:onClick="onAbrirCatalogo"
-            android:text="Ver Catálogo"
+            android:text="VER CATÁLOGO"
             android:layout_width="233dp" />
 
 
         <Button
             android:id="@+id/btnPedidosPorPagar"
             style="@style/button_style"
-            android:text="Ver Pedidos por pagar" />
+            android:text="VER PEDIDOS POR PAGAR" />
 
     </LinearLayout>
 </LinearLayout>

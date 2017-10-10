@@ -88,27 +88,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Línea de crédito disponible después:"
                     android:gravity="center"
+                    android:text="Total a Pagar"
                     android:textStyle="bold" />
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Solicitar aumento de linea"
+                    android:text="SOLICITAR AUMENTO DE LINEA"
                     style="@style/button_style"/>
 
                 <Button
+                    style="@style/button_style"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Solicitar aumento de linea"
-                    style="@style/button_style"/>
-
-
-
-
+                    android:onClick="onClickPedidoConsignacion"
+                    android:text="REALIZAR PEDIDO CONSIGNACIÓN" />
 
             </LinearLayout>
         </LinearLayout>

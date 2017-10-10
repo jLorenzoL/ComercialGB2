@@ -43,10 +43,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
+
         <Button
-            android:id="@+id/button"
-            android:text="Pagar"
-            style="@style/button_style_pedido"/>
+            android:id="@+id/btnRealizarPedido"
+            style="@style/button_style_pedido"
+            android:onClick="onClickRealizarPedido"
+            android:text="REALIZAR PEDIDO" />
         </LinearLayout>
     </LinearLayout>
 
