@@ -5,9 +5,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
@@ -35,6 +38,14 @@ public class TipoPagoFragment extends Fragment {
     RadioButton rdEfectivo;
     RadioButton rdTarjeta;
     RadioButton rdTransferencia;
+
+    EditText txtCelularPedido;
+
+    EditText txtNroTarjetaVisa;
+    EditText txtNombreVisa;
+    EditText txtApellidoVisa;
+    EditText txtFechaVisa;
+    EditText txtVisaCSV;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -88,6 +99,13 @@ public class TipoPagoFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        txtCelularPedido = (EditText) getView().findViewById(R.id.txtCelularPedido);
+        txtNroTarjetaVisa = (EditText) getView().findViewById(R.id.txtNroTarjetaVisa);
+        txtNombreVisa = (EditText) getView().findViewById(R.id.txtNombreVisa);
+        txtApellidoVisa = (EditText) getView().findViewById(R.id.txtApellidoVisa);
+        txtFechaVisa = (EditText) getView().findViewById(R.id.txtFechaVisa);
+        txtVisaCSV = (EditText) getView().findViewById(R.id.txtVisaCSV);
 
         lyBanco = (LinearLayout) getView().findViewById(R.id.lyBanco);
         lyCuentaBancaria = (LinearLayout) getView().findViewById(R.id.lyCuentaBancaria);
@@ -158,6 +176,79 @@ public class TipoPagoFragment extends Fragment {
         rdEfectivo.setOnClickListener(ocl);
         rdTarjeta.setOnClickListener(ocl);
         rdTransferencia.setOnClickListener(ocl);
+
+        txtCelularPedido.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                RegistrarPedidoActivity.celular = txtCelularPedido.getText().toString();
+            }
+        });
+        txtNroTarjetaVisa.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                RegistrarPedidoActivity.txtNroTarjetaVisa = txtNroTarjetaVisa.getText().toString();
+            }
+        });
+        txtNombreVisa.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                RegistrarPedidoActivity.txtNombreVisa = txtNombreVisa.getText().toString();
+            }
+        });
+        txtApellidoVisa.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                RegistrarPedidoActivity.txtApellidoVisa = txtApellidoVisa.getText().toString();
+            }
+        });
+        txtFechaVisa.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                RegistrarPedidoActivity.txtFechaVisa = txtFechaVisa.getText().toString();
+            }
+        });
+        txtVisaCSV.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                RegistrarPedidoActivity.txtVisaCSV = txtVisaCSV.getText().toString();
+            }
+        });
+
+        if(!RegistrarPedidoActivity.celular.equals("")){
+            txtCelularPedido.setText(RegistrarPedidoActivity.celular);
+        }
+
+        if(RegistrarPedidoActivity.tipoPago == 3){
+            txtNroTarjetaVisa.setText(RegistrarPedidoActivity.txtNroTarjetaVisa);
+            txtNombreVisa.setText(RegistrarPedidoActivity.txtNombreVisa);
+            txtApellidoVisa.setText(RegistrarPedidoActivity.txtApellidoVisa);
+            txtFechaVisa.setText(RegistrarPedidoActivity.txtFechaVisa);
+            txtVisaCSV.setText(RegistrarPedidoActivity.txtVisaCSV);
+        }
 
         cargarPantalla();
 

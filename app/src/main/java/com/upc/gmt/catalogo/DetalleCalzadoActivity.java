@@ -197,6 +197,12 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
     }
 
     public void onClickAgregarPedido(View v){
+        if(Util.USUARIO_SESSION.getCodUsuario() == null || Util.USUARIO_SESSION.getCodUsuario().equals("")){
+            Util.REGRESAR_A_CATALOGO = true;
+            Intent i = new Intent(getApplicationContext(), com.upc.gmt.comercialgb.LoginActivity.class);
+            startActivity(i);
+            return;
+        }
         Log.i("DATOS PEDIDO", idProducto+"-"+idColor+"-"+nroTalla.substring(0,2));
         Producto p = CatalogoActivity.productoSeleccionado;
         p.setIdProducto(Integer.parseInt(idProducto));

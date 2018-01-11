@@ -2,15 +2,19 @@ package com.upc.gmt.pedido;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -58,6 +62,7 @@ public class TipoEntregaFragment extends Fragment {
     String idUbigeoProvincia;
     String idUbigeoDistrito;
 
+    EditText txtDireccionEnvio;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -232,6 +237,29 @@ public class TipoEntregaFragment extends Fragment {
             layoutDomicilio.setVisibility(View.INVISIBLE);
             rdRecojoAlmacen.setChecked(true);
         }
+
+        txtDireccionEnvio = (EditText) getView().findViewById(R.id.txtDireccionEnvio);
+        txtDireccionEnvio.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                RegistrarPedidoActivity.direccionEntrega = txtDireccionEnvio.getText().toString();
+            }
+        });
+
+        if(!RegistrarPedidoActivity.direccionEntrega.equals("")){
+            txtDireccionEnvio.setText(RegistrarPedidoActivity.direccionEntrega);
+        }
+
         new HttpRequestTaskDepartamentos().execute();
 
         super.onViewCreated(view, savedInstanceState);//siempre final

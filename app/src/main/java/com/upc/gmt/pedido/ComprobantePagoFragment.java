@@ -5,9 +5,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
@@ -28,6 +31,9 @@ public class ComprobantePagoFragment extends Fragment {
 
     RadioButton rdBoleta;
     RadioButton rdFactura;
+
+    EditText txtPedidoRuc;
+    EditText txtPedidoRS;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -120,6 +126,9 @@ public class ComprobantePagoFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
+        txtPedidoRuc = (EditText) getView().findViewById(R.id.txtPedidoRuc);
+        txtPedidoRS = (EditText) getView().findViewById(R.id.txtPedidoRS);
+
         lyRUC = (LinearLayout) getView().findViewById(R.id.lyRUC);
         lyRS = (LinearLayout) getView().findViewById(R.id.lyRS);
 
@@ -153,6 +162,37 @@ public class ComprobantePagoFragment extends Fragment {
             rdBoleta.setChecked(true);
             lyRUC.setVisibility(View.INVISIBLE);
             lyRS.setVisibility(View.INVISIBLE);
+        }
+
+        txtPedidoRuc.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                RegistrarPedidoActivity.RUC = txtPedidoRuc.getText().toString();
+            }
+        });
+
+        txtPedidoRS.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                RegistrarPedidoActivity.RS = txtPedidoRS.getText().toString();
+            }
+        });
+
+        if(RegistrarPedidoActivity.tipoComprobante == 1){
+            txtPedidoRuc.setText(RegistrarPedidoActivity.RUC);
+            txtPedidoRS.setText(RegistrarPedidoActivity.RS);
         }
 
         super.onViewCreated(view, savedInstanceState);

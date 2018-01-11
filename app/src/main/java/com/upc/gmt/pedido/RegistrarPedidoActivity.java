@@ -39,10 +39,6 @@ public class RegistrarPedidoActivity extends AppCompatActivity
 
     static ProgressDialog progressDialog;
 
-    static int tipoEntrega = 0;
-    static int tipoPago = 1;
-    static int tipoComprobante = 0;
-
     ListView lvRegistrarPedido;
     FrameLayout fragPedido;
 
@@ -51,13 +47,22 @@ public class RegistrarPedidoActivity extends AppCompatActivity
     EditText txtPedidoRuc;
     EditText txtPedidoRS;
 
-    static String RUC = "";
-    static String RS = "";
-    static String tramaPedido = "";
-    static String codigoUbigeo = "150101";
-    static int nroCuotas = 5;
-    static int codigoBanco = 2;
+    static int tipoEntrega;
+    static int tipoPago;
+    static int tipoComprobante;
+    static String RUC;
+    static String RS;
+    static String tramaPedido;
+    static String codigoUbigeo;
+    static int nroCuotas;
+    static int codigoBanco;
     static String direccionEntrega;
+    static String celular;
+    static String txtNroTarjetaVisa;
+    static String txtNombreVisa;
+    static String txtApellidoVisa;
+    static String txtFechaVisa;
+    static String txtVisaCSV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +70,23 @@ public class RegistrarPedidoActivity extends AppCompatActivity
         setContentView(R.layout.activity_registrar_pedido);
 
         progressDialog = new ProgressDialog(this);
+
+        tipoEntrega = 0;
+        tipoPago = 1;
+        tipoComprobante = 0;
+        RUC = "";
+        RS = "";
+        tramaPedido = "";
+        codigoUbigeo = "150101";
+        nroCuotas = 5;
+        codigoBanco = 2;
+        direccionEntrega = "";
+        celular = "";
+        txtNroTarjetaVisa = "";
+        txtNombreVisa = "";
+        txtApellidoVisa = "";
+        txtFechaVisa = "";
+        txtVisaCSV = "";
 
         txtPedidoRuc = (EditText) findViewById(R.id.txtPedidoRuc);
         txtPedidoRS = (EditText) findViewById(R.id.txtPedidoRS);
@@ -128,10 +150,51 @@ public class RegistrarPedidoActivity extends AppCompatActivity
     }
 
     public void onClickRealizarPedido(View v){
+        if(tipoEntrega == 1 && direccionEntrega.equals("")){
+            Toast.makeText(getApplicationContext(),"INGRESAR UNA DIRECCIÓN", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(celular.equals("")){
+            Toast.makeText(getApplicationContext(),"POR FAVOR INGRESAR UN NÚMERO DE CELULAR", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(tipoPago == 3){
+            if(txtNroTarjetaVisa.equals("")){
+                Toast.makeText(getApplicationContext(),"NÚMERO DE TARJETA INCORRECTO", Toast.LENGTH_LONG).show();
+                return;
+            }
+            if(txtNombreVisa.equals("")){
+                Toast.makeText(getApplicationContext(),"INGRESAR UN NOMBRE", Toast.LENGTH_LONG).show();
+                return;
+            }
+            if(txtApellidoVisa.equals("")){
+                Toast.makeText(getApplicationContext(),"INGRESAR UN APELLIDO", Toast.LENGTH_LONG).show();
+                return;
+            }
+            if(txtFechaVisa.equals("") || txtFechaVisa.length() != 5 || !txtFechaVisa.contains("/")){
+                Toast.makeText(getApplicationContext(),"FECHA DE CADUCIDAD INCORRECTO", Toast.LENGTH_LONG).show();
+                return;
+            }
+            if(txtVisaCSV.equals("")){
+                Toast.makeText(getApplicationContext(),"INGRESAR CSV", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+        if(tipoComprobante == 1){
+            if(RUC.equals("")){
+                Toast.makeText(getApplicationContext(),"INGRESAR RUC", Toast.LENGTH_LONG).show();
+                return;
+            }
+            if(RS.equals("")){
+                Toast.makeText(getApplicationContext(),"INGRESAR RAZÓN SOCIAL", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+
         Util.PRECIO_TOTAL_PAGAR = Util.PRECIO_COSTO_ENVIO + Util.PRECIO_TOTAL_CALZADOS;
         tramaPedido = "";
-        RUC = "";
-        RS = "";
+//        RUC = "";
+//        RS = "";
 //        codigoUbigeo = "";
         for (Producto p : Util.LISTA_PRODUCTOS_PEDIDO){
             tramaPedido += p.getIdProducto()+","+p.getIdColor()+","+p.getNroTalla()+","+p.getCantidad()+";";

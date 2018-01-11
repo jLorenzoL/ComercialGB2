@@ -123,7 +123,7 @@
                 android:text="Celular:" />
 
             <EditText
-                android:id="@+id/editText16"
+                android:id="@+id/txtCelularPedido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -148,7 +148,7 @@
                 android:text="Número de Tarjeta:" />
 
             <EditText
-                android:id="@+id/editText11"
+                android:id="@+id/txtNroTarjetaVisa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -173,7 +173,7 @@
                 android:text="Nombre:" />
 
             <EditText
-                android:id="@+id/editText12"
+                android:id="@+id/txtNombreVisa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -196,7 +196,7 @@
                 android:text="Apellido:" />
 
             <EditText
-                android:id="@+id/editText13"
+                android:id="@+id/txtApellidoVisa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -219,12 +219,13 @@
                 android:text="Fecha de Caducidad:" />
 
             <EditText
-                android:id="@+id/editText14"
+                android:id="@+id/txtFechaVisa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:maxLength="5" />
         </LinearLayout>
 
         <LinearLayout
@@ -242,7 +243,7 @@
                 android:text="CSV:" />
 
             <EditText
-                android:id="@+id/editText15"
+                android:id="@+id/txtVisaCSV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

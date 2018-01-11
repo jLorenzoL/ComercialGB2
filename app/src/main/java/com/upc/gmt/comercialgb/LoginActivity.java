@@ -41,9 +41,8 @@ public class LoginActivity extends AppCompatActivity {
         usuario = txtUsuario.getText().toString();
         password = txtPassword.getText().toString();
         new HttpRequestTaskLogin().execute();
-        Intent i = new Intent(getApplicationContext(),com.upc.gmt.comercialgb.MenuPrincipalActivity.class);
-        startActivity(i);
-
+        //Intent i = new Intent(getApplicationContext(),com.upc.gmt.comercialgb.MenuPrincipalActivity.class);
+        //startActivity(i);
     }
 
     public void onRecuperClave(View v) {
@@ -86,6 +85,12 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this,
                         "BIENVENIDO " + usuario.getCodUsuario()
                         , Toast.LENGTH_SHORT).show();
+                if(Util.REGRESAR_A_CATALOGO){
+                    finish();
+                }else{
+                    Intent i = new Intent(getApplicationContext(),com.upc.gmt.comercialgb.MenuPrincipalActivity.class);
+                    startActivity(i);
+                }
             }else {
                 Util.USUARIO_SESSION = new Usuario();
                 Util.USUARIO_SESSION.setIdTipoUsuario(1);
