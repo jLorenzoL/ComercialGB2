@@ -68,6 +68,30 @@
         </RadioGroup>
 
         <LinearLayout
+            android:id="@+id/lyLineaCredito"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Linea de Crédito Disponible" />
+
+            <TextView
+                android:id="@+id/txtCredito"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="S/.500"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/lyBanco"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -85,6 +109,7 @@
                 android:id="@+id/spnBanco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/spinner_style"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -103,7 +128,7 @@
                 android:text="Cuenta Bancaria para el Deposito:" />
 
             <TextView
-                android:id="@+id/textView30"
+                android:id="@+id/txtCuentaBancaria"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -131,6 +156,7 @@
                 android:inputType="number"
                 android:maxLength="9" />
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/lyNumeroTarjeta"

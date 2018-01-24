@@ -4,17 +4,27 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.upc.gmt.comercialgb.R;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +43,7 @@ public class TipoPagoFragment extends Fragment {
     LinearLayout lyApellido;
     LinearLayout lyFechaCaducidad;
     LinearLayout lyCSV;
+    LinearLayout lyLineaCredito;
 
     RadioButton rdConsignacion;
     RadioButton rdEfectivo;
@@ -46,6 +57,13 @@ public class TipoPagoFragment extends Fragment {
     EditText txtApellidoVisa;
     EditText txtFechaVisa;
     EditText txtVisaCSV;
+
+    Spinner spnBanco;
+    List<String> listaBancos;
+    TextView txtCuentaBancaria;
+    TextView txtCredito;
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -108,12 +126,59 @@ public class TipoPagoFragment extends Fragment {
         txtVisaCSV = (EditText) getView().findViewById(R.id.txtVisaCSV);
 
         lyBanco = (LinearLayout) getView().findViewById(R.id.lyBanco);
+        spnBanco = (Spinner) getView().findViewById(R.id.spnBanco);
         lyCuentaBancaria = (LinearLayout) getView().findViewById(R.id.lyCuentaBancaria);
         lyNumeroTarjeta = (LinearLayout) getView().findViewById(R.id.lyNumeroTarjeta);
         lyNombre = (LinearLayout) getView().findViewById(R.id.lyNombre);
         lyApellido = (LinearLayout) getView().findViewById(R.id.lyApellido);
         lyFechaCaducidad = (LinearLayout) getView().findViewById(R.id.lyFechaCaducidad);
         lyCSV = (LinearLayout) getView().findViewById(R.id.lyCSV);
+        txtCuentaBancaria = (TextView) getView().findViewById(R.id.txtCuentaBancaria);
+        lyLineaCredito = (LinearLayout) getView().findViewById(R.id.lyLineaCredito);
+        txtCredito = (TextView) getView().findViewById(R.id.txtCredito);
+
+        listaBancos = new ArrayList<>();
+        listaBancos.add("BANCOS");
+        listaBancos.add("BCP");
+        listaBancos.add("BBVA");
+        listaBancos.add("BANBIF");
+        listaBancos.add("INTERBANK");
+        listaBancos.add("SCOTIABANK");
+        ArrayAdapter<String> arrayBanco = new ArrayAdapter<String>(getContext(),R.layout.simple_spinner_item,listaBancos);
+        arrayBanco.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+        spnBanco.setAdapter(arrayBanco);
+
+        spnBanco.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String banco = (String) parent.getItemAtPosition(position);
+                int contador = 0;
+                for(int i=0; i<listaBancos.size()&& position !=0; i++){
+                    String item = listaBancos.get(i);
+                    if(banco.equals(item)){
+                        contador=i;
+                        break;
+                    }
+                }
+                if (contador == 5 ){
+                    txtCuentaBancaria.setText("1025486394");
+                } else if (contador == 4){
+                    txtCuentaBancaria.setText("6477988012");
+                }else if (contador == 3){
+                    txtCuentaBancaria.setText("5544113067");
+                }else if (contador == 2) {
+                    txtCuentaBancaria.setText("8874336901");
+                }else if (contador == 1){
+                    txtCuentaBancaria.setText("5201144269");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         View.OnClickListener ocl = new View.OnClickListener(){
             @Override
@@ -127,6 +192,7 @@ public class TipoPagoFragment extends Fragment {
                 if(id == R.id.rdConsignacion){
                     rdConsignacion.setChecked(true);
                     RegistrarPedidoActivity.tipoPago = 2;
+                    lyLineaCredito.setVisibility(View.VISIBLE);
                     lyBanco.setVisibility(View.INVISIBLE);
                     lyCuentaBancaria.setVisibility(View.INVISIBLE);
                     lyNumeroTarjeta.setVisibility(View.INVISIBLE);
@@ -137,6 +203,7 @@ public class TipoPagoFragment extends Fragment {
                 }else if(id == R.id.rdEfectivo){
                     rdEfectivo.setChecked(true);
                     RegistrarPedidoActivity.tipoPago = 1;
+                    lyLineaCredito.setVisibility(View.INVISIBLE);
                     lyBanco.setVisibility(View.INVISIBLE);
                     lyCuentaBancaria.setVisibility(View.INVISIBLE);
                     lyNumeroTarjeta.setVisibility(View.INVISIBLE);
@@ -148,6 +215,7 @@ public class TipoPagoFragment extends Fragment {
                     rdTarjeta.setChecked(true);
                     RegistrarPedidoActivity.tipoPago = 3;
                     lyBanco.setVisibility(View.INVISIBLE);
+                    lyLineaCredito.setVisibility(View.INVISIBLE);
                     lyCuentaBancaria.setVisibility(View.INVISIBLE);
                     lyNumeroTarjeta.setVisibility(View.VISIBLE);
                     lyNombre.setVisibility(View.VISIBLE);
@@ -157,7 +225,9 @@ public class TipoPagoFragment extends Fragment {
                 }else if(id == R.id.rdTransferencia){
                     rdTransferencia.setChecked(true);
                     RegistrarPedidoActivity.tipoPago = 4;
+                    lyLineaCredito.setVisibility(View.INVISIBLE);
                     lyBanco.setVisibility(View.VISIBLE);
+                    spnBanco.setVisibility(View.VISIBLE);
                     lyCuentaBancaria.setVisibility(View.VISIBLE);
                     lyNumeroTarjeta.setVisibility(View.INVISIBLE);
                     lyNombre.setVisibility(View.INVISIBLE);
@@ -259,6 +329,7 @@ public class TipoPagoFragment extends Fragment {
         int id = RegistrarPedidoActivity.tipoPago;
         if(id == 2){
             rdConsignacion.setChecked(true);
+            lyLineaCredito.setVisibility(View.VISIBLE);
             lyBanco.setVisibility(View.INVISIBLE);
             lyCuentaBancaria.setVisibility(View.INVISIBLE);
             lyNumeroTarjeta.setVisibility(View.INVISIBLE);
@@ -276,6 +347,7 @@ public class TipoPagoFragment extends Fragment {
             lyFechaCaducidad.setVisibility(View.INVISIBLE);
             lyCSV.setVisibility(View.INVISIBLE);
         }else if(id == 3){
+
             rdTarjeta.setChecked(true);
             lyBanco.setVisibility(View.INVISIBLE);
             lyCuentaBancaria.setVisibility(View.INVISIBLE);
@@ -287,6 +359,7 @@ public class TipoPagoFragment extends Fragment {
         }else if(id == 4){
             rdTransferencia.setChecked(true);
             lyBanco.setVisibility(View.VISIBLE);
+            spnBanco.setVisibility(View.VISIBLE);
             lyCuentaBancaria.setVisibility(View.VISIBLE);
             lyNumeroTarjeta.setVisibility(View.INVISIBLE);
             lyNombre.setVisibility(View.INVISIBLE);
@@ -295,6 +368,7 @@ public class TipoPagoFragment extends Fragment {
             lyCSV.setVisibility(View.INVISIBLE);
         }
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
