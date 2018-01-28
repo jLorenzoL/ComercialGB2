@@ -264,10 +264,10 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
             Log.i("onPostExecute", "HttpRequestTaskDetalleCalzado");
             Log.i("Producto", p.toString());
             if(p.getIdProducto() != null) {
-                tvDetalleNombre.setText("Nombre  :" + p.getDescripcion());
-                tvDetalleCodigo.setText("Codigo  :" + p.getSKU());
+                tvDetalleNombre.setText( p.getDescripcion());
+                tvDetalleCodigo.setText( p.getSKU());
                 if(Util.USUARIO_SESSION.getIdTipoUsuario() == 2){
-                    tvDetallePrecio.setText("Precio  :" + p.getPrecioVendedor() + " (RV)");
+                    tvDetallePrecio.setText( p.getPrecioVendedor() + " (RV)");
                 }else{
                     tvDetallePrecio.setText("Precio  :" + p.getPrecioUnitario());
                 }

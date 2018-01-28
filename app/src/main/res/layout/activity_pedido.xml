@@ -36,6 +36,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="334dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
         <TextView
             android:id="@+id/tvTotalPedido"
             android:layout_width="match_parent"
@@ -48,13 +54,12 @@
         <Button
             android:id="@+id/btnComprar"
             style="@style/button_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:fontFamily="cursive"
-            android:gravity="center"
             android:onClick="onClickComprar"
             android:text="COMPRAR"
             android:textColor="#000000" />
+
+            </LinearLayout>
 
     </LinearLayout>
 

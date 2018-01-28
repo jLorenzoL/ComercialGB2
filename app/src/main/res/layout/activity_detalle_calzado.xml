@@ -8,7 +8,6 @@
     tools:context="com.upc.gmt.catalogo.DetalleCalzadoActivity">
 
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -34,105 +33,261 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-            <TextView
-                android:id="@+id/tvDetalleNombre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Nombre"
-                style="@style/textView_stylePedido"
-                android:layout_weight="1"
-                android:padding="5dp"/>
 
-            <TextView
-                android:id="@+id/tvDetalleCodigo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Codigo"
-                style="@style/textView_stylePedido"
-                android:layout_weight="1"
-                android:padding="5dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvDetallePrecio"
+                    <TextView
+                        style="@style/textView_stylePedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="Nombre" />
+                    <TextView
+                        android:id="@+id/tvDetalleNombre"
+                        style="@style/textView_stylePedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/textView_stylePedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="Codigo" />
+                    <TextView
+                        android:id="@+id/tvDetalleCodigo"
+                        style="@style/textView_stylePedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/textView_stylePedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="Precio" />
+                    <TextView
+                        android:id="@+id/tvDetallePrecio"
+                        style="@style/textView_stylePedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/textView_stylePedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="Color" />
+
+                    <Spinner
+                        android:id="@+id/spnDetalleColores"
+                        style="@style/spinner_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:padding="3dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/textView_stylePedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="Talla" />
+
+                    <Spinner
+                        android:id="@+id/spnDetalleTallas"
+                        style="@style/spinner_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:padding="3dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/textView_stylePedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="Material" />
+                    <TextView
+                        android:id="@+id/tvDetalleMaterial"
+                        style="@style/textView_stylePedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+           <!-- <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Precio"
-                style="@style/textView_stylePedido"
-                android:layout_weight="1"
-                android:padding="5dp"/>
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvDetalleNombre"
+                    style="@style/textView_stylePedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Nombre" />
+
+                <TextView
+                    android:id="@+id/tvDetalleCodigo"
+                    style="@style/textView_stylePedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Codigo" />
+
+                <TextView
+                    android:id="@+id/tvDetallePrecio"
+                    style="@style/textView_stylePedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Precio" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="2">
+                        android:layout_weight="2"
+                        android:orientation="vertical">
 
                         <TextView
+                            style="@style/textView_stylePedido"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Color"
-                            style="@style/textView_stylePedido"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:text="Color" />
+
                         <TextView
+                            style="@style/textView_stylePedido"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Talla"
-                            style="@style/textView_stylePedido"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:text="Talla" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:layout_gravity="center"
                         android:layout_weight="2"
-                        android:layout_gravity="center">
+                        android:orientation="vertical">
 
-            <Spinner
-                style="@style/spinner_style"
-                android:id="@+id/spnDetalleColores"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="3dp" />
+                        <Spinner
+                            android:id="@+id/spnDetalleColores"
+                            style="@style/spinner_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="3dp" />
 
-            <Spinner
-                style="@style/spinner_style"
-                android:id="@+id/spnDetalleTallas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="3dp"/>
+                        <Spinner
+                            android:id="@+id/spnDetalleTallas"
+                            style="@style/spinner_style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="3dp" />
+                    </LinearLayout>
                 </LinearLayout>
-                </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvDetalleMaterial"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Material"
-                style="@style/textView_stylePedido"
-                android:layout_weight="1"
-                android:padding="5dp"/>
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/tvDetalleMaterial"
+                    style="@style/textView_stylePedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Material" />
+            </LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="334dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
 
             <Button
                 android:id="@+id/btnAgregarPedido"
-                style="@style/button_styleCatalogo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/button_style_pedido"
                 android:onClick="onClickAgregarPedido"
-                android:text="AGREGAR AL PEDIDO" />
+                android:text="AGREGAR AL PEDIDO"
+                android:fontFamily="cursive"
+                android:textColor="#000000"/>
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
