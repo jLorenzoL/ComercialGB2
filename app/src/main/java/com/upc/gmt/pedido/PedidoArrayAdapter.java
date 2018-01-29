@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.upc.gmt.comercialgb.R;
 import com.upc.gmt.model.Producto;
 import com.upc.gmt.util.Util;
@@ -65,8 +67,19 @@ public class PedidoArrayAdapter extends ArrayAdapter {
                         CheckBox chbArticulo = (CheckBox) viewPedido.findViewById(R.id.chbArticulo);
                         if(chbArticulo.isChecked()){
                             EditText txtCantidadPedido = (EditText) viewPedido.findViewById(R.id.txtCantidadPedido);
+                            if(txtCantidadPedido.getText().toString().equals("")){
+                                Toast.makeText(getContext().getApplicationContext(),"CANTIDAD NO PERMITIDA",Toast.LENGTH_LONG).show();
+                                chbArticulo.setChecked(false);
+                                return;
+                            }
+                            int cantidad = Integer.parseInt(txtCantidadPedido.getText().toString());
+                            if(Util.USUARIO_SESSION.getIdTipoUsuario() != 2 && cantidad > 3){
+                                Toast.makeText(getContext().getApplicationContext(),"SOLO PUEDE COMPRAR HASTA 3 PARES DE CALZADO",Toast.LENGTH_LONG).show();
+                                chbArticulo.setChecked(false);
+                                return;
+                            }
                             Producto p = Util.LISTA_PRODUCTOS_PEDIDO.get(i);
-                            p.setCantidad(Integer.parseInt(txtCantidadPedido.getText().toString()));
+                            p.setCantidad(cantidad);
                             Util.LISTA_PRODUCTOS_PEDIDO.set(i, p);
                             TextView tvTotalArticulo = (TextView) viewPedido.findViewById(R.id.tvTotalArticulo);
                             if(Util.USUARIO_SESSION.getIdTipoUsuario() == 2){
@@ -116,22 +129,15 @@ public class PedidoArrayAdapter extends ArrayAdapter {
 
             ImageView imageView = (ImageView) convertView.findViewById(R.id.grid_pedido_image);
 
-            Double random = Math.random()*15;
-            if (random.intValue() > 9) {
-                imageView.setImageResource(R.mipmap.calzado_rojo);
-            } else if (random.intValue() > 5) {
-                imageView.setImageResource(R.mipmap.calzado_rojo);
-            } else {
-                imageView.setImageResource(R.mipmap.calzado_rojo);
-            }
 //            Picasso picasso = Picasso.with(context);
 //            picasso.setIndicatorsEnabled(true);
 //            picasso.setLoggingEnabled(true);
             try {
-//                Picasso.with(context).load(Util.URL_WEB_SERVICE+"/verImagen?nombre="+p.getNombreImagen()).into(imageView);
+                Log.d("PedidoArrayAdapter", Util.URL_WEB_SERVICE+"/verImagen?nombre="+p.getSKU()+"_"+p.getIdColor()+"_1.jpg");
+                Picasso.with(context).load(Util.URL_WEB_SERVICE+"/verImagen?nombre="+p.getSKU()+"_"+p.getIdColor()+"_1.jpg").resize(100, 100).into(imageView);
             }catch (Exception e){
                 e.printStackTrace();
-                Log.e("ERROR", e.getMessage());
+                Log.e("PedidoArrayAdapter", e.getMessage());
             }
 
         return convertView;

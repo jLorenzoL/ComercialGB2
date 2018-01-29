@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.upc.gmt.comercialgb.R;
 import com.upc.gmt.model.Producto;
 import com.upc.gmt.util.Util;
@@ -68,20 +69,21 @@ public class ImagenCalzadoArrayAdapter extends ArrayAdapter {
             // set image based on selected text
             ImageView imageView = (ImageView) convertView.findViewById(R.id.grid_item_image);
 
-            Double random = Math.random()*15;
-            if (random.intValue() > 9) {
-                imageView.setImageResource(R.mipmap.calzado_rojo);
-            } else if (random.intValue() > 4) {
-                imageView.setImageResource(R.mipmap.calzado_amarillo);
-            } else {
-                imageView.setImageResource(R.mipmap.calzado_verde);
-            }
+//            Double random = Math.random()*15;
+//            if (random.intValue() > 9) {
+//                imageView.setImageResource(R.mipmap.calzado_rojo);
+//            } else if (random.intValue() > 4) {
+//                imageView.setImageResource(R.mipmap.calzado_amarillo);
+//            } else {
+//                imageView.setImageResource(R.mipmap.calzado_verde);
+//            }
 
 //            Picasso picasso = Picasso.with(context);
 //            picasso.setIndicatorsEnabled(true);
 //            picasso.setLoggingEnabled(true);
             try {
-//                Picasso.with(context).load(Util.URL_WEB_SERVICE+"/verImagen?nombre="+p.getNombreImagen()).into(imageView);
+                Log.d("DEBUG", Util.URL_WEB_SERVICE+"/verImagen?nombre="+p.getSKU()+"_"+p.getIdColor()+"_1.jpg");
+                Picasso.with(context).load(Util.URL_WEB_SERVICE+"/verImagen?nombre="+p.getSKU()+"_"+p.getIdColor()+"_1.jpg").into(imageView);
             }catch (Exception e){
                 e.printStackTrace();
                 Log.e("ERROR", e.getMessage());

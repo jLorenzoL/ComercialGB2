@@ -3,8 +3,7 @@ package com.upc.gmt.catalogo;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +21,8 @@ import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.upc.gmt.comercialgb.R;
 import com.upc.gmt.model.Producto;
 import com.upc.gmt.pedido.PedidoActivity;
@@ -34,7 +35,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +55,8 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
 
     ImageView imageView;
     String idProducto;
+    String SKU;
+    String idColorImg;
     String idColor;
     String nroTalla;
 
@@ -73,6 +75,11 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
 
         idProducto = extras.getString("idProducto");
         Log.i("onCreate-idProducto", idProducto);
+        SKU = extras.getString("SKU");
+        Log.i("onCreate-SKU", SKU);
+        idColorImg = extras.getString("idColor");
+        Log.i("onCreate-idColor", idColorImg);
+
         tvDetalleNombre = (TextView) findViewById(R.id.tvDetalleNombre);
         tvDetalleCodigo = (TextView) findViewById(R.id.tvDetalleCodigo);
         tvDetallePrecio = (TextView) findViewById(R.id.tvDetallePrecio);
@@ -116,22 +123,24 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
         });
 
         lyDetalleCalzado = (LinearLayout) findViewById(R.id.lyDetalleCalzado);
-        for (int i = 0; i <= 4; i++) {
+        for (int i = 1; i <= 5; i++) {
             imageView = new ImageView(this);
-            imageView.setId(i);
+            imageView.setId(Integer.parseInt(idProducto+i));
             imageView.setClickable(true);
             imageView.setAdjustViewBounds(true);
             imageView.setPadding(2, 2, 2, 2);
-            Double random = Math.random()*10;
-            if(random.intValue() > 6){
-                imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.calzado_verde));
-            }else if(random.intValue() > 3){
-                imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.calzado_amarillo));
-            }else{
-                imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.calzado_rojo));
-            }
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            imageView.setTag(imageView.getDrawable());
+//            Double random = Math.random()*10;
+//            if(random.intValue() > 6){
+//                imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.calzado_verde));
+//            }else if(random.intValue() > 3){
+//                imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.calzado_amarillo));
+//            }else{
+//                imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.calzado_rojo));
+//            }
+//            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            imageView.setMaxWidth(300);
+            imageView.setMaxHeight(300);
+            /*
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -151,6 +160,29 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                     startActivity(i);
                 }
             });
+            */
+            Target target = new Target() {
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    imageView.setImageBitmap(bitmap);
+                    Drawable image = imageView.getDrawable();
+                    imageView.setTag(image);
+                }
+
+                @Override
+                public void onBitmapFailed(Drawable errorDrawable) {}
+
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {}
+            };
+            Log.i("DETALLE IMG", Util.URL_WEB_SERVICE+"/verImagen?nombre="+SKU+"_"+idColorImg+"_"+i+".jpg");
+            try {
+                Picasso.with(getApplicationContext()).load(Util.URL_WEB_SERVICE + "/verImagen?nombre=" + SKU + "_" + idColorImg + "_" + i + ".jpg").into(imageView);
+//                imageView.setImageBitmap(b);
+//                imageView.setTag(imageView.getDrawable());
+            }catch(Exception e){
+                Log.e("DETALLE IMG", e.getMessage());
+            }
 
             lyDetalleCalzado.addView(imageView);
         }
@@ -338,10 +370,46 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
             ArrayAdapter<String> arrayTallaCalzado = new ArrayAdapter<String>(getApplicationContext(),R.layout.simple_spinner_item,items);
             arrayTallaCalzado.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
             spnTallas.setAdapter(arrayTallaCalzado);
+//            cargarImagenesDetalle();
             progressDialog.dismiss();
             Log.i("onPostExecute", "fin");
         }
 
     }
+/*
+    void cargarImagenesDetalle(){
+        lyDetalleCalzado.removeAllViews();
+        for (int i = 1; i <= 5; i++) {
+            imageView = new ImageView(this);
+            imageView.setId(Integer.parseInt(idProducto+i));
+            imageView.setClickable(true);
+            imageView.setAdjustViewBounds(true);
+            imageView.setPadding(2, 2, 2, 2);
+            imageView.setMaxWidth(300);
+            imageView.setMaxHeight(300);
+            Target target = new Target() {
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    imageView.setImageBitmap(bitmap);
+                    Drawable image = imageView.getDrawable();
+                    imageView.setTag(image);
+                }
 
+                @Override
+                public void onBitmapFailed(Drawable errorDrawable) {}
+
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {}
+            };
+            Log.i("DETALLE IMG", Util.URL_WEB_SERVICE+"/verImagen?nombre="+SKU+"_"+idColor+"_"+i+".jpg");
+            try {
+                Picasso.with(getApplicationContext()).load(Util.URL_WEB_SERVICE + "/verImagen?nombre=" + SKU + "_" + idColor + "_" + i + ".jpg").into(imageView);
+            }catch(Exception e){
+                Log.e("DETALLE IMG", e.getMessage());
+            }
+
+            lyDetalleCalzado.addView(imageView);
+        }
+    }
+*/
 }

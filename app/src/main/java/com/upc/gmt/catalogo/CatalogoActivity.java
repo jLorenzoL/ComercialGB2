@@ -113,6 +113,8 @@ public class CatalogoActivity extends AppCompatActivity {
                 Toast.makeText(view.getContext().getApplicationContext(),productoSeleccionado.getDescripcion(),Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(),DetalleCalzadoActivity.class);
                 i.putExtra("idProducto", productoSeleccionado.getIdProducto().toString());
+                i.putExtra("idColor", productoSeleccionado.getIdColor());
+                i.putExtra("SKU", productoSeleccionado.getSKU());
                 startActivity(i);
             }
         });
