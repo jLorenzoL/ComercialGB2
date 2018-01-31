@@ -86,9 +86,9 @@ public class ImagenCalzadoAdapter extends BaseAdapter {
 //            } else {
 //                imageView.setImageResource(R.mipmap.calzado_rojo);
 //            }
-            Picasso picasso = Picasso.with(context);
-            picasso.setIndicatorsEnabled(true);
-            picasso.setLoggingEnabled(true);
+//            Picasso picasso = Picasso.with(context);
+//            picasso.setIndicatorsEnabled(true);
+//            picasso.setLoggingEnabled(true);
             try {
                 Picasso.with(context).load(Util.URL_WEB_SERVICE+"/imagen?nombre="+p.getNombreImagen()).into(imageView);
             }catch (Exception e){

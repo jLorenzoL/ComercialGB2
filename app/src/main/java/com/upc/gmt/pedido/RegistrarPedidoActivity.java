@@ -81,7 +81,7 @@ public class RegistrarPedidoActivity extends AppCompatActivity
         nroCuotas = 5;
         codigoBanco = 2;
         direccionEntrega = "";
-        celular = "";
+        celular = Util.CLIENTE_SESSION.getCelular();
         txtNroTarjetaVisa = "";
         txtNombreVisa = "";
         txtApellidoVisa = "";
@@ -159,7 +159,7 @@ public class RegistrarPedidoActivity extends AppCompatActivity
             return;
         }
         if(tipoPago == 3){
-            if(txtNroTarjetaVisa.equals("")){
+            if(txtNroTarjetaVisa.equals("") || txtNroTarjetaVisa.length() != 16 ){
                 Toast.makeText(getApplicationContext(),"NÚMERO DE TARJETA INCORRECTO", Toast.LENGTH_LONG).show();
                 return;
             }
@@ -171,18 +171,18 @@ public class RegistrarPedidoActivity extends AppCompatActivity
                 Toast.makeText(getApplicationContext(),"INGRESAR UN APELLIDO", Toast.LENGTH_LONG).show();
                 return;
             }
-            if(txtFechaVisa.equals("") || txtFechaVisa.length() != 5 || !txtFechaVisa.contains("/")){
+            if(txtFechaVisa.equals("") || txtFechaVisa.length() != 5 || !txtFechaVisa.contains("/") || !(""+txtFechaVisa.charAt(2)).equals("/")){
                 Toast.makeText(getApplicationContext(),"FECHA DE CADUCIDAD INCORRECTO", Toast.LENGTH_LONG).show();
                 return;
             }
-            if(txtVisaCSV.equals("")){
+            if(txtVisaCSV.equals("") || txtVisaCSV.length() != 3){
                 Toast.makeText(getApplicationContext(),"INGRESAR CSV", Toast.LENGTH_LONG).show();
                 return;
             }
         }
         if(tipoComprobante == 1){
-            if(RUC.equals("")){
-                Toast.makeText(getApplicationContext(),"INGRESAR RUC", Toast.LENGTH_LONG).show();
+            if(RUC.equals("") || RUC.length() != 11){
+                Toast.makeText(getApplicationContext(),"INGRESAR RUC CORRECTO", Toast.LENGTH_LONG).show();
                 return;
             }
             if(RS.equals("")){

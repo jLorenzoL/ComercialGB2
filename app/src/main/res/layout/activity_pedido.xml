@@ -3,18 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.upc.gmt.pedido.PedidoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -33,33 +34,36 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="2"
+        android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="334dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvTotalPedido"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="cursive"
-            android:gravity="center"
-            android:text="PRECIO TOTAL DE CALZADOS: S/ 0.00"
-            android:textColor="#000000" />
+            <TextView
+                android:id="@+id/tvTotalPedido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="cursive"
+                android:gravity="center"
+                android:text="PRECIO TOTAL DE CALZADOS: S/ 0.00"
+                android:textColor="#000000" />
 
-        <Button
-            android:id="@+id/btnComprar"
-            style="@style/button_style"
-            android:fontFamily="cursive"
-            android:onClick="onClickComprar"
-            android:text="COMPRAR"
-            android:textColor="#000000" />
+            <Button
+                android:id="@+id/btnComprar"
+                style="@style/button_style"
+                android:layout_height="match_parent"
+                android:fontFamily="cursive"
+                android:onClick="onClickComprar"
+                android:text="COMPRAR"
+                android:textColor="#000000" />
 
-            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

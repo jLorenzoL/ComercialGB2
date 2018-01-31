@@ -3,6 +3,7 @@ package com.upc.gmt.util;
 import android.view.View;
 import android.widget.ListView;
 
+import com.upc.gmt.model.Cliente;
 import com.upc.gmt.model.Producto;
 import com.upc.gmt.model.Usuario;
 
@@ -16,9 +17,11 @@ import java.util.List;
 public class Util {
 
         //public static String URL_WEB_SERVICE = "http://192.168.43.172:8080/ComercialWEB";
-        public static String URL_WEB_SERVICE = "http://192.168.1.37:8080/ComercialWEB";
+        public static String URL_WEB_SERVICE = "http://192.168.1.33:8080/ComercialWEB";
 
         public static Usuario USUARIO_SESSION;
+
+        public static Cliente CLIENTE_SESSION;
 
         public static List<Producto> LISTA_PRODUCTOS_PEDIDO = new ArrayList<>();
 

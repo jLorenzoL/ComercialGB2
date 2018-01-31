@@ -53,42 +53,51 @@ public class PedidoArrayAdapter extends ArrayAdapter {
             btnQuitar.setTag(position);
 
             CheckBox chbArticulo = (CheckBox) convertView.findViewById(R.id.chbArticulo);
+
             chbArticulo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     double totalPrecio = 0.00;
                     ListView lvPedidos = (ListView) buttonView.getRootView().findViewById(R.id.lvPedidos);
 //                    ListView lvPedidos = PedidoActivity.lvPedidos;
-                    for (int i = 0; i < lvPedidos.getCount(); i++){
-                        Log.i("OnCheckedChangeListener", "i: "+i);
+                    for (int i = 0; i < lvPedidos.getCount(); i++) {
+                        Log.i("OnCheckedChangeListener", "i: " + i);
                         View viewPedido = Util.getViewByPosition(i, lvPedidos);
 //                        View viewPedido = lvPedidos.getChildAt(i); // USAR SELECTITEM
-                        Log.i("viewPedido", "position: "+viewPedido.getTag());
+                        Log.i("viewPedido", "position: " + viewPedido.getTag());
+                        EditText txtCantidadPedido = (EditText) viewPedido.findViewById(R.id.txtCantidadPedido);
                         CheckBox chbArticulo = (CheckBox) viewPedido.findViewById(R.id.chbArticulo);
-                        if(chbArticulo.isChecked()){
-                            EditText txtCantidadPedido = (EditText) viewPedido.findViewById(R.id.txtCantidadPedido);
-                            if(txtCantidadPedido.getText().toString().equals("")){
-                                Toast.makeText(getContext().getApplicationContext(),"CANTIDAD NO PERMITIDA",Toast.LENGTH_LONG).show();
+                        if (chbArticulo.isChecked()) {
+                            if (txtCantidadPedido.getText().toString().equals("")) {
+                                Toast.makeText(getContext().getApplicationContext(), "CANTIDAD NO PERMITIDA", Toast.LENGTH_LONG).show();
                                 chbArticulo.setChecked(false);
                                 return;
                             }
                             int cantidad = Integer.parseInt(txtCantidadPedido.getText().toString());
-                            if(Util.USUARIO_SESSION.getIdTipoUsuario() != 2 && cantidad > 3){
-                                Toast.makeText(getContext().getApplicationContext(),"SOLO PUEDE COMPRAR HASTA 3 PARES DE CALZADO",Toast.LENGTH_LONG).show();
+                            if (Util.USUARIO_SESSION.getIdTipoUsuario() != 2 && cantidad > 3) {
+                                Toast.makeText(getContext().getApplicationContext(), "SOLO PUEDE COMPRAR HASTA 3 PARES DE CALZADO", Toast.LENGTH_LONG).show();
                                 chbArticulo.setChecked(false);
                                 return;
                             }
                             Producto p = Util.LISTA_PRODUCTOS_PEDIDO.get(i);
+                            if (p.getStockVenta().intValue() < cantidad) {
+                                Toast.makeText(getContext().getApplicationContext(), "LA CANTIDAD INGRESADA SUPERA EL STOCK DISPONIBLE (" + p.getStockVenta().intValue() + ")", Toast.LENGTH_LONG).show();
+                                chbArticulo.setChecked(false);
+                                return;
+                            }
                             p.setCantidad(cantidad);
                             Util.LISTA_PRODUCTOS_PEDIDO.set(i, p);
+                            txtCantidadPedido.setEnabled(false);
                             TextView tvTotalArticulo = (TextView) viewPedido.findViewById(R.id.tvTotalArticulo);
-                            if(Util.USUARIO_SESSION.getIdTipoUsuario() == 2){
-                                tvTotalArticulo.setText("SubTotal del Calzado: S/ " + (p.getCantidad()*p.getPrecioVendedor().doubleValue()));
-                                totalPrecio += (p.getCantidad()*p.getPrecioVendedor().doubleValue());
-                            }else{
-                                tvTotalArticulo.setText("SubTotal del Calzado: S/ " + (p.getCantidad()*p.getPrecioUnitario().doubleValue()));
-                                totalPrecio += (p.getCantidad()*p.getPrecioUnitario().doubleValue());
+                            if (Util.USUARIO_SESSION.getIdTipoUsuario() == 2) {
+                                tvTotalArticulo.setText("SubTotal del Calzado: S/ " + (p.getCantidad() * p.getPrecioVendedor().doubleValue()));
+                                totalPrecio += (p.getCantidad() * p.getPrecioVendedor().doubleValue());
+                            } else {
+                                tvTotalArticulo.setText("SubTotal del Calzado: S/ " + (p.getCantidad() * p.getPrecioUnitario().doubleValue()));
+                                totalPrecio += (p.getCantidad() * p.getPrecioUnitario().doubleValue());
                             }
+                        } else {
+                            txtCantidadPedido.setEnabled(true);
                         }
                     }
                     TextView vTotalPedido = (TextView) buttonView.getRootView().findViewById(R.id.tvTotalPedido);
@@ -133,8 +142,10 @@ public class PedidoArrayAdapter extends ArrayAdapter {
 //            picasso.setIndicatorsEnabled(true);
 //            picasso.setLoggingEnabled(true);
             try {
-                Log.d("PedidoArrayAdapter", Util.URL_WEB_SERVICE+"/verImagen?nombre="+p.getSKU()+"_"+p.getIdColor()+"_1.jpg");
-                Picasso.with(context).load(Util.URL_WEB_SERVICE+"/verImagen?nombre="+p.getSKU()+"_"+p.getIdColor()+"_1.jpg").resize(100, 100).into(imageView);
+                Log.d("PedidoArrayAdapter", p.getSKU()+"_"+p.getIdColor()+"_1.jpg");
+//                Picasso.with(context).load(Util.URL_WEB_SERVICE+"/verImagen?nombre="+p.getSKU()+"_"+p.getIdColor()+"_1.jpg").resize(100, 100).into(imageView);
+                int id = context.getResources().getIdentifier(p.getSKU().toLowerCase()+"_"+p.getIdColor()+"_1", "mipmap", context.getPackageName());
+                Picasso.with(context).load(id).resize(150, 150).into(imageView);
             }catch (Exception e){
                 e.printStackTrace();
                 Log.e("PedidoArrayAdapter", e.getMessage());

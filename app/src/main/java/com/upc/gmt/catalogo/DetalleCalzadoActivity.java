@@ -3,6 +3,7 @@ package com.upc.gmt.catalogo;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -123,6 +125,7 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
         });
 
         lyDetalleCalzado = (LinearLayout) findViewById(R.id.lyDetalleCalzado);
+
         for (int i = 1; i <= 5; i++) {
             imageView = new ImageView(this);
             imageView.setId(Integer.parseInt(idProducto+i));
@@ -140,7 +143,7 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
 //            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setMaxWidth(300);
             imageView.setMaxHeight(300);
-            /*
+
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -160,13 +163,14 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                     startActivity(i);
                 }
             });
-            */
+
             Target target = new Target() {
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                     imageView.setImageBitmap(bitmap);
                     Drawable image = imageView.getDrawable();
                     imageView.setTag(image);
+//                    lyDetalleCalzado.addView(imageView);
                 }
 
                 @Override
@@ -175,9 +179,14 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                 @Override
                 public void onPrepareLoad(Drawable placeHolderDrawable) {}
             };
-            Log.i("DETALLE IMG", Util.URL_WEB_SERVICE+"/verImagen?nombre="+SKU+"_"+idColorImg+"_"+i+".jpg");
+            Log.i("DETALLE IMG", SKU+"_"+idColorImg+"_"+i+".jpg");
             try {
-                Picasso.with(getApplicationContext()).load(Util.URL_WEB_SERVICE + "/verImagen?nombre=" + SKU + "_" + idColorImg + "_" + i + ".jpg").into(imageView);
+                int id = getResources().getIdentifier(SKU.toLowerCase()+"_"+idColorImg+"_"+i, "mipmap", getPackageName());
+                Picasso.with(getApplicationContext()).load(id).resize(150,150).centerCrop().into(target);
+//                Picasso.with(getApplicationContext()).load(Util.URL_WEB_SERVICE + "/verImagen?nombre=" + SKU + "_" + idColorImg + "_" + i + ".jpg").into(imageView);
+//                imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), id));
+//                imageView.setDrawingCacheEnabled(true);
+//                imageView.setImageResource(id);
 //                imageView.setImageBitmap(b);
 //                imageView.setTag(imageView.getDrawable());
             }catch(Exception e){
@@ -412,4 +421,5 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
         }
     }
 */
+
 }

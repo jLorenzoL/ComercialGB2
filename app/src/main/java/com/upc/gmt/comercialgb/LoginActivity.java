@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.upc.gmt.model.Cliente;
 import com.upc.gmt.model.Usuario;
 import com.upc.gmt.util.Util;
 
@@ -67,11 +68,11 @@ public class LoginActivity extends AppCompatActivity {
 
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                Log.i("Login URL", builder.build().encode().toUri().toString());
+                Usuario usuario = restTemplate.getForObject(builder.build().encode().toUri(), Usuario.class);
+                Log.i("Usuario", usuario.toString());
 
-                Usuario Usuario = restTemplate.getForObject(builder.build().encode().toUri(), Usuario.class);
-                Log.i("Usuario", usuario);
-
-                return Usuario;
+                return usuario;
             } catch (Exception e) {
                 Log.e(this.getClass().getName(), e.getMessage(), e);
             }
@@ -84,7 +85,8 @@ public class LoginActivity extends AppCompatActivity {
                 Util.USUARIO_SESSION = usuario;
                 Toast.makeText(LoginActivity.this,
                         "BIENVENIDO " + usuario.getCodUsuario()
-                        , Toast.LENGTH_SHORT).show();
+                        , Toast.LENGTH_LONG).show();
+                new HttpRequestTaskCliente().execute();
                 if(Util.REGRESAR_A_CATALOGO){
                     finish();
                 }else{
@@ -94,6 +96,42 @@ public class LoginActivity extends AppCompatActivity {
             }else {
                 Util.USUARIO_SESSION = new Usuario();
                 Util.USUARIO_SESSION.setIdTipoUsuario(1);
+                Toast.makeText(LoginActivity.this,
+                        "CREDENCIALES INCORRECTAS"
+                        , Toast.LENGTH_LONG).show();
+            }
+
+        }
+
+    }
+
+    private class HttpRequestTaskCliente extends AsyncTask<Void, Void, Cliente> {
+        @Override
+        protected Cliente doInBackground(Void... params) {
+            try {
+                String URL = Util.URL_WEB_SERVICE + "/cliente";
+                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(URL)
+                        .queryParam("idCliente", Util.USUARIO_SESSION.getIdCliente());
+
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+                Cliente cliente = restTemplate.getForObject(builder.build().encode().toUri(), Cliente.class);
+                Log.i("Cliente", cliente.toString());
+
+                return cliente;
+            } catch (Exception e) {
+                Log.e(this.getClass().getName(), e.getMessage(), e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Cliente cliente) {
+            if(null != cliente) {
+                Util.CLIENTE_SESSION = cliente;
+            }else {
+                Util.CLIENTE_SESSION = new Cliente();
             }
 
         }
