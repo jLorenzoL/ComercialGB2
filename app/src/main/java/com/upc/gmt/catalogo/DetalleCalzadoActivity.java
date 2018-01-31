@@ -26,6 +26,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.upc.gmt.comercialgb.R;
 import com.upc.gmt.model.Producto;
+import com.upc.gmt.model.Venta;
 import com.upc.gmt.pedido.PedidoActivity;
 import com.upc.gmt.util.Util;
 
@@ -103,6 +104,7 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                 Log.i("idColor", idColorNuevo);
                 if(!idColorNuevo.equals("") && !idColor.equals(idColorNuevo)){
                     idColor = idColorNuevo;
+                    progressDialog.setMessage("Cargando Calzado...");
                     progressDialog.show();
                     new HttpRequestTaskTallas().execute();
                 }
@@ -244,16 +246,9 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
             startActivity(i);
             return;
         }
-        Log.i("DATOS PEDIDO", idProducto+"-"+idColor+"-"+nroTalla.substring(0,2));
-        Producto p = CatalogoActivity.productoSeleccionado;
-        p.setIdProducto(Integer.parseInt(idProducto));
-        p.setIdColor(idColor);
-        p.setNroTalla(Integer.parseInt(nroTalla.substring(0,2)));
-        p.setColor(spnColores.getSelectedItem().toString());
-        p.setCantidad(1);
-        Util.LISTA_PRODUCTOS_PEDIDO.add(p);
-        Toast.makeText(DetalleCalzadoActivity.this, "EL CALZADO "+p.getDescripcion()+" FUE AGREGADO AL PEDIDO", Toast.LENGTH_SHORT).show();
-        finish();
+        progressDialog.setMessage("Validando Cliente...");
+        progressDialog.show();
+        new HttpRequestTaskPedido().execute();
     }
 
     private class HttpRequestTaskDetalleCalzado extends AsyncTask<Void, Void, Producto> {
@@ -385,41 +380,56 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
         }
 
     }
-/*
-    void cargarImagenesDetalle(){
-        lyDetalleCalzado.removeAllViews();
-        for (int i = 1; i <= 5; i++) {
-            imageView = new ImageView(this);
-            imageView.setId(Integer.parseInt(idProducto+i));
-            imageView.setClickable(true);
-            imageView.setAdjustViewBounds(true);
-            imageView.setPadding(2, 2, 2, 2);
-            imageView.setMaxWidth(300);
-            imageView.setMaxHeight(300);
-            Target target = new Target() {
-                @Override
-                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                    imageView.setImageBitmap(bitmap);
-                    Drawable image = imageView.getDrawable();
-                    imageView.setTag(image);
-                }
 
-                @Override
-                public void onBitmapFailed(Drawable errorDrawable) {}
-
-                @Override
-                public void onPrepareLoad(Drawable placeHolderDrawable) {}
-            };
-            Log.i("DETALLE IMG", Util.URL_WEB_SERVICE+"/verImagen?nombre="+SKU+"_"+idColor+"_"+i+".jpg");
+    private class HttpRequestTaskPedido extends AsyncTask<Void, Void, List<Venta>> {
+        @Override
+        protected List<Venta> doInBackground(Void... params) {
+            Log.i("doInBackground", "HttpRequestTaskPedido");
             try {
-                Picasso.with(getApplicationContext()).load(Util.URL_WEB_SERVICE + "/verImagen?nombre=" + SKU + "_" + idColor + "_" + i + ".jpg").into(imageView);
-            }catch(Exception e){
-                Log.e("DETALLE IMG", e.getMessage());
-            }
+                String URL = Util.URL_WEB_SERVICE +"/pedidosXestado";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
-            lyDetalleCalzado.addView(imageView);
+                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(URL)
+                        .queryParam("idCliente", Util.CLIENTE_SESSION.getIdCliente())
+                        .queryParam("idEstadoVenta", 1);//Pendiente
+                Log.i("URL", builder.toUriString());
+                ParameterizedTypeReference<List<Venta>> responseType = new ParameterizedTypeReference<List<Venta>>() {};
+                ResponseEntity<List<Venta>> respuesta = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, null, responseType);
+                List<Venta> lista = respuesta.getBody();
+                Log.i("respuesta", lista.toString());
+                return lista;
+            } catch (Exception e) {
+                Log.i("Exception", "ERROR");
+                Log.e("HttpRequestTask", e.getMessage(), e);
+            }
+            Log.i("doInBackground", "fin");
+            return new ArrayList<>();
         }
+
+        @Override
+        protected void onPostExecute(List<Venta> lista) {
+            Log.i("onPostExecute", "HttpRequestTaskPedido");
+            Log.i("LISTA", "Tamaño: "+lista.size());
+            if(lista != null && lista.size()>3){
+                Toast.makeText(DetalleCalzadoActivity.this, "USTED CUENTA CON 3 PEDIDOS PENDIENTE DE PAGO Y NO PUEDE REALIZAR OTRO PEDIDO", Toast.LENGTH_LONG).show();
+            }else{
+                Log.i("DATOS PEDIDO", idProducto+"-"+idColor+"-"+nroTalla.substring(0,2));
+                Producto p = CatalogoActivity.productoSeleccionado;
+                p.setIdProducto(Integer.parseInt(idProducto));
+                p.setIdColor(idColor);
+                p.setNroTalla(Integer.parseInt(nroTalla.substring(0,2)));
+                p.setColor(spnColores.getSelectedItem().toString());
+                p.setCantidad(1);
+                Util.LISTA_PRODUCTOS_PEDIDO.add(p);
+                Toast.makeText(DetalleCalzadoActivity.this, "EL CALZADO "+p.getDescripcion()+" FUE AGREGADO AL PEDIDO", Toast.LENGTH_LONG).show();
+                finish();
+            }
+            progressDialog.dismiss();
+            Log.i("onPostExecute", "fin");
+        }
+
     }
-*/
+
 
 }
