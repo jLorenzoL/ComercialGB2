@@ -48,7 +48,7 @@
             android:id="@+id/btnRealizarPedido"
             style="@style/button_style_pedido"
             android:onClick="onClickRealizarPedido"
-            android:text="REALIZAR PEDIDO" />
+            android:text="PAGAR" />
         </LinearLayout>
     </LinearLayout>
 

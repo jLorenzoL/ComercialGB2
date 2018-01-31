@@ -206,7 +206,7 @@ public class RegistrarPedidoActivity extends AppCompatActivity
 //        RS = txtPedidoRS.getText().toString();
 //        Log.i("tramaPedido", tramaPedido);
 //        if(tipoPago == 2) {
-//            Intent i = new Intent(getApplicationContext(), PedidoPorConsignacionActivity.class);
+//            Intent i = new Intent(getApplicationContext(), .class);
 //            startActivity(i);
 //        }else if(tipoPago == 3){
 //            progressDialog.setMessage("Conectandose a Visa...");

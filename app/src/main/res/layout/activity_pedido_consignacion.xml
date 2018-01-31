@@ -4,7 +4,262 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.upc.gmt.pedido.PedidoConsignacionActivity">
+    android:orientation="horizontal"
+    android:background="@color/colorPrimaryDark"
+    tools:context="com.upc.gmt.comercialgb.Pedido_consignacion">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Línea de crédito Total"
+                        android:textColor="#FFFFFF"
+                        android:layout_gravity="center"/>
+
+                    <EditText
+                        style="@style/editText_style"
+                        android:hint="S/. 0"
+                        android:enabled="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Línea de crédito Disponible"
+                        android:textColor="#FFFFFF"
+                        android:layout_gravity="center"/>
+
+                    <EditText
+                        style="@style/editText_style"
+                        android:enabled="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:hint="S/. 0"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Deuda pendiente"
+                        android:textColor="#FFFFFF"
+                        android:layout_gravity="center"/>
+
+                    <EditText
+                        style="@style/editText_style"
+                        android:enabled="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="S/. 0"
+                        android:layout_gravity="center"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                        <Spinner
+                            android:id="@+id/spnCuota"
+                            style="@style/spinner_style"
+                            android:layout_width="154dp"
+                            android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <TableLayout
+                    android:id="@+id/tbCuotas"
+                    android:layout_width="346dp"
+                    android:layout_height="match_parent"
+                    android:stretchColumns="3"
+                    android:layout_gravity="center"
+                    android:background="#FFFFFF">
+
+                    <TableRow>
+                        <TextView
+                            android:layout_column="1"
+                            android:text="Cuota"
+                            android:padding="15dip"
+                            android:textColor="#000000"/>
+
+                        <TextView
+                            android:id="@+id/textView27"
+                            android:layout_column="1"
+                            android:padding="15dip"
+                            android:text="Cantidad"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:layout_column="1"
+                            android:text="Vencimiento"
+                            android:padding="15dip"
+                            android:textColor="#000000"/>
+
+                    </TableRow>
+
+                </TableLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Línea de crédito Disponible después"
+                            android:textColor="#FFFFFF"
+                            android:layout_gravity="center"/>
+
+                        <EditText
+                            android:enabled="false"
+                            style="@style/editText_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:hint="S/. 0"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total a Pagar"
+                            android:textColor="#FFFFFF"
+                            android:layout_gravity="center"/>
+
+                        <EditText
+                            android:enabled="false"
+                            style="@style/editText_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:hint="S/. 0"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    style="@style/button_style"
+                    android:id="@+id/btnAumento"
+                    android:text="Solicitar Aumento de Línea"
+                    android:onClick="onSolicitarAumento"/>
+
+                <Button
+                    style="@style/button_style"
+                    android:id="@+id/btnAceptar"
+                    android:text="Aceptar"
+                    android:layout_gravity="center"
+                    android:onClick="onSolicitarAumento"
+                    android:layout_width="161dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </LinearLayout>

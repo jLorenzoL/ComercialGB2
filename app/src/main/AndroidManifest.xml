@@ -18,8 +18,7 @@
         <activity
             android:name=".LoginActivity"
             android:label="INICIAR SESIÓN"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".MenuPrincipalActivity"
             android:label="MENÚ PRINCIPAL"
@@ -43,9 +42,7 @@
         <activity
             android:name="com.upc.gmt.pedido.RegistrarPedidoActivity"
             android:label="REGISTRAR PEDIDO"
-            android:parentActivityName="com.upc.gmt.pedido.PedidoActivity"
-            >
-        </activity>
+            android:parentActivityName="com.upc.gmt.pedido.PedidoActivity" />
         <activity
             android:name="com.upc.gmt.catalogo.CatalogoActivity"
             android:label="@string/app_mostrar_catalogo"
@@ -81,17 +78,26 @@
         <activity android:name="com.upc.gmt.pedido.PedidoConsignacionActivity" />
         <activity
             android:name=".HomeActivity"
-            android:screenOrientation="landscape"
             android:label="@string/app_name"
-            >
+            android:screenOrientation="landscape">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name="com.upc.gmt.pedido.PedidoPorConsignacionActivity"
-            android:label="PEDIDO POR CONSIGNACIÓN"
-            >
+        <activity
+            android:name=".Pedido_consignacion"
+            android:label="PEDIDO POR CONSIGNACION"
+            android:screenOrientation="landscape">
+
+        </activity>
+        <activity
+            android:name=".Aumento_credito"
+            android:screenOrientation="landscape">
+
 
         </activity>
     </application>

@@ -1,13 +1,16 @@
 package com.upc.gmt.pedido;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +22,22 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.upc.gmt.catalogo.DetalleCalzadoActivity;
 import com.upc.gmt.comercialgb.R;
+import com.upc.gmt.model.Bancos;
+import com.upc.gmt.model.Costoubigeo;
+import com.upc.gmt.util.Util;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +48,8 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class TipoPagoFragment extends Fragment {
+
+    ProgressDialog progressDialog;
 
     LinearLayout lyBanco;
     LinearLayout lyCuentaBancaria;
@@ -59,10 +74,11 @@ public class TipoPagoFragment extends Fragment {
     EditText txtVisaCSV;
 
     Spinner spnBanco;
-    List<String> listaBancos;
+    //List<String> listaBancos;
     TextView txtCuentaBancaria;
     TextView txtCredito;
 
+    List<Bancos> listaBancos;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -137,7 +153,16 @@ public class TipoPagoFragment extends Fragment {
         lyLineaCredito = (LinearLayout) getView().findViewById(R.id.lyLineaCredito);
         txtCredito = (TextView) getView().findViewById(R.id.txtCredito);
 
-        listaBancos = new ArrayList<>();
+        spnBanco.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,new String[]{"BANCOS"}));
+
+        spnBanco.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+
+        /*listaBancos = new ArrayList<>();
         listaBancos.add("BANCOS");
         listaBancos.add("BCP");
         listaBancos.add("BBVA");
@@ -146,9 +171,9 @@ public class TipoPagoFragment extends Fragment {
         listaBancos.add("SCOTIABANK");
         ArrayAdapter<String> arrayBanco = new ArrayAdapter<String>(getContext(),R.layout.simple_spinner_item,listaBancos);
         arrayBanco.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-        spnBanco.setAdapter(arrayBanco);
+        spnBanco.setAdapter(arrayBanco);*/
 
-        spnBanco.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        /*spnBanco.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String banco = (String) parent.getItemAtPosition(position);
@@ -177,8 +202,7 @@ public class TipoPagoFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
-
+        });*/
 
         View.OnClickListener ocl = new View.OnClickListener(){
             @Override
@@ -234,6 +258,7 @@ public class TipoPagoFragment extends Fragment {
                     lyApellido.setVisibility(View.INVISIBLE);
                     lyFechaCaducidad.setVisibility(View.INVISIBLE);
                     lyCSV.setVisibility(View.INVISIBLE);
+                    new HttpRequestTaskBancos().execute();
                 }
             }
         };
@@ -407,6 +432,45 @@ public class TipoPagoFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+
+
+    private class HttpRequestTaskBancos extends AsyncTask<Void, Void, List<Bancos>> {
+        @Override
+        protected List<Bancos> doInBackground(Void... params) {
+            Log.i("doInBackground", "HttpRequestTaskBancos");
+            try {
+                String URL = Util.URL_WEB_SERVICE +"/bancos";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                ParameterizedTypeReference<List<Bancos>> responseType = new ParameterizedTypeReference<List<Bancos>>() {};
+                ResponseEntity<List<Bancos>> respuesta = restTemplate.exchange(URL, HttpMethod.GET, null, responseType);
+                List<Bancos> lista = respuesta.getBody();
+                return lista;
+            } catch (Exception e) {
+                Log.i("Exception", "ERROR");
+                Log.e("doInBackground", e.getMessage(), e);
+            }
+            Log.i("doInBackground", "fin");
+            return new ArrayList<>();
+        }
+
+        @Override
+        protected void onPostExecute(List<Bancos> lista) {
+            Log.i("onPostExecute", "HttpRequestTaskBancos");
+            Log.i("LISTA", "Bancos: "+lista.size());
+            listaBancos = lista;
+            List<String> items = new ArrayList<>();
+            items.add("BANCOS");
+            for (Bancos tp: lista) {
+                items.add(tp.getDescripcion());
+            }
+            ArrayAdapter<String> array = new ArrayAdapter<>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,items);
+            array.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+            spnBanco.setAdapter(array);
+            Log.i("onPostExecute", "fin");
+        }
     }
 
 }
