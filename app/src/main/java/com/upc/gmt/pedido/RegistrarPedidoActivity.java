@@ -28,6 +28,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import static java.lang.System.currentTimeMillis;
@@ -42,7 +43,7 @@ public class RegistrarPedidoActivity extends AppCompatActivity
     ListView lvRegistrarPedido;
     FrameLayout fragPedido;
 
-    TextView tvTotalPagar;
+    static TextView tvTotalPagar;
 
     EditText txtPedidoRuc;
     EditText txtPedidoRS;
@@ -98,7 +99,9 @@ public class RegistrarPedidoActivity extends AppCompatActivity
         txtPedidoRS = (EditText) findViewById(R.id.txtPedidoRS);
 
         tvTotalPagar = (TextView) findViewById(R.id.tvTotalPagar);
-        tvTotalPagar.setText("TOTAL A PAGAR: S/ "+ Util.PRECIO_TOTAL_CALZADOS);
+        BigDecimal total = new BigDecimal(Util.PRECIO_TOTAL_CALZADOS);
+        total.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        tvTotalPagar.setText("TOTAL A PAGAR: S/ "+String.format("%.2f", total.doubleValue()));
 
         String[] items = {"TIPO DE ENTREGA","TIPO DE PAGO","COMPROBANTE DE PAGO"};
         lvRegistrarPedido = (ListView) findViewById(R.id.lvRegistrarPedido);
@@ -153,6 +156,12 @@ public class RegistrarPedidoActivity extends AppCompatActivity
 //                Log.i("RUN","FIN");
 //            }
 //        }).start();
+    }
+
+    public static void actualizarTotalPagar(){
+        BigDecimal total = new BigDecimal(Util.PRECIO_TOTAL_CALZADOS+Util.PRECIO_COSTO_ENVIO);
+        total.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        tvTotalPagar.setText("TOTAL A PAGAR: S/ "+String.format("%.2f", total.doubleValue()));
     }
 
     public void onClickRealizarPedido(View v){

@@ -14,11 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.upc.gmt.comercialgb.R;
 import com.upc.gmt.model.Costoubigeo;
@@ -51,11 +54,9 @@ public class TipoEntregaFragment extends Fragment {
     RadioButton rdRecojoAlmacen;
     RadioButton rdEnvioDomicilio;
 
-
     List<Costoubigeo> listaDepartamento;
     List<Costoubigeo> listaProvincia;
     List<Costoubigeo> listaDistrito;
-
 
     LinearLayout layoutDomicilio;
 
@@ -66,6 +67,10 @@ public class TipoEntregaFragment extends Fragment {
     EditText txtDireccionEnvio;
 
     TextView txtCostoEnvio;
+
+    ToggleButton btnAceptarCosto;
+
+    double costoEnvio;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -170,11 +175,20 @@ public class TipoEntregaFragment extends Fragment {
                 }else if(id == R.id.rdEnvioDomicilio){
                     layoutDomicilio.setVisibility(View.VISIBLE);
                     RegistrarPedidoActivity.tipoEntrega = 1;
+                    txtDireccionEnvio.setText("");
+                    btnAceptarCosto.setChecked(false);
+                    txtDireccionEnvio.setEnabled(true);
+                    spnDepartamento.setEnabled(true);
+                    spnProvincia.setEnabled(true);
+                    spnDistrito.setEnabled(true);
                 }
+                RegistrarPedidoActivity.actualizarTotalPagar();
             }
         };
 
+        txtDireccionEnvio = (EditText) getView().findViewById(R.id.txtDireccionEnvio);
         txtCostoEnvio = (TextView) getView().findViewById(R.id.txtCostoEnvio);
+        btnAceptarCosto = (ToggleButton) getView().findViewById(R.id.btnAceptarCosto);
 
         rdRecojoAlmacen = (RadioButton) getView().findViewById(R.id.rdRecojoAlmacen);
         rdEnvioDomicilio = (RadioButton) getView().findViewById(R.id.rdEnvioDomicilio);
@@ -184,6 +198,38 @@ public class TipoEntregaFragment extends Fragment {
 
         spnProvincia.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,new String[]{"PROVINCIA"}));
         spnDistrito.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,new String[]{"DISTRITO"}));
+
+        if(!RegistrarPedidoActivity.direccionEntrega.equals("")){
+            txtDireccionEnvio.setText(RegistrarPedidoActivity.direccionEntrega);
+        }
+
+        btnAceptarCosto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(btnAceptarCosto.isChecked()){
+                    if(txtDireccionEnvio.getText().toString().equals("") && costoEnvio != 0){
+                        Toast.makeText(getContext(),"POR FAVOR INGRESAR UNA DIRECCIÓN", Toast.LENGTH_LONG).show();
+                        btnAceptarCosto.setChecked(false);
+                        return;
+                    }
+                    if(costoEnvio != 0){
+                        Util.PRECIO_COSTO_ENVIO = costoEnvio;//DEV COLOCAR FLAG DE BOTON
+                    }
+                    spnDepartamento.setEnabled(false);
+                    spnProvincia.setEnabled(false);
+                    spnDistrito.setEnabled(false);
+                    txtDireccionEnvio.setEnabled(false);
+
+                }else{
+                    Util.PRECIO_COSTO_ENVIO = 0;
+                    spnDepartamento.setEnabled(true);
+                    spnProvincia.setEnabled(true);
+                    spnDistrito.setEnabled(true);
+                    txtDireccionEnvio.setEnabled(true);
+                }
+                RegistrarPedidoActivity.actualizarTotalPagar();
+            }
+        });
 
         spnDepartamento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -238,7 +284,7 @@ public class TipoEntregaFragment extends Fragment {
                 if(listaDistrito == null || listaDistrito.size()==0){
                     return;
                 }
-                double costoEnvio = 0.00;
+                costoEnvio = 0.00;
                 String desDistritro = (String) parent.getItemAtPosition(position);
                 idUbigeoDistrito = "";
                 for(Costoubigeo cu : listaDistrito) {
@@ -253,6 +299,7 @@ public class TipoEntregaFragment extends Fragment {
                 if(!idUbigeoDistrito.equals("") ){
                     RegistrarPedidoActivity.indexDistrito = position;
                     RegistrarPedidoActivity.codigoUbigeo = idUbigeoDistrito;
+                    Util.PRECIO_COSTO_ENVIO = costoEnvio;
                     txtCostoEnvio.setText("Costo de Envío: "+costoEnvio);
                 }
             }
@@ -264,26 +311,37 @@ public class TipoEntregaFragment extends Fragment {
         rdRecojoAlmacen.setOnClickListener(ocl);
         rdEnvioDomicilio.setOnClickListener(ocl);
 
-        layoutDomicilio = (LinearLayout) getView().findViewById(R.id.layoutDomicilio);;
+        layoutDomicilio = (LinearLayout) getView().findViewById(R.id.layoutDomicilio);
+
         if(RegistrarPedidoActivity.tipoEntrega == 1){
             layoutDomicilio.setVisibility(View.VISIBLE);
             rdEnvioDomicilio.setChecked(true);
+            if(Util.PRECIO_COSTO_ENVIO != 0){
+                btnAceptarCosto.setChecked(true);
+                txtDireccionEnvio.setEnabled(false);
+                spnDepartamento.setEnabled(false);
+                spnProvincia.setEnabled(false);
+                spnDistrito.setEnabled(false);
+            }else{
+                btnAceptarCosto.setChecked(false);
+                txtDireccionEnvio.setEnabled(true);
+                spnDepartamento.setEnabled(true);
+                spnProvincia.setEnabled(true);
+                spnDistrito.setEnabled(true);
+            }
         }else{
             layoutDomicilio.setVisibility(View.INVISIBLE);
             rdRecojoAlmacen.setChecked(true);
+            Util.PRECIO_COSTO_ENVIO = 0;
+            RegistrarPedidoActivity.actualizarTotalPagar();
         }
 
-        txtDireccionEnvio = (EditText) getView().findViewById(R.id.txtDireccionEnvio);
         txtDireccionEnvio.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {  }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -291,17 +349,11 @@ public class TipoEntregaFragment extends Fragment {
             }
         });
 
-        if(!RegistrarPedidoActivity.direccionEntrega.equals("")){
-            txtDireccionEnvio.setText(RegistrarPedidoActivity.direccionEntrega);
-        }
-
         new HttpRequestTaskDepartamentos().execute();
 
         super.onViewCreated(view, savedInstanceState);//siempre final
 
     }
-
-
 
     private class HttpRequestTaskDepartamentos extends AsyncTask<Void, Void, List<Costoubigeo>> {
         @Override
@@ -329,7 +381,7 @@ public class TipoEntregaFragment extends Fragment {
             Log.i("LISTA", "Departamentos: "+lista.size());
             listaDepartamento = lista;
             List<String> items = new ArrayList<>();
-            items.add("DEPARTAMENTO");
+            //items.add("DEPARTAMENTO");
             for (Costoubigeo tp: lista) {
                 items.add(tp.getDepartamento());
             }

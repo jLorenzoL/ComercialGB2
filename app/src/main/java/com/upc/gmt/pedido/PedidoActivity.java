@@ -82,16 +82,16 @@ public class PedidoActivity extends AppCompatActivity {
     public void onQuitarPedido(View v) {
         posicionItemPedido = (Integer) v.getTag();
         AlertDialog.Builder ad = new AlertDialog.Builder(this);
-        ad.setMessage("¿Desea remover el calzado de la lista?");
+        ad.setMessage("¿DESEA REMOVER EL CALZADO DE LA LISTA?");
         ad.setTitle("CONFIRMACIÓN");
-        ad.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+        ad.setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
                 eliminarPedidoItem();
             }
         });
-        ad.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        ad.setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();

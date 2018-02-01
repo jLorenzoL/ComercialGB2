@@ -412,7 +412,7 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
             Log.i("onPostExecute", "HttpRequestTaskPedido");
             Log.i("LISTA", "Tamaño: "+lista.size());
             if(lista != null && lista.size()>3){
-                Toast.makeText(DetalleCalzadoActivity.this, "USTED CUENTA CON 3 PEDIDOS PENDIENTE DE PAGO Y NO PUEDE REALIZAR OTRO PEDIDO", Toast.LENGTH_LONG).show();
+                Toast.makeText(DetalleCalzadoActivity.this, "USTED CUENTA CON MÁS DE 3 PEDIDOS EN PENDIENTE DE PAGO Y NO PUEDE REALIZAR OTRO PEDIDO", Toast.LENGTH_LONG).show();
             }else{
                 Log.i("DATOS PEDIDO", idProducto+"-"+idColor+"-"+nroTalla.substring(0,2));
                 Producto p = CatalogoActivity.productoSeleccionado;

@@ -83,12 +83,12 @@
                     android:textStyle="bold" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton"
+                    android:id="@+id/btnAceptarCosto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:textOff="ACEPTAR"
-                    android:textOn="ACEPTADO" />
+                    android:textOff="ACEPTAR COSTO"
+                    android:textOn="COSTO ACEPTADO" />
 
             </LinearLayout>
         </ScrollView>
