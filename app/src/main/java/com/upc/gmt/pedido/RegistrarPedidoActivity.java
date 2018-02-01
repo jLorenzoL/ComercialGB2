@@ -54,6 +54,9 @@ public class RegistrarPedidoActivity extends AppCompatActivity
     static String RS;
     static String tramaPedido;
     static String codigoUbigeo;
+    static int indexDepartamento;
+    static int indexProvincia;
+    static int indexDistrito;
     static int nroCuotas;
     static int codigoBanco;
     static String direccionEntrega;
@@ -77,7 +80,10 @@ public class RegistrarPedidoActivity extends AppCompatActivity
         RUC = "";
         RS = "";
         tramaPedido = "";
-        codigoUbigeo = "150101";
+        codigoUbigeo = "";
+        indexDepartamento = 0;
+        indexProvincia = 0;
+        indexDistrito = 0;
         nroCuotas = 5;
         codigoBanco = 2;
         direccionEntrega = "";

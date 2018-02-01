@@ -16,10 +16,12 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
     }
-        public void onLogin(View v) {
+
+    public void onLogin(View v) {
+        Util.REGRESAR_A_CATALOGO = false;
         Intent i = new Intent(getApplicationContext(), com.upc.gmt.comercialgb.LoginActivity.class);
         startActivity(i);
-        }
+    }
 
     public void onAbrirCatalogo(View v) {
         Util.USUARIO_SESSION = new Usuario();

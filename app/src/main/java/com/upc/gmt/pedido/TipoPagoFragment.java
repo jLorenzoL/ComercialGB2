@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,10 +21,8 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.upc.gmt.catalogo.DetalleCalzadoActivity;
 import com.upc.gmt.comercialgb.R;
 import com.upc.gmt.model.Bancos;
-import com.upc.gmt.model.Costoubigeo;
 import com.upc.gmt.util.Util;
 
 import org.springframework.core.ParameterizedTypeReference;
@@ -33,11 +30,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -155,11 +150,14 @@ public class TipoPagoFragment extends Fragment {
 
         spnBanco.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,new String[]{"BANCOS"}));
 
-        spnBanco.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spnBanco.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         /*listaBancos = new ArrayList<>();

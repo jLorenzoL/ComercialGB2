@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.upc.gmt.comercialgb.R;
 import com.upc.gmt.model.Costoubigeo;
@@ -63,6 +64,8 @@ public class TipoEntregaFragment extends Fragment {
     String idUbigeoDistrito;
 
     EditText txtDireccionEnvio;
+
+    TextView txtCostoEnvio;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -171,6 +174,8 @@ public class TipoEntregaFragment extends Fragment {
             }
         };
 
+        txtCostoEnvio = (TextView) getView().findViewById(R.id.txtCostoEnvio);
+
         rdRecojoAlmacen = (RadioButton) getView().findViewById(R.id.rdRecojoAlmacen);
         rdEnvioDomicilio = (RadioButton) getView().findViewById(R.id.rdEnvioDomicilio);
         spnDepartamento = (Spinner) getView().findViewById(R.id.spnDepartamento);
@@ -179,7 +184,6 @@ public class TipoEntregaFragment extends Fragment {
 
         spnProvincia.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,new String[]{"PROVINCIA"}));
         spnDistrito.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,new String[]{"DISTRITO"}));
-
 
         spnDepartamento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -194,6 +198,7 @@ public class TipoEntregaFragment extends Fragment {
                 }
                 Log.i("idUbigeoDepartamento", idUbigeoDepartamento);
                 if(!idUbigeoDepartamento.equals("") ){
+                    RegistrarPedidoActivity.indexDepartamento = position;
                     new HttpRequestTaskProvincias().execute();
                 }
             }
@@ -218,7 +223,37 @@ public class TipoEntregaFragment extends Fragment {
                 }
                 Log.i("idUbigeoProvincia", idUbigeoProvincia);
                 if(!idUbigeoProvincia.equals("") ){
+                    RegistrarPedidoActivity.indexProvincia = position;
                     new HttpRequestTaskDistrito().execute();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        spnDistrito.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(listaDistrito == null || listaDistrito.size()==0){
+                    return;
+                }
+                double costoEnvio = 0.00;
+                String desDistritro = (String) parent.getItemAtPosition(position);
+                idUbigeoDistrito = "";
+                for(Costoubigeo cu : listaDistrito) {
+                    if(desDistritro.equals(cu.getDistrito())){
+                        idUbigeoDistrito = cu.getCodUbigeoCosto().substring(0,6);
+                        costoEnvio = cu.getCostoEnvio().doubleValue();
+                        break;
+                    }
+                }
+                Log.i("idUbigeoDistrito", idUbigeoDistrito);
+                Log.i("costoEnvio", ""+costoEnvio);
+                if(!idUbigeoDistrito.equals("") ){
+                    RegistrarPedidoActivity.indexDistrito = position;
+                    RegistrarPedidoActivity.codigoUbigeo = idUbigeoDistrito;
+                    txtCostoEnvio.setText("Costo de Envío: "+costoEnvio);
                 }
             }
             @Override
@@ -301,6 +336,7 @@ public class TipoEntregaFragment extends Fragment {
             ArrayAdapter<String> array = new ArrayAdapter<>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,items);
             array.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
             spnDepartamento.setAdapter(array);
+            spnDepartamento.setSelection(RegistrarPedidoActivity.indexDepartamento);
             Log.i("onPostExecute", "fin");
         }
     }
@@ -342,6 +378,7 @@ public class TipoEntregaFragment extends Fragment {
             ArrayAdapter<String> arrayProvincia = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,items);
             arrayProvincia.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
             spnProvincia.setAdapter(arrayProvincia);
+            spnProvincia.setSelection(RegistrarPedidoActivity.indexProvincia);
         }
 
     }
@@ -384,9 +421,9 @@ public class TipoEntregaFragment extends Fragment {
             ArrayAdapter<String> arrayDistrito = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,items);
             arrayDistrito.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
             spnDistrito.setAdapter(arrayDistrito);
+            spnDistrito.setSelection(RegistrarPedidoActivity.indexDistrito);
         }
 
     }
-
 
 }
