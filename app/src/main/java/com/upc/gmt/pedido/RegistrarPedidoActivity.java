@@ -60,6 +60,8 @@ public class RegistrarPedidoActivity extends AppCompatActivity
     static int indexDistrito;
     static int nroCuotas;
     static int codigoBanco;
+    static String nroCuenta;
+    static int indexBanco;
     static String direccionEntrega;
     static String celular;
     static String txtNroTarjetaVisa;
@@ -67,6 +69,7 @@ public class RegistrarPedidoActivity extends AppCompatActivity
     static String txtApellidoVisa;
     static String txtFechaVisa;
     static String txtVisaCSV;
+    static boolean flagCostoAceptado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +89,9 @@ public class RegistrarPedidoActivity extends AppCompatActivity
         indexProvincia = 0;
         indexDistrito = 0;
         nroCuotas = 5;
-        codigoBanco = 2;
+        codigoBanco = 0;
+        nroCuenta = "";
+        indexBanco = 0;
         direccionEntrega = "";
         celular = Util.CLIENTE_SESSION.getCelular();
         txtNroTarjetaVisa = "";
@@ -94,6 +99,8 @@ public class RegistrarPedidoActivity extends AppCompatActivity
         txtApellidoVisa = "";
         txtFechaVisa = "";
         txtVisaCSV = "";
+
+        flagCostoAceptado = false;
 
         txtPedidoRuc = (EditText) findViewById(R.id.txtPedidoRuc);
         txtPedidoRS = (EditText) findViewById(R.id.txtPedidoRS);
@@ -165,43 +172,57 @@ public class RegistrarPedidoActivity extends AppCompatActivity
     }
 
     public void onClickRealizarPedido(View v){
-        if(tipoEntrega == 1 && direccionEntrega.equals("")){
+        if(tipoEntrega == 1 && direccionEntrega.equals("")){//DOMICILIO
             Toast.makeText(getApplicationContext(),"INGRESAR UNA DIRECCIÓN", Toast.LENGTH_LONG).show();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragPedido, new TipoEntregaFragment()).commit();
+            return;
+        }
+        if(tipoEntrega == 1 && !flagCostoAceptado){
+            Toast.makeText(getApplicationContext(),"POR FAVOR ACEPTAR EL COSTO DE ENVIO", Toast.LENGTH_LONG).show();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragPedido, new TipoEntregaFragment()).commit();
             return;
         }
         if(celular.equals("")){
             Toast.makeText(getApplicationContext(),"POR FAVOR INGRESAR UN NÚMERO DE CELULAR", Toast.LENGTH_LONG).show();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragPedido, new TipoPagoFragment()).commit();
             return;
         }
-        if(tipoPago == 3){
+        if(tipoPago == 3){//VISA
             if(txtNroTarjetaVisa.equals("") || txtNroTarjetaVisa.length() != 16 ){
                 Toast.makeText(getApplicationContext(),"NÚMERO DE TARJETA INCORRECTO", Toast.LENGTH_LONG).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragPedido, new TipoPagoFragment()).commit();
                 return;
             }
             if(txtNombreVisa.equals("")){
                 Toast.makeText(getApplicationContext(),"INGRESAR UN NOMBRE", Toast.LENGTH_LONG).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragPedido, new TipoPagoFragment()).commit();
                 return;
             }
             if(txtApellidoVisa.equals("")){
                 Toast.makeText(getApplicationContext(),"INGRESAR UN APELLIDO", Toast.LENGTH_LONG).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragPedido, new TipoPagoFragment()).commit();
                 return;
             }
             if(txtFechaVisa.equals("") || txtFechaVisa.length() != 5 || !txtFechaVisa.contains("/") || !(""+txtFechaVisa.charAt(2)).equals("/")){
                 Toast.makeText(getApplicationContext(),"FECHA DE CADUCIDAD INCORRECTO", Toast.LENGTH_LONG).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragPedido, new TipoPagoFragment()).commit();
                 return;
             }
             if(txtVisaCSV.equals("") || txtVisaCSV.length() != 3){
                 Toast.makeText(getApplicationContext(),"INGRESAR CSV", Toast.LENGTH_LONG).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragPedido, new TipoPagoFragment()).commit();
                 return;
             }
         }
         if(tipoComprobante == 1){
             if(RUC.equals("") || RUC.length() != 11){
                 Toast.makeText(getApplicationContext(),"INGRESAR RUC CORRECTO", Toast.LENGTH_LONG).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragPedido, new ComprobantePagoFragment()).commit();
                 return;
             }
             if(RS.equals("")){
                 Toast.makeText(getApplicationContext(),"INGRESAR RAZÓN SOCIAL", Toast.LENGTH_LONG).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragPedido, new ComprobantePagoFragment()).commit();
                 return;
             }
         }

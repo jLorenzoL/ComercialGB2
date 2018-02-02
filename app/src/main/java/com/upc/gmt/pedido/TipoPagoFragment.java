@@ -69,12 +69,10 @@ public class TipoPagoFragment extends Fragment {
     EditText txtVisaCSV;
 
     Spinner spnBanco;
-    //List<String> listaBancos;
     TextView txtCuentaBancaria;
     TextView txtCredito;
 
     List<Bancos> listaBancos;
-
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -129,6 +127,8 @@ public class TipoPagoFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
+        listaBancos = new ArrayList<>();
+
         txtCelularPedido = (EditText) getView().findViewById(R.id.txtCelularPedido);
         txtNroTarjetaVisa = (EditText) getView().findViewById(R.id.txtNroTarjetaVisa);
         txtNombreVisa = (EditText) getView().findViewById(R.id.txtNombreVisa);
@@ -153,7 +153,17 @@ public class TipoPagoFragment extends Fragment {
         spnBanco.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                txtCuentaBancaria.setText("");
+                for (Bancos b: listaBancos){
+                    String banco = (String) parent.getItemAtPosition(position);
+                    if(banco.equals(b.getDescripcion())){
+                        txtCuentaBancaria.setText(b.getNroCuenta());
+                        RegistrarPedidoActivity.codigoBanco = b.getIdBancos();
+                        RegistrarPedidoActivity.nroCuenta = b.getNroCuenta();
+                        RegistrarPedidoActivity.indexBanco = position;
+                        break;
+                    }
+                }
             }
 
             @Override
@@ -245,6 +255,7 @@ public class TipoPagoFragment extends Fragment {
                     lyFechaCaducidad.setVisibility(View.VISIBLE);
                     lyCSV.setVisibility(View.VISIBLE);
                 }else if(id == R.id.rdTransferencia){
+                    new HttpRequestTaskBancos().execute();
                     rdTransferencia.setChecked(true);
                     RegistrarPedidoActivity.tipoPago = 4;
                     lyLineaCredito.setVisibility(View.INVISIBLE);
@@ -256,7 +267,6 @@ public class TipoPagoFragment extends Fragment {
                     lyApellido.setVisibility(View.INVISIBLE);
                     lyFechaCaducidad.setVisibility(View.INVISIBLE);
                     lyCSV.setVisibility(View.INVISIBLE);
-                    new HttpRequestTaskBancos().execute();
                 }
             }
         };
@@ -389,6 +399,7 @@ public class TipoPagoFragment extends Fragment {
             lyApellido.setVisibility(View.INVISIBLE);
             lyFechaCaducidad.setVisibility(View.INVISIBLE);
             lyCSV.setVisibility(View.INVISIBLE);
+            new HttpRequestTaskBancos().execute();
         }
     }
 
@@ -460,13 +471,14 @@ public class TipoPagoFragment extends Fragment {
             Log.i("LISTA", "Bancos: "+lista.size());
             listaBancos = lista;
             List<String> items = new ArrayList<>();
-            items.add("BANCOS");
+            //items.add("BANCOS");
             for (Bancos tp: lista) {
                 items.add(tp.getDescripcion());
             }
             ArrayAdapter<String> array = new ArrayAdapter<>(getActivity().getApplicationContext(),R.layout.simple_spinner_item,items);
             array.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
             spnBanco.setAdapter(array);
+            spnBanco.setSelection(RegistrarPedidoActivity.indexBanco);
             Log.i("onPostExecute", "fin");
         }
     }

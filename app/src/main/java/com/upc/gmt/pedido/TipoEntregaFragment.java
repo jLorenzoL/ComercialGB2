@@ -173,6 +173,7 @@ public class TipoEntregaFragment extends Fragment {
                     RegistrarPedidoActivity.tipoEntrega = 0;
                     Util.PRECIO_COSTO_ENVIO = 0.00;
                 }else if(id == R.id.rdEnvioDomicilio){
+                    new HttpRequestTaskDepartamentos().execute();
                     layoutDomicilio.setVisibility(View.VISIBLE);
                     RegistrarPedidoActivity.tipoEntrega = 1;
                     txtDireccionEnvio.setText("");
@@ -212,8 +213,9 @@ public class TipoEntregaFragment extends Fragment {
                         btnAceptarCosto.setChecked(false);
                         return;
                     }
+                    RegistrarPedidoActivity.flagCostoAceptado = true;
                     if(costoEnvio != 0){
-                        Util.PRECIO_COSTO_ENVIO = costoEnvio;//DEV COLOCAR FLAG DE BOTON
+                        Util.PRECIO_COSTO_ENVIO = costoEnvio;
                     }
                     spnDepartamento.setEnabled(false);
                     spnProvincia.setEnabled(false);
@@ -221,6 +223,7 @@ public class TipoEntregaFragment extends Fragment {
                     txtDireccionEnvio.setEnabled(false);
 
                 }else{
+                    RegistrarPedidoActivity.flagCostoAceptado = false;
                     Util.PRECIO_COSTO_ENVIO = 0;
                     spnDepartamento.setEnabled(true);
                     spnProvincia.setEnabled(true);
@@ -314,9 +317,10 @@ public class TipoEntregaFragment extends Fragment {
         layoutDomicilio = (LinearLayout) getView().findViewById(R.id.layoutDomicilio);
 
         if(RegistrarPedidoActivity.tipoEntrega == 1){
+            new HttpRequestTaskDepartamentos().execute();
             layoutDomicilio.setVisibility(View.VISIBLE);
             rdEnvioDomicilio.setChecked(true);
-            if(Util.PRECIO_COSTO_ENVIO != 0){
+            if(Util.PRECIO_COSTO_ENVIO != 0 && RegistrarPedidoActivity.flagCostoAceptado){
                 btnAceptarCosto.setChecked(true);
                 txtDireccionEnvio.setEnabled(false);
                 spnDepartamento.setEnabled(false);
@@ -348,8 +352,6 @@ public class TipoEntregaFragment extends Fragment {
                 RegistrarPedidoActivity.direccionEntrega = txtDireccionEnvio.getText().toString();
             }
         });
-
-        new HttpRequestTaskDepartamentos().execute();
 
         super.onViewCreated(view, savedInstanceState);//siempre final
 
