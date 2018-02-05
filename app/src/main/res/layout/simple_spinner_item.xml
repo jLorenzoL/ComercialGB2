@@ -6,4 +6,5 @@
     android:layout_height="wrap_content"
     android:drawableRight="@android:drawable/arrow_down_float"
     android:ellipsize="marquee"
-    android:maxLines="1" />
+    android:maxLines="1"
+    android:padding="5dp"/>

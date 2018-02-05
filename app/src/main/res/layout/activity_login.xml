@@ -1,20 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
     tools:context="com.upc.gmt.comercialgb.LoginActivity">
 
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <!--android:paddingTop="50dp"
+        android:paddingBottom="50dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"-->
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="3"
+                        app:srcCompat="@drawable/logo"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        style="@style/textView_style"
+                        android:id="@+id/textView2"
+                        android:layout_weight="1"
+                        android:text="SISTEMA COMERCIAL GINO BIGIONI" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="342dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:layout_height="match_parent"
+                        android:id="@+id/txtUsuario"
+                        style="@style/editText_style"
+                        android:hint="Usuario"
+                        android:inputType="textEmailAddress"
+                        android:text="Usuario6" />
+
+                    <EditText
+                        android:layout_height="match_parent"
+                        android:id="@+id/txtPassword"
+                        style="@style/editText_style"
+                        android:hint="Contraseña"
+                        android:inputType="textPassword"
+                        android:text="123456789" />
+
+                    <Button
+                        android:layout_height="match_parent"
+                        style="@style/button_style"
+                        android:id="@+id/btnIngresar"
+                        android:text="INGRESAR"
+                        android:onClick="onValidarIngreso"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtRegistro"
+                        style="@style/textView_style"
+                        android:text="Regístrese"
+                        android:onClick="onRegistrar"/>
+
+                    <TextView
+                        android:id="@+id/textView"
+                        style="@style/textView_style"
+                        android:text="¿Olvidó su contraseña?"
+                        android:onClick="onRecuperClave"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -25,8 +140,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="5"
+            android:layout_height="44dp"
             app:srcCompat="@drawable/logo"
             android:layout_gravity="center"/>
 
@@ -34,11 +148,12 @@
             style="@style/textView_style"
             android:id="@+id/textView2"
             android:layout_margin="5dp"
-            android:text="SISTEMA COMERCIAL GINO BIGIONI" />
+            android:text="SISTEMA COMERCIAL GINO BIGIONI"
+            android:layout_height="31dp" />
 
         <LinearLayout
             android:layout_width="334dp"
-            android:layout_height="wrap_content"
+            android:layout_height="171dp"
             android:orientation="vertical"
             android:layout_gravity="center">
 
@@ -84,5 +199,5 @@
 
         </LinearLayout>
 
-    </LinearLayout>
-</RelativeLayout>
+    </LinearLayout>-->
+</LinearLayout>
