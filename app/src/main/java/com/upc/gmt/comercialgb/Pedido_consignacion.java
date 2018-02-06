@@ -18,7 +18,7 @@ public class Pedido_consignacion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedido_consignacion);
 
-        spnCuota = (Spinner) findViewById(R.id.spnCuota);
+        spnCuota = (Spinner) findViewById(R.id.spnCuotas);
 
         listaCuotas = new ArrayList<>();
         listaCuotas.add("Cuotas");

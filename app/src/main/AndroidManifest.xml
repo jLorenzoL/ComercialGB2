@@ -22,7 +22,8 @@
         <activity
             android:name=".MenuPrincipalActivity"
             android:label="MENÚ PRINCIPAL"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:parentActivityName="com.upc.gmt.comercialgb.LoginActivity" />
         <activity
             android:name=".MantenimientoCalzadoActivity"
             android:label="MANTENIMIENTO DE CALZADO"

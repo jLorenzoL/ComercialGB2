@@ -801,6 +801,126 @@ public class ClienteExample {
             addCriterionForJDBCDate("FechaCreacion not between", value1, value2, "fechaCreacion");
             return (Criteria) this;
         }
+
+        public Criteria andLineaCreditoActualIsNull() {
+            addCriterion("LineaCreditoActual is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineaCreditoActualIsNotNull() {
+            addCriterion("LineaCreditoActual is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineaCreditoActualEqualTo(Double value) {
+            addCriterion("LineaCreditoActual =", value, "lineaCreditoActual");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineaCreditoActualNotEqualTo(Double value) {
+            addCriterion("LineaCreditoActual <>", value, "lineaCreditoActual");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineaCreditoActualGreaterThan(Double value) {
+            addCriterion("LineaCreditoActual >", value, "lineaCreditoActual");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineaCreditoActualGreaterThanOrEqualTo(Double value) {
+            addCriterion("LineaCreditoActual >=", value, "lineaCreditoActual");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineaCreditoActualLessThan(Double value) {
+            addCriterion("LineaCreditoActual <", value, "lineaCreditoActual");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineaCreditoActualLessThanOrEqualTo(Double value) {
+            addCriterion("LineaCreditoActual <=", value, "lineaCreditoActual");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineaCreditoActualIn(List<Double> values) {
+            addCriterion("LineaCreditoActual in", values, "lineaCreditoActual");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineaCreditoActualNotIn(List<Double> values) {
+            addCriterion("LineaCreditoActual not in", values, "lineaCreditoActual");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineaCreditoActualBetween(Double value1, Double value2) {
+            addCriterion("LineaCreditoActual between", value1, value2, "lineaCreditoActual");
+            return (Criteria) this;
+        }
+
+        public Criteria andLineaCreditoActualNotBetween(Double value1, Double value2) {
+            addCriterion("LineaCreditoActual not between", value1, value2, "lineaCreditoActual");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaldoLineaCreditoIsNull() {
+            addCriterion("SaldoLineaCredito is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaldoLineaCreditoIsNotNull() {
+            addCriterion("SaldoLineaCredito is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaldoLineaCreditoEqualTo(Double value) {
+            addCriterion("SaldoLineaCredito =", value, "saldoLineaCredito");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaldoLineaCreditoNotEqualTo(Double value) {
+            addCriterion("SaldoLineaCredito <>", value, "saldoLineaCredito");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaldoLineaCreditoGreaterThan(Double value) {
+            addCriterion("SaldoLineaCredito >", value, "saldoLineaCredito");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaldoLineaCreditoGreaterThanOrEqualTo(Double value) {
+            addCriterion("SaldoLineaCredito >=", value, "saldoLineaCredito");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaldoLineaCreditoLessThan(Double value) {
+            addCriterion("SaldoLineaCredito <", value, "saldoLineaCredito");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaldoLineaCreditoLessThanOrEqualTo(Double value) {
+            addCriterion("SaldoLineaCredito <=", value, "saldoLineaCredito");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaldoLineaCreditoIn(List<Double> values) {
+            addCriterion("SaldoLineaCredito in", values, "saldoLineaCredito");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaldoLineaCreditoNotIn(List<Double> values) {
+            addCriterion("SaldoLineaCredito not in", values, "saldoLineaCredito");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaldoLineaCreditoBetween(Double value1, Double value2) {
+            addCriterion("SaldoLineaCredito between", value1, value2, "saldoLineaCredito");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaldoLineaCreditoNotBetween(Double value1, Double value2) {
+            addCriterion("SaldoLineaCredito not between", value1, value2, "saldoLineaCredito");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

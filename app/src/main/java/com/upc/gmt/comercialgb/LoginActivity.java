@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                 Util.USUARIO_SESSION = usuario;
                 Toast.makeText(LoginActivity.this,
                         "BIENVENIDO " + usuario.getCodUsuario()
-                        , Toast.LENGTH_LONG).show();
+                        , Toast.LENGTH_SHORT).show();
                 new HttpRequestTaskCliente().execute();
                 if(Util.REGRESAR_A_CATALOGO){
                     finish();

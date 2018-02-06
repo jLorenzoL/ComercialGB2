@@ -23,7 +23,11 @@ public class Cliente {
 
     private Date fechaCreacion;
 
-    public Cliente(Integer idCliente, String nombres, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String estado, String nroDocumentoIdentidad, String RUC, String celular, Date fechaCreacion) {
+    private Double lineaCreditoActual;
+
+    private Double saldoLineaCredito;
+
+    public Cliente(Integer idCliente, String nombres, String apellidoPaterno, String apellidoMaterno, Date fechaNacimiento, String estado, String nroDocumentoIdentidad, String RUC, String celular, Date fechaCreacion, Double lineaCreditoActual, Double saldoLineaCredito) {
         this.idCliente = idCliente;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
@@ -34,6 +38,8 @@ public class Cliente {
         this.RUC = RUC;
         this.celular = celular;
         this.fechaCreacion = fechaCreacion;
+        this.lineaCreditoActual = lineaCreditoActual;
+        this.saldoLineaCredito = saldoLineaCredito;
     }
 
     public Cliente() {
@@ -120,6 +126,22 @@ public class Cliente {
         this.fechaCreacion = fechaCreacion;
     }
 
+    public Double getLineaCreditoActual() {
+        return lineaCreditoActual;
+    }
+
+    public void setLineaCreditoActual(Double lineaCreditoActual) {
+        this.lineaCreditoActual = lineaCreditoActual;
+    }
+
+    public Double getSaldoLineaCredito() {
+        return saldoLineaCredito;
+    }
+
+    public void setSaldoLineaCredito(Double saldoLineaCredito) {
+        this.saldoLineaCredito = saldoLineaCredito;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -136,6 +158,8 @@ public class Cliente {
         sb.append(", RUC=").append(RUC);
         sb.append(", celular=").append(celular);
         sb.append(", fechaCreacion=").append(fechaCreacion);
+        sb.append(", lineaCreditoActual=").append(lineaCreditoActual);
+        sb.append(", saldoLineaCredito=").append(saldoLineaCredito);
         sb.append("]");
         return sb.toString();
     }

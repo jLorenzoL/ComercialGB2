@@ -17,7 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.upc.gmt.comercialgb.MenuPrincipalActivity;
+import com.upc.gmt.comercialgb.Pedido_consignacion;
 import com.upc.gmt.comercialgb.R;
+import com.upc.gmt.model.Cliente;
 import com.upc.gmt.model.Producto;
 import com.upc.gmt.util.Util;
 
@@ -241,9 +243,9 @@ public class RegistrarPedidoActivity extends AppCompatActivity
 //        RUC = txtPedidoRuc.getText().toString();
 //        RS = txtPedidoRS.getText().toString();
 //        Log.i("tramaPedido", tramaPedido);
-//        if(tipoPago == 2) {
-//            Intent i = new Intent(getApplicationContext(), .class);
-//            startActivity(i);
+        if(tipoPago == 2) {
+            Intent i = new Intent(getApplicationContext(), PedidoConsignacionActivity.class);
+            startActivity(i);
 //        }else if(tipoPago == 3){
 //            progressDialog.setMessage("Conectandose a Visa...");
 //            progressDialog.show();
@@ -254,11 +256,11 @@ public class RegistrarPedidoActivity extends AppCompatActivity
 //            progressDialog.setMessage("Realizando Pago...");
 //            progressDialog.show();
 //            new HttpRequestTaskRegistrarPedido().execute();
-//        }else{
+        }else{
             progressDialog.setMessage("Registrando Pedido...");
             progressDialog.show();
             new HttpRequestTaskRegistrarPedido().execute();
-//        }
+        }
     }
 
     @Override

@@ -38,12 +38,13 @@
                         android:layout_gravity="center"/>
 
                     <EditText
+                        android:id="@+id/txtCreditoTotal"
                         style="@style/editText_style"
-                        android:hint="S/. 0"
-                        android:enabled="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:enabled="false"
+                        android:text="cargando..." />
 
 
                 </LinearLayout>
@@ -61,12 +62,13 @@
                         android:layout_gravity="center"/>
 
                     <EditText
+                        android:id="@+id/txtCreditoDisponible"
                         style="@style/editText_style"
-                        android:enabled="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:hint="S/. 0"/>
+                        android:enabled="false"
+                        android:text="cargando..." />
 
                 </LinearLayout>
 
@@ -83,12 +85,13 @@
                         android:layout_gravity="center"/>
 
                     <EditText
+                        android:id="@+id/txtDeudaPendiente"
                         style="@style/editText_style"
-                        android:enabled="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="S/. 0"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:enabled="false"
+                        android:text="cargando..." />
 
 
                 </LinearLayout>
@@ -107,28 +110,29 @@
                     android:orientation="vertical"
                     android:gravity="center">
 
-                        <Spinner
-                            android:id="@+id/spnCuota"
-                            style="@style/spinner_style"
-                            android:layout_width="154dp"
-                            android:layout_height="wrap_content" />
+                    <Spinner
+                        android:id="@+id/spnCuotas"
+                        style="@style/spinner_style"
+                        android:layout_width="154dp"
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
                 <TableLayout
-                    android:id="@+id/tbCuotas"
+                    android:id="@+id/lyCuotas"
                     android:layout_width="346dp"
                     android:layout_height="match_parent"
-                    android:stretchColumns="3"
                     android:layout_gravity="center"
-                    android:background="#FFFFFF">
+                    android:background="#FFFFFF"
+                    android:stretchColumns="3">
 
-                    <TableRow>
+                    <TableRow android:id="@+id/tblCuotas">
+
                         <TextView
                             android:layout_column="1"
-                            android:text="Cuota"
                             android:padding="15dip"
-                            android:textColor="#000000"/>
+                            android:text="Cuota"
+                            android:textColor="#000000" />
 
                         <TextView
                             android:id="@+id/textView27"
@@ -139,9 +143,9 @@
 
                         <TextView
                             android:layout_column="1"
-                            android:text="Vencimiento"
                             android:padding="15dip"
-                            android:textColor="#000000"/>
+                            android:text="Vencimiento"
+                            android:textColor="#000000" />
 
                     </TableRow>
 
@@ -188,12 +192,13 @@
                             android:layout_gravity="center"/>
 
                         <EditText
-                            android:enabled="false"
+                            android:id="@+id/txtCreditoDespues"
                             style="@style/editText_style"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:hint="S/. 0"/>
+                            android:enabled="false"
+                            android:text="cargando..." />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -216,12 +221,13 @@
                             android:layout_gravity="center"/>
 
                         <EditText
-                            android:enabled="false"
+                            android:id="@+id/txtTotalConsignacion"
                             style="@style/editText_style"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:hint="S/. 0"/>
+                            android:enabled="false"
+                            android:text="cargando..." />
 
                     </LinearLayout>
                 </LinearLayout>

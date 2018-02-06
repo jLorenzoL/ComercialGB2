@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.upc.gmt.comercialgb.R;
 import com.upc.gmt.model.Bancos;
+import com.upc.gmt.model.Cliente;
 import com.upc.gmt.util.Util;
 
 import org.springframework.core.ParameterizedTypeReference;
@@ -30,6 +31,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -232,6 +234,7 @@ public class TipoPagoFragment extends Fragment {
                     lyApellido.setVisibility(View.INVISIBLE);
                     lyFechaCaducidad.setVisibility(View.INVISIBLE);
                     lyCSV.setVisibility(View.INVISIBLE);
+                    new HttpRequestTaskCliente().execute();
                 }else if(id == R.id.rdEfectivo){
                     rdEfectivo.setChecked(true);
                     RegistrarPedidoActivity.tipoPago = 1;
@@ -370,6 +373,7 @@ public class TipoPagoFragment extends Fragment {
             lyApellido.setVisibility(View.INVISIBLE);
             lyFechaCaducidad.setVisibility(View.INVISIBLE);
             lyCSV.setVisibility(View.INVISIBLE);
+            new HttpRequestTaskCliente().execute();
         }else if(id == 1){
             rdEfectivo.setChecked(true);
             lyBanco.setVisibility(View.INVISIBLE);
@@ -380,7 +384,6 @@ public class TipoPagoFragment extends Fragment {
             lyFechaCaducidad.setVisibility(View.INVISIBLE);
             lyCSV.setVisibility(View.INVISIBLE);
         }else if(id == 3){
-
             rdTarjeta.setChecked(true);
             lyBanco.setVisibility(View.INVISIBLE);
             lyCuentaBancaria.setVisibility(View.INVISIBLE);
@@ -481,6 +484,40 @@ public class TipoPagoFragment extends Fragment {
             spnBanco.setSelection(RegistrarPedidoActivity.indexBanco);
             Log.i("onPostExecute", "fin");
         }
+    }
+
+    private class HttpRequestTaskCliente extends AsyncTask<Void, Void, Cliente> {
+        @Override
+        protected Cliente doInBackground(Void... params) {
+            try {
+                String URL = Util.URL_WEB_SERVICE + "/cliente";
+                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(URL)
+                        .queryParam("idCliente", Util.USUARIO_SESSION.getIdCliente());
+
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+                Cliente cliente = restTemplate.getForObject(builder.build().encode().toUri(), Cliente.class);
+                Log.i("Cliente", cliente.toString());
+
+                return cliente;
+            } catch (Exception e) {
+                Log.e(this.getClass().getName(), e.getMessage(), e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Cliente cliente) {
+            if(null != cliente) {
+                Util.CLIENTE_SESSION = cliente;
+                txtCredito.setText("S/. "+String.format("%.2f", cliente.getSaldoLineaCredito()));
+            }else {
+                Util.CLIENTE_SESSION = new Cliente();
+            }
+
+        }
+
     }
 
 }
