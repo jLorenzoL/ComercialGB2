@@ -288,9 +288,7 @@
                 android:id="@+id/btnAgregarPedido"
                 style="@style/button_style_pedido"
                 android:onClick="onClickAgregarPedido"
-                android:text="AGREGAR AL PEDIDO"
-                android:fontFamily="cursive"
-                android:textColor="#000000"/>
+                android:text="AGREGAR AL PEDIDO"/>
 
             </LinearLayout>
 

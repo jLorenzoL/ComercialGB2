@@ -45,7 +45,6 @@
                     android:id="@+id/tvTotalPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="cursive"
                     android:gravity="center"
                     android:text="PRECIO TOTAL DE CALZADOS: S/ 0.00"
                     android:textColor="#000000" />
@@ -54,10 +53,8 @@
                     android:id="@+id/btnComprar"
                     style="@style/button_style"
                     android:layout_height="match_parent"
-                    android:fontFamily="cursive"
                     android:onClick="onClickComprar"
-                    android:text="COMPRAR"
-                    android:textColor="#000000" />
+                    android:text="COMPRAR"/>
 
             </LinearLayout>
 
