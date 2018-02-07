@@ -17,7 +17,7 @@ import java.util.List;
 public class Util {
 
         //public static String URL_WEB_SERVICE = "http://192.168.43.172:8080/ComercialWEB";
-        public static String URL_WEB_SERVICE = "http://192.168.1.39:8070/ComercialWEB";
+        public static String URL_WEB_SERVICE = "http://192.168.1.39:8080/ComercialWEB";
 
         public static Usuario USUARIO_SESSION;
 

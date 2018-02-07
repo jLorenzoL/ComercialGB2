@@ -120,7 +120,7 @@
 
                 <TableLayout
                     android:id="@+id/lyCuotas"
-                    android:layout_width="346dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:background="#FFFFFF"
@@ -251,8 +251,10 @@
                 <Button
                     style="@style/button_style"
                     android:id="@+id/btnAumento"
+                    android:layout_gravity="center"
                     android:text="Solicitar Aumento de Línea"
-                    android:onClick="onSolicitarAumento"/>
+                    android:onClick="onSolicitarAumento"
+                    android:layout_width="219dp"/>
 
                 <Button
                     style="@style/button_style"
@@ -260,7 +262,7 @@
                     android:text="Aceptar"
                     android:layout_gravity="center"
                     android:onClick="onSolicitarAumento"
-                    android:layout_width="161dp" />
+                    android:layout_width="219dp" />
 
             </LinearLayout>
         </LinearLayout>

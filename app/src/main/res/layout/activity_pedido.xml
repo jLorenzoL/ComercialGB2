@@ -9,62 +9,62 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
                 <ListView
                     android:id="@+id/lvPedidos"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:dividerHeight="5dp" />
 
-            </LinearLayout>
 
-        </ScrollView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="2"
-        android:gravity="center"
-        android:orientation="vertical">
+        </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvTotalPedido"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="cursive"
-                android:gravity="center"
-                android:text="PRECIO TOTAL DE CALZADOS: S/ 0.00"
-                android:textColor="#000000" />
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnComprar"
-                style="@style/button_style"
-                android:layout_height="match_parent"
-                android:fontFamily="cursive"
-                android:onClick="onClickComprar"
-                android:text="COMPRAR"
-                android:textColor="#000000" />
+                <TextView
+                    android:id="@+id/tvTotalPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="cursive"
+                    android:gravity="center"
+                    android:text="PRECIO TOTAL DE CALZADOS: S/ 0.00"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/btnComprar"
+                    style="@style/button_style"
+                    android:layout_height="match_parent"
+                    android:fontFamily="cursive"
+                    android:onClick="onClickComprar"
+                    android:text="COMPRAR"
+                    android:textColor="#000000" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
+
 
 </LinearLayout>

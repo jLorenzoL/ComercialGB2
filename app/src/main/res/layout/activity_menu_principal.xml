@@ -8,17 +8,6 @@
     android:orientation="vertical"
     tools:context="com.upc.gmt.comercialgb.MenuPrincipalActivity">
 
-    <!--<Button
-        android:id="@+id/btnMantCalzado"
-        style="@style/button_style"
-        android:onClick="onIngresarMantenimientoCalzado"
-        android:text="Mantenimiento de Calzado" />
-
-    <Button
-        android:id="@+id/btnRegistroPedido"
-        style="@style/button_style"
-        android:onClick="onIngresarRegistroPedido"
-        android:text="Registro de Pedido" />-->
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -42,8 +31,4 @@
 
     </LinearLayout>
 </LinearLayout>
-    <!--<Button
-        android:id="@+id/btnMantUsuario"
-        style="@style/button_style"
-        android:onClick="onMantenimientoUsuario"
-        android:text="Mantenimiento Usuario"/>-->
+
