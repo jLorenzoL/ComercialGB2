@@ -108,7 +108,7 @@ public class PedidoArrayAdapter extends ArrayAdapter {
 
             Producto p = lista.get(position);
 
-//            Log.i("Producto "+position, p.toString());
+            Log.i("Producto "+position, p.toString());
 
             EditText txtCantidadPedido = (EditText) convertView.findViewById(R.id.txtCantidadPedido);
             txtCantidadPedido.setText(""+p.getCantidad());

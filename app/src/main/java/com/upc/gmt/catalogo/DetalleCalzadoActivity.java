@@ -59,15 +59,18 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
     ImageView imageView;
     String idProducto;
     String SKU;
-    String idColorImg;
+//    String idColorImg;
     String idColor;
     String nroTalla;
+    int indexTalla;
+    int indexColor;
 
     List<String> listaMateriales;
     Map<String, String> mapaColores;
-    List<String> listaTallas;
-
+//    List<String> listaTallas;
     List<Producto> listaColorTalla;
+
+    boolean flagCarga = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +83,10 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
         Log.i("onCreate-idProducto", idProducto);
         SKU = extras.getString("SKU");
         Log.i("onCreate-SKU", SKU);
-        idColorImg = extras.getString("idColor");
-        Log.i("onCreate-idColor", idColorImg);
+        idColor = extras.getString("idColor");
+        Log.i("onCreate-idColor", idColor);
+        nroTalla = extras.getString("nroTalla");
+        Log.i("onCreate-nroTalla", nroTalla);
 
         tvDetalleNombre = (TextView) findViewById(R.id.tvDetalleNombre);
         tvDetalleCodigo = (TextView) findViewById(R.id.tvDetalleCodigo);
@@ -102,7 +107,7 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                     }
                 }
                 Log.i("idColor", idColorNuevo);
-                if(!idColorNuevo.equals("") && !idColor.equals(idColorNuevo)){
+                if(!idColorNuevo.equals("")){
                     idColor = idColorNuevo;
                     progressDialog.setMessage("Cargando Calzado...");
                     progressDialog.show();
@@ -181,9 +186,9 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                 @Override
                 public void onPrepareLoad(Drawable placeHolderDrawable) {}
             };
-            Log.i("DETALLE IMG", SKU+"_"+idColorImg+"_"+i+".jpg");
+            Log.i("DETALLE IMG", SKU+"_"+idColor+"_"+i+".jpg");
             try {
-                int id = getResources().getIdentifier(SKU.toLowerCase()+"_"+idColorImg+"_"+i, "mipmap", getPackageName());
+                int id = getResources().getIdentifier(SKU.toLowerCase()+"_"+idColor+"_"+i, "mipmap", getPackageName());
                 Picasso.with(getApplicationContext()).load(id).resize(150,150).centerCrop().into(target);
 //                Picasso.with(getApplicationContext()).load(Util.URL_WEB_SERVICE + "/verImagen?nombre=" + SKU + "_" + idColorImg + "_" + i + ".jpg").into(imageView);
 //                imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), id));
@@ -275,17 +280,17 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                 }
                 List<Producto> colores = mapper.convertValue(mapa.get("colores"), new TypeReference<List<Producto>>(){});
                 mapaColores = new HashMap<>();
-                for (Producto p:colores) {
+                for (int i = 0; i<colores.size(); i++) {
+                    Producto p = colores.get(i);
                     mapaColores.put(p.getIdColor(),p.getColor());
                 }
-                List<Producto> tallas = mapper.convertValue(mapa.get("tallas"), new TypeReference<List<Producto>>(){});
-                if(tallas.size() > 0){
-                    nroTalla = String.valueOf(tallas.get(0).getNroTalla());
-                }
-                listaTallas = new ArrayList<>();
-                for (Producto p:tallas) {
-                    listaTallas.add(p.getNroTalla() + " (Stock: "+ p.getStockVenta() + ")");
-                }
+//                List<Producto> tallas = mapper.convertValue(mapa.get("tallas"), new TypeReference<List<Producto>>(){});
+//                listaTallas = new ArrayList<>();
+//                for (int i = 0; i<tallas.size(); i++) {
+//                    Producto p = tallas.get(i);
+//                    if(nroTalla.equals(p.getNroTalla().toString()))indexTalla = i;
+//                    listaTallas.add(p.getNroTalla() + " (Stock: "+ p.getStockVenta() + ")");
+//                }
                 return lista.get(0);
             } catch (Exception e) {
                 Log.i("Exception", "ERROR");
@@ -308,22 +313,26 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                     tvDetallePrecio.setText("Precio  :" + p.getPrecioUnitario());
                 }
                 List<String> colores = new ArrayList<>();
-                int contador = 1;
+                int contador = 0;
                 for (Map.Entry<String, String> entry : mapaColores.entrySet()) {
-                    if (contador == 1) {
-                        idColor = entry.getKey();
-                    }
+//                    if (contador == 1) {
+//                        idColor = entry.getKey();
+//                    }
+                    if(idColor.equals(entry.getKey()))indexColor = contador;
                     colores.add(entry.getValue());
                     contador++;
                 }
-                ArrayAdapter spnColores = new ArrayAdapter(getApplicationContext(), R.layout.simple_spinner_item, colores);
-                spnColores.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-                Spinner spn = (Spinner) findViewById(R.id.spnDetalleColores);
-                spn.setAdapter(spnColores);
-                ArrayAdapter spnTallas = new ArrayAdapter(getApplicationContext(), R.layout.simple_spinner_item, listaTallas);
-                spnTallas.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-                Spinner spn1 = (Spinner) findViewById(R.id.spnDetalleTallas);
-                spn1.setAdapter(spnTallas);
+                ArrayAdapter arrayColores = new ArrayAdapter(getApplicationContext(), R.layout.simple_spinner_item, colores);
+                arrayColores.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+//                Spinner spn = (Spinner) findViewById(R.id.spnDetalleColores);
+                spnColores.setAdapter(arrayColores);
+                Log.i("indexColor", ""+indexColor);
+                spnColores.setSelection(indexColor);
+//                ArrayAdapter spnTallas = new ArrayAdapter(getApplicationContext(), R.layout.simple_spinner_item, listaTallas);
+//                spnTallas.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+//                Spinner spn1 = (Spinner) findViewById(R.id.spnDetalleTallas);
+//                spn1.setAdapter(spnTallas);
+//                spn1.setSelection(indexTalla);
                 String material = "";
                 for (String m : listaMateriales) {
                     material += m + System.getProperty("line.separator");
@@ -368,12 +377,20 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
             Log.i("LISTA", "Tamaño: "+lista.size());
             listaColorTalla = lista;
             List<String> items = new ArrayList<>();
-            for (Producto p:lista) {
+            indexTalla = 0;
+            for (int i=0; i<lista.size(); i++) {
+                Producto p = lista.get(i);
+                if(nroTalla.equals(p.getNroTalla().toString()) && flagCarga){
+                    flagCarga = false;
+                    indexTalla = i;
+                }
                 items.add(p.getNroTalla().toString() + " (Stock: "+ p.getStockVenta() + ")");
             }
             ArrayAdapter<String> arrayTallaCalzado = new ArrayAdapter<String>(getApplicationContext(),R.layout.simple_spinner_item,items);
             arrayTallaCalzado.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
             spnTallas.setAdapter(arrayTallaCalzado);
+            Log.i("indexTalla", ""+indexTalla);
+            spnTallas.setSelection(indexTalla);
 //            cargarImagenesDetalle();
             progressDialog.dismiss();
             Log.i("onPostExecute", "fin");
@@ -421,6 +438,7 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                 p.setNroTalla(Integer.parseInt(nroTalla.substring(0,2)));
                 p.setColor(spnColores.getSelectedItem().toString());
                 p.setCantidad(1);
+                Log.i("Producto al Pedido", p.toString());
                 Util.LISTA_PRODUCTOS_PEDIDO.add(p);
                 Toast.makeText(DetalleCalzadoActivity.this, "EL CALZADO "+p.getDescripcion()+" FUE AGREGADO AL PEDIDO", Toast.LENGTH_LONG).show();
                 finish();

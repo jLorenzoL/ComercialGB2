@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ListView;
@@ -32,7 +33,8 @@ public class PedidoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pedido);
 
         lvPedidos = (ListView) findViewById(R.id.lvPedidos);
-        pedidoArrayAdapter = new PedidoArrayAdapter(this, LISTA_PRODUCTOS_PEDIDO);
+        Log.i("LISTA_PRODUCTOS_PEDIDO", ""+Util.LISTA_PRODUCTOS_PEDIDO.size());
+        pedidoArrayAdapter = new PedidoArrayAdapter(this, Util.LISTA_PRODUCTOS_PEDIDO);
         lvPedidos.setAdapter(pedidoArrayAdapter);
 
         tvTotalPedido = (TextView) findViewById(R.id.tvTotalPedido);
@@ -40,7 +42,7 @@ public class PedidoActivity extends AppCompatActivity {
     }
 
     public void onClickComprar(View v) {
-        if(Util.LISTA_PRODUCTOS_PEDIDO.size() == 0){
+        if(LISTA_PRODUCTOS_PEDIDO.size() == 0){
             Toast.makeText(getApplicationContext(), "NO HAY CALZADOS EN EL PEDIDO", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -102,10 +104,10 @@ public class PedidoActivity extends AppCompatActivity {
 
     private void eliminarPedidoItem() {
        if(posicionItemPedido != null){
-           Producto p = Util.LISTA_PRODUCTOS_PEDIDO.get(posicionItemPedido);
+           Producto p = LISTA_PRODUCTOS_PEDIDO.get(posicionItemPedido);
            pedidoArrayAdapter.remove(p);
            pedidoArrayAdapter.notifyDataSetChanged();
-           Util.LISTA_PRODUCTOS_PEDIDO.remove(posicionItemPedido);
+           LISTA_PRODUCTOS_PEDIDO.remove(posicionItemPedido);
        }
     }
 }
