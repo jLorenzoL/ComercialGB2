@@ -1,6 +1,7 @@
 package com.upc.gmt.pedido;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,21 +54,33 @@ public class PedidoArrayAdapter extends ArrayAdapter {
             btnQuitar.setTag(position);
 
             CheckBox chbArticulo = (CheckBox) convertView.findViewById(R.id.chbArticulo);
+            chbArticulo.setTag(position);
 
             chbArticulo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     double totalPrecio = 0.00;
                     ListView lvPedidos = (ListView) buttonView.getRootView().findViewById(R.id.lvPedidos);
+                    int posicion = (int) buttonView.getTag();
+                    Log.d("posicion", ""+posicion);
+                    Producto pp = Util.LISTA_PRODUCTOS_PEDIDO.get(posicion);
+                    pp.setChecked(isChecked);
+//                    Util.LISTA_PRODUCTOS_PEDIDO.set(posicion, pp);
 //                    ListView lvPedidos = PedidoActivity.lvPedidos;
                     for (int i = 0; i < lvPedidos.getCount(); i++) {
-                        Log.i("OnCheckedChangeListener", "i: " + i);
+//                        Log.i("OnCheckedChangeListener", "i: " + i);
+
                         View viewPedido = Util.getViewByPosition(i, lvPedidos);
+
+//                        lvPedidos.setItemChecked(i, true);
+//                        View viewPedido = lvPedidos.getAdapter().getView(0, null, lvPedidos);
+
 //                        View viewPedido = lvPedidos.getChildAt(i); // USAR SELECTITEM
-                        Log.i("viewPedido", "position: " + viewPedido.getTag());
+//                        Log.i("viewPedido", "position: " + viewPedido.getTag());
                         EditText txtCantidadPedido = (EditText) viewPedido.findViewById(R.id.txtCantidadPedido);
                         CheckBox chbArticulo = (CheckBox) viewPedido.findViewById(R.id.chbArticulo);
-                        if (chbArticulo.isChecked()) {
+                        Producto p = Util.LISTA_PRODUCTOS_PEDIDO.get(i);
+                        if (p.isChecked()) {
                             if (txtCantidadPedido.getText().toString().equals("")) {
                                 Toast.makeText(getContext().getApplicationContext(), "CANTIDAD NO PERMITIDA", Toast.LENGTH_LONG).show();
                                 chbArticulo.setChecked(false);
@@ -79,7 +92,6 @@ public class PedidoArrayAdapter extends ArrayAdapter {
                                 chbArticulo.setChecked(false);
                                 return;
                             }
-                            Producto p = Util.LISTA_PRODUCTOS_PEDIDO.get(i);
                             if (p.getStockVenta().intValue() < cantidad) {
                                 Toast.makeText(getContext().getApplicationContext(), "LA CANTIDAD INGRESADA SUPERA EL STOCK DISPONIBLE (" + p.getStockVenta().intValue() + ")", Toast.LENGTH_LONG).show();
                                 chbArticulo.setChecked(false);
@@ -90,10 +102,12 @@ public class PedidoArrayAdapter extends ArrayAdapter {
                             txtCantidadPedido.setEnabled(false);
                             TextView tvTotalArticulo = (TextView) viewPedido.findViewById(R.id.tvTotalArticulo);
                             if (Util.USUARIO_SESSION.getIdTipoUsuario() == 2) {
-                                tvTotalArticulo.setText("SubTotal del Calzado: S/ " + (p.getCantidad() * p.getPrecioVendedor().doubleValue()));
+                                double subTotal = (p.getCantidad() * p.getPrecioVendedor().doubleValue());
+                                tvTotalArticulo.setText("SubTotal del Calzado: S/ " + String.format("%.2f", subTotal));
                                 totalPrecio += (p.getCantidad() * p.getPrecioVendedor().doubleValue());
                             } else {
-                                tvTotalArticulo.setText("SubTotal del Calzado: S/ " + (p.getCantidad() * p.getPrecioUnitario().doubleValue()));
+                                double subTotal = (p.getCantidad() * p.getPrecioUnitario().doubleValue());
+                                tvTotalArticulo.setText("SubTotal del Calzado: S/ " + String.format("%.2f", subTotal));
                                 totalPrecio += (p.getCantidad() * p.getPrecioUnitario().doubleValue());
                             }
                         } else {
@@ -101,14 +115,16 @@ public class PedidoArrayAdapter extends ArrayAdapter {
                         }
                     }
                     TextView vTotalPedido = (TextView) buttonView.getRootView().findViewById(R.id.tvTotalPedido);
-                    vTotalPedido.setText("PRECIO TOTAL DE CALZADOS: S/ "+totalPrecio);
+                    vTotalPedido.setText("PRECIO TOTAL DE CALZADOS: S/ "+String.format("%.2f", totalPrecio));
                     Util.PRECIO_TOTAL_CALZADOS = totalPrecio;
                 }
             });
 
             Producto p = lista.get(position);
 
-            Log.i("Producto "+position, p.toString());
+//            chbArticulo.setChecked(p.isChecked());
+
+//            Log.i("Producto "+position, p.toString());
 
             EditText txtCantidadPedido = (EditText) convertView.findViewById(R.id.txtCantidadPedido);
             txtCantidadPedido.setText(""+p.getCantidad());
@@ -142,7 +158,7 @@ public class PedidoArrayAdapter extends ArrayAdapter {
 //            picasso.setIndicatorsEnabled(true);
 //            picasso.setLoggingEnabled(true);
             try {
-                Log.d("PedidoArrayAdapter", p.getSKU()+"_"+p.getIdColor()+"_1.jpg");
+//                Log.d("PedidoArrayAdapter", p.getSKU()+"_"+p.getIdColor()+"_1.jpg");
 //                Picasso.with(context).load(Util.URL_WEB_SERVICE+"/verImagen?nombre="+p.getSKU()+"_"+p.getIdColor()+"_1.jpg").resize(100, 100).into(imageView);
                 int id = context.getResources().getIdentifier(p.getSKU().toLowerCase()+"_"+p.getIdColor()+"_1", "mipmap", context.getPackageName());
                 Picasso.with(context).load(id).resize(150, 150).into(imageView);
@@ -165,4 +181,22 @@ public class PedidoArrayAdapter extends ArrayAdapter {
         return position;
     }
 
+    @Override
+    public int getCount() {
+        return lista.size();
+    }
+
+    @Nullable
+    @Override
+    public Object getItem(int position) {
+        return lista.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 }
+//http://android.amberfog.com/?p=296
+//http://www.vogella.com/tutorials/AndroidListView/article.html
+//http://android.amberfog.com/?p=296

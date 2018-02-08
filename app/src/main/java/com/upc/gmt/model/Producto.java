@@ -64,6 +64,8 @@ public class Producto {
     private String material;
     private int cantidad;
 
+    private boolean isChecked;
+
     public Producto(Integer idProducto, String SKU, String descripcion, Integer idTipoProducto, String genero, BigDecimal precioUnitario, BigDecimal precioVendedor, String estilo, String estado, Integer stockVenta, Integer stockObservado, Integer stockCritico, Date fechaUltimaCarga, Date fechaProximaCarga, String usuarioGenero, Date fechaGeneracion, String usuarioModifico, Date fechaModificacion, BigDecimal altoPaquete, BigDecimal anchoPaquete, BigDecimal largoPaquete, String observacion, Integer idTemporada, Integer idUMD, BigDecimal peso) {
         this.idProducto = idProducto;
         this.SKU = SKU;
@@ -90,6 +92,7 @@ public class Producto {
         this.idTemporada = idTemporada;
         this.idUMD = idUMD;
         this.peso = peso;
+        isChecked = false;
     }
 
     public Producto() {
@@ -360,6 +363,10 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
+    public boolean isChecked() { return isChecked; }
+
+    public void setChecked(boolean checked) { isChecked = checked; }
+
     @Override
     public String toString() {
         return "Producto{" +
@@ -395,7 +402,8 @@ public class Producto {
                 ", nroTalla=" + nroTalla +
                 ", componente='" + componente + '\'' +
                 ", material='" + material + '\'' +
-                ", cantidad='" + cantidad + '\'' +
+                ", cantidad=" + cantidad +
+                ", isChecked=" + isChecked +
                 '}';
     }
 }

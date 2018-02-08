@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,10 +33,25 @@ public class PedidoActivity extends AppCompatActivity {
 
         lvPedidos = (ListView) findViewById(R.id.lvPedidos);
         Log.i("LISTA_PRODUCTOS_PEDIDO", ""+Util.LISTA_PRODUCTOS_PEDIDO.size());
+        for(Producto p : Util.LISTA_PRODUCTOS_PEDIDO){
+            p.setChecked(false);
+        }
         pedidoArrayAdapter = new PedidoArrayAdapter(this, Util.LISTA_PRODUCTOS_PEDIDO);
         lvPedidos.setAdapter(pedidoArrayAdapter);
 
+//        lvPedidos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                if(view.getId() == R.id.chbArticulo){
+//                    Log.d("getId", ""+view.getId());
+//                }
+//            }
+//        });
+
         tvTotalPedido = (TextView) findViewById(R.id.tvTotalPedido);
+
+        tvTotalPedido.setText("PRECIO TOTAL DE CALZADOS: S/ 0.00");
+        Util.PRECIO_TOTAL_CALZADOS = 0.00;
 
     }
 
@@ -49,10 +63,9 @@ public class PedidoActivity extends AppCompatActivity {
         boolean validado = true;
 //        double totalPrecio = 0.00;
 
-        for (int i = 0; i < lvPedidos.getCount(); i++) {
-            View viewPedido = Util.getViewByPosition(i, lvPedidos);
-            CheckBox chbArticulo = (CheckBox) viewPedido.findViewById(R.id.chbArticulo);
-            if (!chbArticulo.isChecked()) {
+        for (int i = 0; i < Util.LISTA_PRODUCTOS_PEDIDO.size(); i++) {
+            Producto p = Util.LISTA_PRODUCTOS_PEDIDO.get(i);
+            if (!p.isChecked()) {
                 validado = false;
                 break;
             }
