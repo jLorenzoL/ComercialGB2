@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="@color/colorPrimaryDark"
+    android:background="@drawable/trial"
     tools:context="com.upc.gmt.comercialgb.Aumento_credito">
 
    <LinearLayout
