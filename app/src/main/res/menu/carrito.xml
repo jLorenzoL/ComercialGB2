@@ -6,7 +6,7 @@
     <item
         android:id="@+id/action_carrito"
         android:icon="@drawable/lista"
-        android:title="Carrito"
+        android:title="Ver Pedido"
         app:showAsAction="ifRoom"/>
 
     <!-- Settings, should always be in the overflow -->

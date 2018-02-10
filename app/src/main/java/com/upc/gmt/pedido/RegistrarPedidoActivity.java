@@ -1,5 +1,6 @@
 package com.upc.gmt.pedido;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,9 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.upc.gmt.comercialgb.MenuPrincipalActivity;
-import com.upc.gmt.comercialgb.Pedido_consignacion;
 import com.upc.gmt.comercialgb.R;
-import com.upc.gmt.model.Cliente;
 import com.upc.gmt.model.Producto;
 import com.upc.gmt.util.Util;
 
@@ -41,6 +40,8 @@ public class RegistrarPedidoActivity extends AppCompatActivity
         ComprobantePagoFragment.OnFragmentInteractionListener {
 
     static ProgressDialog progressDialog;
+
+    public static Activity objeto;
 
     ListView lvRegistrarPedido;
     FrameLayout fragPedido;
@@ -77,6 +78,8 @@ public class RegistrarPedidoActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_pedido);
+
+        objeto = this;
 
         progressDialog = new ProgressDialog(this);
 

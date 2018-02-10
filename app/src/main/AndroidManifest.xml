@@ -76,7 +76,9 @@
             android:name=".RecuperarClaveActivity"
             android:label="RECUPERAR CONTRASEÑA"
             android:screenOrientation="landscape" />
-        <activity android:name="com.upc.gmt.pedido.PedidoConsignacionActivity" />
+        <activity android:name="com.upc.gmt.pedido.PedidoConsignacionActivity"
+            android:label="PEDIDO POR CONSIGNACIÓN"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/app_name"
