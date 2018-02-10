@@ -48,19 +48,21 @@ public class PedidoConsignacionActivity extends AppCompatActivity {
 
         //Lista Precios
         listaCuotas = new ArrayList<>();
-        listaCuotas.add("2 cuotas");
-        listaCuotas.add("3 cuotas");
-        listaCuotas.add("4 cuotas");
-        listaCuotas.add("5 cuotas");
-        listaCuotas.add("6 cuotas");
-        listaCuotas.add("7 cuotas");
-        listaCuotas.add("8 cuotas");
+        listaCuotas.add("2");
+        listaCuotas.add("3");
+        listaCuotas.add("4");
+        listaCuotas.add("5");
+        listaCuotas.add("6");
+        listaCuotas.add("7");
+        listaCuotas.add("8");
 
         ArrayAdapter<String> arrayPrecioCalzado = new ArrayAdapter<String>(getApplicationContext(),R.layout.simple_spinner_item,listaCuotas);
         arrayPrecioCalzado.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
         spnCuotas.setAdapter(arrayPrecioCalzado);
 
         spnCuotas.setSelection(2);
+
+
 
     }
 

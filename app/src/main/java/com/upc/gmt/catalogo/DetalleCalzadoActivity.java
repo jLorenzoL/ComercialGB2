@@ -438,10 +438,23 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                 p.setNroTalla(Integer.parseInt(nroTalla.substring(0,2)));
                 p.setColor(spnColores.getSelectedItem().toString());
                 p.setCantidad(1);
-                Log.i("Producto al Pedido", p.toString());
-                Util.LISTA_PRODUCTOS_PEDIDO.add(p);
-                Toast.makeText(DetalleCalzadoActivity.this, "EL CALZADO "+p.getDescripcion()+" FUE AGREGADO AL PEDIDO", Toast.LENGTH_LONG).show();
-                finish();
+                boolean existe = false;
+                for(Producto ps : Util.LISTA_PRODUCTOS_PEDIDO){
+                    if(p.getIdProducto() == ps.getIdProducto() &&
+                            p.getIdColor().equals(ps.getIdColor()) &&
+                            p.getNroTalla().equals(ps.getNroTalla())){
+                        existe = true;
+                        break;
+                    }
+                }
+                if(!existe){
+                    Log.i("Producto al Pedido", p.toString());
+                    Util.LISTA_PRODUCTOS_PEDIDO.add(p);
+                    Toast.makeText(DetalleCalzadoActivity.this, "EL CALZADO "+p.getDescripcion()+" FUE AGREGADO AL PEDIDO", Toast.LENGTH_LONG).show();
+                    finish();
+                }else{
+                    Toast.makeText(DetalleCalzadoActivity.this, "ESTE CALZADO YA EXISTE EN EL PEDIDO", Toast.LENGTH_LONG).show();
+                }
             }
             progressDialog.dismiss();
             Log.i("onPostExecute", "fin");

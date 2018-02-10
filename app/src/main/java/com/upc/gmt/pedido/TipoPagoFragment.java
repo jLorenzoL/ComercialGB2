@@ -404,6 +404,11 @@ public class TipoPagoFragment extends Fragment {
             lyCSV.setVisibility(View.INVISIBLE);
             new HttpRequestTaskBancos().execute();
         }
+        if(Util.USUARIO_SESSION.getIdTipoUsuario() == 2){//REVENDEDOR
+            rdConsignacion.setVisibility(View.VISIBLE);
+        }else{
+            rdConsignacion.setVisibility(View.INVISIBLE);
+        }
     }
 
 

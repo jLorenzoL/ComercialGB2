@@ -87,6 +87,11 @@ public class PedidoArrayAdapter extends ArrayAdapter {
                                 return;
                             }
                             int cantidad = Integer.parseInt(txtCantidadPedido.getText().toString());
+                            if (cantidad < 1) {
+                                Toast.makeText(getContext().getApplicationContext(), "CANTIDAD NO PERMITIDA", Toast.LENGTH_LONG).show();
+                                chbArticulo.setChecked(false);
+                                return;
+                            }
                             if (Util.USUARIO_SESSION.getIdTipoUsuario() != 2 && cantidad > 3) {
                                 Toast.makeText(getContext().getApplicationContext(), "SOLO PUEDE COMPRAR HASTA 3 PARES DE CALZADO", Toast.LENGTH_LONG).show();
                                 chbArticulo.setChecked(false);
@@ -173,7 +178,7 @@ public class PedidoArrayAdapter extends ArrayAdapter {
     //https://stackoverflow.com/questions/39912827/random-checkbox-getting-checked-when-scrolling-down-the-list-view?rq=1
     @Override
     public int getViewTypeCount() {
-        return getCount();
+        return 1;
     }
 
     @Override

@@ -56,7 +56,7 @@ public class ImagenCalzadoArrayAdapter extends ArrayAdapter {
             tvNombre.setText(p.getDescripcion());
 
             TextView tvCodigo = (TextView) convertView.findViewById(R.id.grid_item_label_codigo);
-            tvCodigo.setText(p.getSKU());
+            tvCodigo.setText("Talla: "+p.getNroTalla());
 
             TextView tvPrecio = (TextView) convertView.findViewById(R.id.grid_item_label_precio);
             int tipoUsuario = Util.USUARIO_SESSION.getIdTipoUsuario();

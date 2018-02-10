@@ -69,12 +69,12 @@
                     android:orientation="vertical">
 
                     <EditText
-                        android:layout_height="match_parent"
                         android:id="@+id/txtUsuario"
                         style="@style/editText_style"
+                        android:layout_height="match_parent"
                         android:hint="Usuario"
                         android:inputType="textEmailAddress"
-                        android:text="Usuario5" />
+                        android:text="Usuario6" />
 
                     <EditText
                         android:layout_height="match_parent"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppGinoBigioni</string>
+    <string name="app_name">APPGINOBIGIONI</string>
     <string name="app_menu_principal">MENU PRINCIPAL</string>
     <string name="app_menu_mantenimiento">MANTENIMIENTO DE CALZADO</string>
     <string name="app_agregar_calzado">AGREGAR CALZADO</string>
@@ -8,10 +8,10 @@
     <string name="app_registrar_pedido">REGISTRAR PEDIDO</string>
     <string name="app_mostrar_catalogo">CATALOGO DE CALZADOS</string>
     <string name="app_mantenimiento_cliente">MANTENIMIENTO DE CLIENTE</string>
-    <string name="app_agregar_cliente">AGREGAR CLIENTe</string>
-    <string name="app_recupera_contraseña">RECUPERAR CONTRASEÑa</string>
+    <string name="app_agregar_cliente">AGREGAR CLIENTE</string>
+    <string name="app_recupera_contraseña">RECUPERAR CONTRASEÑA</string>
     <string name="app_pedido">MIS CALZADOS</string>
-    <string name="app_pedido_consignacion">PEDIDO POR CONSIGNACION</string>
+    <string name="app_pedido_consignacion">PEDIDO POR CONSIGNACIÓN</string>
 
 
     <!-- Strings related to login -->

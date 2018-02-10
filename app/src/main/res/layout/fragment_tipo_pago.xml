@@ -32,18 +32,18 @@
                         android:orientation="vertical">
 
                         <RadioButton
-                            android:id="@+id/rdConsignacion"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Consignación" />
-
-                        <RadioButton
                             android:id="@+id/rdEfectivo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Efectivo" />
+
+                        <RadioButton
+                            android:id="@+id/rdTransferencia"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Transferencia Bancaria" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -60,11 +60,12 @@
                             android:text="Tarjeta VISA" />
 
                         <RadioButton
-                            android:id="@+id/rdTransferencia"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/rdConsignacion"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Transferencia Bancaria" />
+                            android:text="Consignación" />
+
                     </LinearLayout>
 
                 </LinearLayout>

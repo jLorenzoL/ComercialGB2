@@ -52,7 +52,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="Nombre" />
+                        android:text="Nombre:" />
                     <TextView
                         android:id="@+id/tvDetalleNombre"
                         style="@style/textView_stylePedido"
@@ -74,7 +74,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="Codigo" />
+                        android:text="Código:" />
                     <TextView
                         android:id="@+id/tvDetalleCodigo"
                         style="@style/textView_stylePedido"
@@ -96,7 +96,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="Precio" />
+                        android:text="Precio:" />
                     <TextView
                         android:id="@+id/tvDetallePrecio"
                         style="@style/textView_stylePedido"
@@ -118,7 +118,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="Color" />
+                        android:text="Color:" />
 
                     <Spinner
                         android:id="@+id/spnDetalleColores"
@@ -142,7 +142,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="Talla" />
+                        android:text="Talla:" />
 
                     <Spinner
                         android:id="@+id/spnDetalleTallas"
@@ -166,7 +166,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="Material" />
+                        android:text="Material:" />
                     <TextView
                         android:id="@+id/tvDetalleMaterial"
                         style="@style/textView_stylePedido"

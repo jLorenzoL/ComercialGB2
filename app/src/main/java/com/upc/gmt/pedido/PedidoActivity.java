@@ -117,10 +117,26 @@ public class PedidoActivity extends AppCompatActivity {
 
     private void eliminarPedidoItem() {
        if(posicionItemPedido != null){
-           Producto p = LISTA_PRODUCTOS_PEDIDO.get(posicionItemPedido);
-           pedidoArrayAdapter.remove(p);
+           Producto pr = LISTA_PRODUCTOS_PEDIDO.get(posicionItemPedido);
+           pedidoArrayAdapter.remove(pr);
            pedidoArrayAdapter.notifyDataSetChanged();
            LISTA_PRODUCTOS_PEDIDO.remove(posicionItemPedido);
+
+           double totalPrecio = 0.00;
+           for (Producto p : Util.LISTA_PRODUCTOS_PEDIDO) {
+               if (p.isChecked()) {
+                   if (Util.USUARIO_SESSION.getIdTipoUsuario() == 2) {
+                       totalPrecio += (p.getCantidad() * p.getPrecioVendedor().doubleValue());
+                   } else {
+                       totalPrecio += (p.getCantidad() * p.getPrecioUnitario().doubleValue());
+                   }
+               }
+           }
+
+           TextView vTotalPedido = (TextView) findViewById(R.id.tvTotalPedido);
+           vTotalPedido.setText("PRECIO TOTAL DE CALZADOS: S/ "+String.format("%.2f", totalPrecio));
+           Util.PRECIO_TOTAL_CALZADOS = totalPrecio;
+
        }
     }
 }
