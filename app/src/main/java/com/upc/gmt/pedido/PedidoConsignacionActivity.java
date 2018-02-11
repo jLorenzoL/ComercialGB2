@@ -79,6 +79,8 @@ public class PedidoConsignacionActivity extends AppCompatActivity {
         txtCreditoDespues.setText("S/. "+String.format("%.2f", Util.CLIENTE_SESSION.getSaldoLineaCredito()-Util.PRECIO_TOTAL_PAGAR));
         txtTotalConsignacion.setText("S/. "+String.format("%.2f", Util.PRECIO_TOTAL_PAGAR));
 
+        txtDeudaPendiente.setText("S/. "+String.format("%.2f", Util.CLIENTE_SESSION.getLineaCreditoActual()-Util.CLIENTE_SESSION.getSaldoLineaCredito()));
+
         //Lista Precios
         listaCuotas = new ArrayList<>();
         listaCuotas.add(" 2   ");
@@ -110,7 +112,7 @@ public class PedidoConsignacionActivity extends AppCompatActivity {
                     c.set(Calendar.DATE, c.get(Calendar.DATE) + 7*i);
                     Date fechaVencimiento = c.getTime();
                     String formatoVencimiento = new SimpleDateFormat("dd/MM/yyyy").format(fechaVencimiento);
-                    textoDetalleCuota += "       " + i + "         " + cuota + "       " + formatoVencimiento + " " + System.getProperty("line.separator");
+                    textoDetalleCuota += "       " + i + "         " + String.format("%.2f", cuota) + "       " + formatoVencimiento + " " + System.getProperty("line.separator");
                 }
 
                 txtDetalleCuotas.setText(textoDetalleCuota);

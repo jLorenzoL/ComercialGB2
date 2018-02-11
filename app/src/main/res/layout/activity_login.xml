@@ -110,13 +110,13 @@
                         android:id="@+id/txtRegistro"
                         style="@style/textView_style"
                         android:text="Regístrese"
-                        android:onClick="onRegistrar"/>
+                        android:visibility="invisible" />
 
                     <TextView
                         android:id="@+id/textView"
                         style="@style/textView_style"
                         android:text="¿Olvidó su contraseña?"
-                        android:onClick="onRecuperClave"/>
+                        android:visibility="invisible" />
 
 
                 </LinearLayout>
