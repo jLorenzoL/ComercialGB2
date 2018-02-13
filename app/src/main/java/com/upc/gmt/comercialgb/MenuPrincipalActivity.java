@@ -39,7 +39,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
 //    }
 
     public void onAumentoLinea(View v){
-        Intent i = new Intent(getApplicationContext(),CatalogoActivity.class);
+        Intent i = new Intent(getApplicationContext(),SolicitarAumentoActivity.class);
         startActivity(i);
     }
 }

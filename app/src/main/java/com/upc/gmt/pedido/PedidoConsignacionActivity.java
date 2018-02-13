@@ -15,7 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.upc.gmt.comercialgb.Aumento_credito;
+import com.upc.gmt.comercialgb.SolicitarAumentoActivity;
 import com.upc.gmt.comercialgb.MenuPrincipalActivity;
 import com.upc.gmt.comercialgb.R;
 import com.upc.gmt.util.Util;
@@ -127,7 +127,7 @@ public class PedidoConsignacionActivity extends AppCompatActivity {
     }
 
     public void onSolicitarAumento(View v){
-        Intent i = new Intent(this, Aumento_credito.class);
+        Intent i = new Intent(this, SolicitarAumentoActivity.class);
         startActivity(i);
     }
 

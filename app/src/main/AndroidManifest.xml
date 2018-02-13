@@ -47,7 +47,6 @@
         <activity
             android:name="com.upc.gmt.catalogo.CatalogoActivity"
             android:label="@string/app_mostrar_catalogo"
-            android:parentActivityName=".MenuPrincipalActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".MantenimientoUsuarioActivity"
@@ -91,18 +90,13 @@
             </intent-filter>
 
         </activity>
+
         <activity
-            android:name=".Pedido_consignacion"
-            android:label="PEDIDO POR CONSIGNACION"
-            android:screenOrientation="landscape">
+            android:name=".SolicitarAumentoActivity"
+            android:label="SOLICITAR AUMENTO DE LÍNEA"
+            android:parentActivityName=".MenuPrincipalActivity"
+            android:screenOrientation="landscape" />
 
-        </activity>
-        <activity
-            android:name=".Aumento_credito"
-            android:screenOrientation="landscape">
-
-
-        </activity>
     </application>
 
 </manifest>
