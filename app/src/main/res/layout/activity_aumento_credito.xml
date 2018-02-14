@@ -4,130 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
     android:background="@drawable/trial"
+    android:orientation="vertical"
     tools:context="com.upc.gmt.comercialgb.SolicitarAumentoActivity">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:fillViewport="true">
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            android:fillViewport="true">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Línea de Crédito Total:"
-                            android:textColor="#000000" />
-
-                        <EditText
-                            android:id="@+id/txtCreditoTotalAumento"
-                            style="@style/editText_style"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:enabled="false"
-                            android:text="cargando..." />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Línea de Crédito Disponible:"
-                            android:textColor="#000000" />
-
-                        <EditText
-                            android:id="@+id/txtCreditoDisponibleAumento"
-                            style="@style/editText_style"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:enabled="false"
-                            android:text="cargando..." />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Deuda Pendiente:"
-                            android:textColor="#000000" />
-
-                        <EditText
-                            android:id="@+id/txtDeudaPendienteAumento"
-                            style="@style/editText_style"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:enabled="false"
-                            android:text="cargando..." />
-
-
-                    </LinearLayout>
-
-
-                    <TextView
-                        android:id="@+id/txtDetalleCuotasAumento"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="top|right"
-                        android:paddingRight="10px"
-                        android:text="Solicitudes..." />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:fillViewport="true">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical">-->
 
             <!--<LinearLayout-->
             <!--android:layout_width="match_parent"-->
@@ -138,76 +34,209 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:orientation="vertical">
 
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:gravity="center">-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:orientation="vertical">-->
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Cantidad de Aumento:"
-                    android:textColor="#000000" />
-
-                <EditText
-                    android:id="@+id/txtCantidadAumento"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:textAlignment="center" />
+                    android:orientation="vertical">
 
-                <!--</LinearLayout>-->
-                <!--</LinearLayout>-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Línea de Crédito Total:"
+                        android:textColor="#000000" />
+
+                    <EditText
+                        android:id="@+id/txtCreditoTotalAumento"
+                        style="@style/editText_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:enabled="false"
+                        android:text="cargando..." />
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:orientation="vertical">-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Línea de Crédito Disponible:"
+                        android:textColor="#000000" />
 
-                <Button
-                    android:id="@+id/btnAumento"
-                    style="@style/button_style"
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:onClick="onSolicitarAumento"
-                    android:text="   SOLICITAR AUMENTO DE LÍNEA   " />
+                    <EditText
+                        android:id="@+id/txtCreditoDisponibleAumento"
+                        style="@style/editText_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:enabled="false"
+                        android:text="cargando..." />
 
-                <Button
-                    android:id="@+id/btnRegresarAumento"
-                    style="@style/button_style"
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:onClick="onRegresarMenu"
-                    android:text="          REGRESAR         " />
+                </LinearLayout>
 
-                <!--</LinearLayout>-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Deuda Pendiente:"
+                        android:textColor="#000000" />
+
+                    <EditText
+                        android:id="@+id/txtDeudaPendienteAumento"
+                        style="@style/editText_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:enabled="false"
+                        android:text="cargando..." />
+
+
+                </LinearLayout>
+
+
             </LinearLayout>
 
             <!--</LinearLayout>-->
 
-        </LinearLayout>
+            <!--</LinearLayout>-->
 
-    </ScrollView>
+        </ScrollView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:orientation="vertical">-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center">-->
+
+                    <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:orientation="vertical">-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Cantidad de Aumento:"
+                        android:textColor="#000000" />
+
+                    <EditText
+                        android:id="@+id/txtCantidadAumento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:textAlignment="center" />
+
+                    <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:orientation="vertical">-->
+
+                    <Button
+                        android:id="@+id/btnAumento"
+                        style="@style/button_style"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:onClick="onSolicitarAumento"
+                        android:text="   SOLICITAR AUMENTO DE LÍNEA   " />
+
+                    <Button
+                        android:id="@+id/btnRegresarAumento"
+                        style="@style/button_style"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:onClick="onRegresarMenu"
+                        android:text="          REGRESAR         " />
+
+                    <!--</LinearLayout>-->
+                </LinearLayout>
+
+                <!--</LinearLayout>-->
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtDetalleAumento"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="top|right"
+                    android:paddingRight="10px"
+                    android:text="Solicitudes..." />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
 
 
 </LinearLayout>
