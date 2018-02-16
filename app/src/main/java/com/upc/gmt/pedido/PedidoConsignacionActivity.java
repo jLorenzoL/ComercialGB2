@@ -2,6 +2,7 @@ package com.upc.gmt.pedido;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +34,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static android.graphics.Typeface.BOLD_ITALIC;
 import static com.upc.gmt.pedido.RegistrarPedidoActivity.RS;
 import static com.upc.gmt.pedido.RegistrarPedidoActivity.RUC;
 import static com.upc.gmt.pedido.RegistrarPedidoActivity.codigoUbigeo;

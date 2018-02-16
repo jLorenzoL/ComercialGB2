@@ -225,14 +225,27 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txtDetalleAumento"
+                <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="top|right"
-                    android:paddingRight="10px"
-                    android:text="Solicitudes..." />
+                    android:stretchColumns="1">
+
+                    <TableRow>
+                        <TextView
+                            android:id="@+id/txtDetalleAumento"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="top|center"
+                            android:text="Solicitudes..."
+                            android:padding="3dip"
+                            android:textSize="15sp"
+                            style="@style/txt_style"/>
+                    </TableRow>
+
+                </TableLayout>
+
+
             </LinearLayout>
         </ScrollView>
 

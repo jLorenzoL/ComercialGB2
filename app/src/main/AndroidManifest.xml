@@ -14,7 +14,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:screenOrientation="landscape">
         <activity
             android:name=".LoginActivity"
             android:label="INICIAR SESIÓN"
@@ -43,7 +44,8 @@
         <activity
             android:name="com.upc.gmt.pedido.RegistrarPedidoActivity"
             android:label="REGISTRAR PEDIDO"
-            android:parentActivityName="com.upc.gmt.pedido.PedidoActivity" />
+            android:parentActivityName="com.upc.gmt.pedido.PedidoActivity"
+            android:screenOrientation="landscape"/>
         <activity
             android:name="com.upc.gmt.catalogo.CatalogoActivity"
             android:label="@string/app_mostrar_catalogo"

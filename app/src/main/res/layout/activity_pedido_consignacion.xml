@@ -124,13 +124,30 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/txtDetalleCuotas"
+                    <TableLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="top|right"
-                        android:paddingRight="10px"
-                        android:text="Cuotas..." />
+                        android:stretchColumns="1">
+
+                        <TableRow>
+
+                            <TextView
+                                android:id="@+id/txtDetalleCuotas"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:padding="5dip"
+                                android:gravity="top|center"
+                                android:text="Cuotas..."
+                                android:textSize="15sp"
+                                style="@style/txt_style"/>
+
+                        </TableRow>
+
+
+                    </TableLayout>
+
+
 
                 </LinearLayout>
 
