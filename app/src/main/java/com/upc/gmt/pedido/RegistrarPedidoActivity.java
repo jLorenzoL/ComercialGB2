@@ -221,30 +221,33 @@ public class RegistrarPedidoActivity extends AppCompatActivity
         }
         if(tipoComprobante == 1){
             if(RUC.equals("") || RUC.length() != 11){
-                Toast.makeText(getApplicationContext(),"INGRESAR RUC CORRECTO", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"INGRESAR UN RUC CORRECTO", Toast.LENGTH_LONG).show();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragPedido, new ComprobantePagoFragment()).commit();
                 return;
             }
             if(RS.equals("")){
-                Toast.makeText(getApplicationContext(),"INGRESAR RAZÓN SOCIAL", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"INGRESAR UNA RAZÓN SOCIAL", Toast.LENGTH_LONG).show();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragPedido, new ComprobantePagoFragment()).commit();
                 return;
             }
         }
 
         Util.PRECIO_TOTAL_PAGAR = Util.PRECIO_COSTO_ENVIO + Util.PRECIO_TOTAL_CALZADOS;
+
+        if(tipoPago == 2) {
+            if(Util.CLIENTE_SESSION.getSaldoLineaCredito() < Util.PRECIO_TOTAL_PAGAR){
+                Toast.makeText(getApplicationContext(),"NO TIENE SUFICIENTE LÍNEA DE CRÉDITO PARA COMPRAR POR CONSIGNACIÓN", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+
         tramaPedido = "";
-//        RUC = "";
-//        RS = "";
-//        codigoUbigeo = "";
         for (Producto p : Util.LISTA_PRODUCTOS_PEDIDO){
             tramaPedido += p.getIdProducto()+","+p.getIdColor()+","+p.getNroTalla()+","+p.getCantidad()+";";
         }
         if(tramaPedido.length()>0){
             tramaPedido = tramaPedido.substring(0, tramaPedido.length()-1);
         }
-//        RUC = txtPedidoRuc.getText().toString();
-//        RS = txtPedidoRS.getText().toString();
 //        Log.i("tramaPedido", tramaPedido);
         if(tipoPago == 2) {
             Intent i = new Intent(getApplicationContext(), PedidoConsignacionActivity.class);

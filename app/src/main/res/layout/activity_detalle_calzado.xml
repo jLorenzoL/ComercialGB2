@@ -191,6 +191,11 @@
                 android:onClick="onClickAgregarPedido"
                 android:text="AGREGAR AL PEDIDO"/>
 
+            <Button
+                style="@style/button_style_pedido"
+                android:onClick="onRegresarMenu"
+                android:text="REGRESAR"/>
+
             </LinearLayout>
 
         </LinearLayout>

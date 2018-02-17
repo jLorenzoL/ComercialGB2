@@ -16,6 +16,8 @@ import com.upc.gmt.model.Solicitud;
 import com.upc.gmt.util.Util;
 
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -144,6 +146,8 @@ public class SolicitarAumentoActivity extends AppCompatActivity {
             progressDialog.dismiss();
             if(i == null || i == 0) {
                 Toast.makeText(getApplicationContext(), "NO SE PUDO REGISTRAR LA SOLICITUD", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(getApplicationContext(), "SE HA GENERADO LA SOLICITUD EXITOSAMENTE", Toast.LENGTH_LONG).show();
             }
             txtCantidadAumento.setText("");
             new HttpRequestTaskListaAumento().execute();
@@ -163,8 +167,15 @@ public class SolicitarAumentoActivity extends AppCompatActivity {
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 Log.i("URL", builder.toUriString());
+                HttpHeaders headers = new HttpHeaders();
+                String cookies = "";
+                for(String cook : Util.COOKIES_SESSION){
+                    cookies += cook + ";";
+                }
+                headers.set("Cookie", cookies);
+                HttpEntity<String> entity = new HttpEntity<String>(headers);
                 ParameterizedTypeReference<List<Solicitud>> responseType = new ParameterizedTypeReference<List<Solicitud>>() {};
-                ResponseEntity<List<Solicitud>> respuesta = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, null, responseType);
+                ResponseEntity<List<Solicitud>> respuesta = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, entity, responseType);
                 List<Solicitud> lista = respuesta.getBody();
                 Log.i("lista", lista.toString());
                 return lista;

@@ -60,12 +60,12 @@
             android:screenOrientation="landscape" />
         <activity
             android:name="com.upc.gmt.catalogo.DetalleCalzadoActivity"
-            android:label="DETALLE CALZADO"
+            android:label="DETALLE DEL CALZADO"
             android:parentActivityName="com.upc.gmt.catalogo.CatalogoActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name="com.upc.gmt.pedido.PedidoActivity"
-            android:label="MIS CALZADOS"
+            android:label="VER PEDIDO"
             android:parentActivityName="com.upc.gmt.catalogo.CatalogoActivity"
             android:screenOrientation="landscape" />
         <activity
@@ -95,7 +95,7 @@
 
         <activity
             android:name=".SolicitarAumentoActivity"
-            android:label="SOLICITAR AUMENTO DE LÍNEA"
+            android:label="SOLICITAR AUMENTO DE LÍNEA DE CRÉDITO"
             android:parentActivityName=".MenuPrincipalActivity"
             android:screenOrientation="landscape" />
 

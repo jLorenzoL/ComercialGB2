@@ -17,8 +17,8 @@ import java.util.List;
 public class Util {
 
         //public static String URL_WEB_SERVICE = "http://192.168.43.172:8080/ComercialWEB";
-        //public static String URL_WEB_SERVICE = "http://192.168.1.34:8080/ComercialWEB";
-        public static String URL_WEB_SERVICE = "http://192.168.42.206:8080/ComercialWEB";
+//        public static String URL_WEB_SERVICE = "http://192.168.1.33:8080/ComercialWEB";
+        public static String URL_WEB_SERVICE = "http://10.230.168.210:9090/ComercialWEB";
 
         public static Usuario USUARIO_SESSION;
 
@@ -33,6 +33,8 @@ public class Util {
         public static double PRECIO_TOTAL_PAGAR = 0.00;
 
         public static boolean REGRESAR_A_CATALOGO = false;
+
+        public static List<String> COOKIES_SESSION;
 
         public static View getViewByPosition(int pos, ListView listView) {
             final int firstListItemPosition = listView.getFirstVisiblePosition();

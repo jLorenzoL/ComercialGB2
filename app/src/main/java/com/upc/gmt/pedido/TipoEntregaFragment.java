@@ -67,6 +67,7 @@ public class TipoEntregaFragment extends Fragment {
     EditText txtDireccionEnvio;
 
     TextView txtCostoEnvio;
+    TextView txtDirAlmacen;
 
     ToggleButton btnAceptarCosto;
 
@@ -169,11 +170,13 @@ public class TipoEntregaFragment extends Fragment {
             public void onClick(View v) {
                 int id = v.getId();
                 if(id == R.id.rdRecojoAlmacen){
+                    txtDirAlmacen.setVisibility(View.VISIBLE);
                     layoutDomicilio.setVisibility(View.INVISIBLE);
                     RegistrarPedidoActivity.tipoEntrega = 0;
                     Util.PRECIO_COSTO_ENVIO = 0.00;
                 }else if(id == R.id.rdEnvioDomicilio){
                     new HttpRequestTaskDepartamentos().execute();
+                    txtDirAlmacen.setVisibility(View.INVISIBLE);
                     layoutDomicilio.setVisibility(View.VISIBLE);
                     RegistrarPedidoActivity.tipoEntrega = 1;
                     txtDireccionEnvio.setText("");
@@ -189,6 +192,7 @@ public class TipoEntregaFragment extends Fragment {
 
         txtDireccionEnvio = (EditText) getView().findViewById(R.id.txtDireccionEnvio);
         txtCostoEnvio = (TextView) getView().findViewById(R.id.txtCostoEnvio);
+        txtDirAlmacen = (TextView) getView().findViewById(R.id.txtDirAlmacen);
         btnAceptarCosto = (ToggleButton) getView().findViewById(R.id.btnAceptarCosto);
 
         rdRecojoAlmacen = (RadioButton) getView().findViewById(R.id.rdRecojoAlmacen);
@@ -318,6 +322,7 @@ public class TipoEntregaFragment extends Fragment {
 
         if(RegistrarPedidoActivity.tipoEntrega == 1){
             new HttpRequestTaskDepartamentos().execute();
+            txtDirAlmacen.setVisibility(View.INVISIBLE);
             layoutDomicilio.setVisibility(View.VISIBLE);
             rdEnvioDomicilio.setChecked(true);
             if(Util.PRECIO_COSTO_ENVIO != 0 && RegistrarPedidoActivity.flagCostoAceptado){
@@ -334,6 +339,7 @@ public class TipoEntregaFragment extends Fragment {
                 spnDistrito.setEnabled(true);
             }
         }else{
+            txtDirAlmacen.setVisibility(View.VISIBLE);
             layoutDomicilio.setVisibility(View.INVISIBLE);
             rdRecojoAlmacen.setChecked(true);
             Util.PRECIO_COSTO_ENVIO = 0;

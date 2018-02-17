@@ -93,7 +93,7 @@ public class PedidoArrayAdapter extends ArrayAdapter {
                                 return;
                             }
                             if (Util.USUARIO_SESSION.getIdTipoUsuario() != 2 && cantidad > 3) {
-                                Toast.makeText(getContext().getApplicationContext(), "SOLO PUEDE COMPRAR HASTA 3 PARES DE CALZADO", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext().getApplicationContext(), "SOLO PUEDE COMPRAR HASTA 3 PARES DEL MISMO CALZADO", Toast.LENGTH_LONG).show();
                                 chbArticulo.setChecked(false);
                                 return;
                             }

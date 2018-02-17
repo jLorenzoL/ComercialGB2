@@ -23,11 +23,12 @@
                 android:text="Recojo en Almacén" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/txtDirAlmacen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Dirección del Almacén: A.C.P Cerro Verde Mz B Lt 12 - San Gabriel – Villa María del Triunfo  " />
+                android:text="Dirección del Almacén: A.C.P Cerro Verde Mz B Lt 12 - San Gabriel – Villa María del Triunfo  "
+                android:visibility="invisible" />
 
             <RadioButton
                 android:id="@+id/rdEnvioDomicilio"

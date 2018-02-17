@@ -14,9 +14,12 @@ import com.upc.gmt.model.Cliente;
 import com.upc.gmt.model.Usuario;
 import com.upc.gmt.util.Util;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -69,9 +72,11 @@ public class LoginActivity extends AppCompatActivity {
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 Log.i("Login URL", builder.build().encode().toUri().toString());
-                Usuario usuario = restTemplate.getForObject(builder.build().encode().toUri(), Usuario.class);
+//                Usuario usuario = restTemplate.getForObject(builder.build().encode().toUri(), Usuario.class);
+                ResponseEntity<Usuario> response = restTemplate.getForEntity(builder.build().encode().toUri(), Usuario.class);
+                Usuario usuario = response.getBody();
                 Log.i("Usuario", usuario.toString());
-
+                Util.COOKIES_SESSION = response.getHeaders().get("Set-Cookie");
                 return usuario;
             } catch (Exception e) {
                 Log.e(this.getClass().getName(), e.getMessage(), e);

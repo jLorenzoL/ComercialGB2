@@ -256,6 +256,10 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
         new HttpRequestTaskPedido().execute();
     }
 
+    public void onRegresarMenu(View v){
+        finish();
+    }
+
     private class HttpRequestTaskDetalleCalzado extends AsyncTask<Void, Void, Producto> {
         @Override
         protected Producto doInBackground(Void... params) {
