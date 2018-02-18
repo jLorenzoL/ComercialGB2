@@ -73,16 +73,14 @@
                         style="@style/editText_style"
                         android:layout_height="match_parent"
                         android:hint="Usuario"
-                        android:inputType="textEmailAddress"
-                        android:text="Usuario6" />
+                        android:inputType="textEmailAddress" />
 
                     <EditText
-                        android:layout_height="match_parent"
                         android:id="@+id/txtPassword"
                         style="@style/editText_style"
+                        android:layout_height="match_parent"
                         android:hint="Contraseña"
-                        android:inputType="textPassword"
-                        android:text="123456789" />
+                        android:inputType="textPassword" />
 
                     <Button
                         android:layout_height="match_parent"
