@@ -178,7 +178,11 @@ public class PedidoArrayAdapter extends ArrayAdapter {
     //https://stackoverflow.com/questions/39912827/random-checkbox-getting-checked-when-scrolling-down-the-list-view?rq=1
     @Override
     public int getViewTypeCount() {
-        return 1;
+        if(getCount() < 1){
+            return 1;
+        }else{
+            return getCount();
+        }
     }
 
     @Override
