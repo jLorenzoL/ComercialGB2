@@ -73,7 +73,8 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="DIRECCIÓN"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:maxLength="150" />
 
                 <TextView
                     android:id="@+id/txtCostoEnvio"

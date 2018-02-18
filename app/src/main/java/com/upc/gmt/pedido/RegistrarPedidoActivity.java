@@ -23,6 +23,8 @@ import com.upc.gmt.model.Producto;
 import com.upc.gmt.util.Util;
 
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -319,8 +321,16 @@ public class RegistrarPedidoActivity extends AppCompatActivity
 
                 Log.i("URL", builder.toUriString());
 
+                HttpHeaders headers = new HttpHeaders();
+                String cookies = "";
+                for(String cook : Util.COOKIES_SESSION){
+                    cookies += cook + ";";
+                }
+                headers.set("Cookie", cookies);
+                HttpEntity<String> entity = new HttpEntity<String>(headers);
+
                 ParameterizedTypeReference<Integer> responseType = new ParameterizedTypeReference<Integer>() {};
-                ResponseEntity<Integer> respuesta = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.POST, null, responseType);
+                ResponseEntity<Integer> respuesta = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.POST, entity, responseType);
                 Integer codRespuesta = respuesta.getBody();
                 Log.i("respuesta", ""+codRespuesta);
                 return codRespuesta;

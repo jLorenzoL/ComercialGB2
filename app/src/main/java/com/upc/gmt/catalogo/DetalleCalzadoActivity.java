@@ -227,7 +227,7 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.carrito, menu);
+//        getMenuInflater().inflate(R.menu.carrito, menu);
         return true;
     }
 
@@ -436,7 +436,12 @@ public class DetalleCalzadoActivity extends AppCompatActivity {
                 Toast.makeText(DetalleCalzadoActivity.this, "USTED CUENTA CON MÁS DE 3 PEDIDOS EN PENDIENTE DE PAGO Y NO PUEDE REALIZAR OTRO PEDIDO", Toast.LENGTH_LONG).show();
             }else{
                 Log.i("DATOS PEDIDO", idProducto+"-"+idColor+"-"+nroTalla.substring(0,2));
-                Producto p = CatalogoActivity.productoSeleccionado;
+                Producto p = new Producto();
+                try {
+                    p = (Producto) CatalogoActivity.productoSeleccionado.clone();
+                } catch (Exception e) {
+                    Log.e("ERROR", e.getMessage());
+                }
                 p.setIdProducto(Integer.parseInt(idProducto));
                 p.setIdColor(idColor);
                 p.setNroTalla(Integer.parseInt(nroTalla.substring(0,2)));

@@ -2,7 +2,6 @@ package com.upc.gmt.pedido;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,9 +15,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.upc.gmt.comercialgb.SolicitarAumentoActivity;
 import com.upc.gmt.comercialgb.MenuPrincipalActivity;
 import com.upc.gmt.comercialgb.R;
+import com.upc.gmt.comercialgb.SolicitarAumentoActivity;
 import com.upc.gmt.util.Util;
 
 import org.springframework.core.ParameterizedTypeReference;
@@ -34,7 +33,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static android.graphics.Typeface.BOLD_ITALIC;
 import static com.upc.gmt.pedido.RegistrarPedidoActivity.RS;
 import static com.upc.gmt.pedido.RegistrarPedidoActivity.RUC;
 import static com.upc.gmt.pedido.RegistrarPedidoActivity.codigoUbigeo;
@@ -131,6 +129,10 @@ public class PedidoConsignacionActivity extends AppCompatActivity {
     public void onSolicitarAumento(View v){
         Intent i = new Intent(this, SolicitarAumentoActivity.class);
         startActivity(i);
+    }
+
+    public void onRegresarConsignacion(View v){
+        finish();
     }
 
     public void onAceptarConsignacion(View v){

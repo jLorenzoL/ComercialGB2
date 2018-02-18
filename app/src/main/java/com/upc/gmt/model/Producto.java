@@ -3,7 +3,7 @@ package com.upc.gmt.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Producto {
+public class Producto implements Cloneable{
     private Integer idProducto;
 
     private String SKU;
@@ -406,4 +406,10 @@ public class Producto {
                 ", isChecked=" + isChecked +
                 '}';
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
 }
